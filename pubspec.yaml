@@ -40,6 +40,7 @@ dependencies:
   dio: ^5.8.0+1
   device_preview: ^1.1.0
   go_router: ^13.2.0
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -64,8 +65,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -79,17 +80,20 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: AbhayaLibre
+      fonts:
+        - asset: assets/fonts/abhaya-libre.extrabold.ttf
+    - family: Afacad
+      fonts:
+        - asset: assets/fonts/Afacad-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Afacad-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Afacad-Bold.ttf
+          weight: 700
+    - family: ArialRoundedMT
+      fonts:
+        - asset: assets/fonts/Arial Rounded MT Bold Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

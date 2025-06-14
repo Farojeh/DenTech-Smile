@@ -1,5 +1,7 @@
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -47,7 +49,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                     fontFamily: Static.abhayaLibrefont,
                     color: Colors.black
                   ),),
-                  SizedBox(width: 10,),
+                  const SizedBox(width: 10,),
                   Image.asset("assets/images/tooth.png",
                   height: 30,
                   width: 30,
@@ -61,7 +63,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                       fontSize: 18,
                       fontFamily: Static.afacadfont,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff615F5F)
+                      color:const Color(0xff615F5F)
                     ),
                     textAlign: TextAlign.center,),
               ),
@@ -76,6 +78,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
+        GoRouter.of(context).pushReplacement(AppRouter.welcomView);
         // if (userInfo!.getBool("user") == null ||
         //     userInfo!.getBool("user") == false) {
         //   GoRouter.of(context).pushReplacement(AppRouter.welcomView);

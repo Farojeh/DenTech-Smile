@@ -1,6 +1,8 @@
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/widget/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Buttonpart extends StatelessWidget {
   const Buttonpart({super.key});
@@ -21,6 +23,7 @@ class Buttonpart extends StatelessWidget {
           height: 45,
           elevation: 7,
            width: MediaQuery.of(context).size.width * 0.45,
+           onPressed: () => GoRouter.of(context).push(AppRouter.signUp),
           child: Text(
             "Patient",
             style: TextStyle(

@@ -31,6 +31,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
           height: (MediaQuery.of(context).size.height / 932) * 30,
         ),
         CustomTextField(
+          isEnglish: false,
           prefixIcon: const Padding(
             padding: EdgeInsets.only(right: 20),
             child: Icon(
@@ -54,6 +55,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
           height: (MediaQuery.of(context).size.height / 932) * 5,
         ),
         CustomTextField(
+          isEnglish: false,
           prefixIcon: const Padding(
             padding: EdgeInsets.only(right: 20),
             child: Icon(
@@ -77,6 +79,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
           height: (MediaQuery.of(context).size.height / 932) * 5,
         ),
         CustomTextField(
+           isEnglish: false,
           prefixIcon: const Padding(
             padding: EdgeInsets.only(right: 20),
             child: Icon(
@@ -102,6 +105,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
           height: (MediaQuery.of(context).size.height / 932) * 5,
         ),
         CustomTextField(
+           isEnglish: false,
           prefixIcon: const Padding(
             padding: EdgeInsets.only(right: 20),
             child: Icon(

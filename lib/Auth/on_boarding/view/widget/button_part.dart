@@ -20,9 +20,9 @@ class Buttonpart extends StatelessWidget {
           redbr: 20,
           redtl: 20,
           redtr: 20,
-          height: 45,
+          height: (MediaQuery.of(context).size.height / 932) * 55,
           elevation: 7,
-           width: MediaQuery.of(context).size.width * 0.45,
+           width:  (MediaQuery.of(context).size.width / 430) * 247,
            onPressed: () => GoRouter.of(context).push(AppRouter.signUp),
           child: Text(
             "Patient",
@@ -44,8 +44,9 @@ class Buttonpart extends StatelessWidget {
             redtl: 20,
             redtr: 20,
             elevation: 7,
-            height: 45,
-             width: MediaQuery.of(context).size.width * 0.45,
+            height: (MediaQuery.of(context).size.height / 932) * 55,
+              width:  (MediaQuery.of(context).size.width / 430) * 247,
+             onPressed: () => GoRouter.of(context).push(AppRouter.login),
             child: Text(
               "Student",
               style: TextStyle(
@@ -65,8 +66,9 @@ class Buttonpart extends StatelessWidget {
             redtl: 20,
             redtr: 20,
             elevation: 7,
-            height: 45,
-            width: MediaQuery.of(context).size.width * 0.45,
+            height: (MediaQuery.of(context).size.height / 932) * 55,
+            width:  (MediaQuery.of(context).size.width / 430) * 247,
+            onPressed: () => GoRouter.of(context).push(AppRouter.login),
             child: Text(
               "Professor",
               style: TextStyle(

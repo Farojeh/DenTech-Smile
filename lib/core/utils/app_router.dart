@@ -1,3 +1,5 @@
+import 'package:dentech_smile/Auth/log_in/controller/cubit/login_cubit.dart';
+import 'package:dentech_smile/Auth/log_in/view/login_view.dart';
 import 'package:dentech_smile/Auth/on_boarding/controller/cubit/on_boarding_cubit.dart';
 import 'package:dentech_smile/Auth/on_boarding/view/on_boarding.dart';
 import 'package:dentech_smile/Auth/on_boarding/view/role_selection_page.dart';
@@ -11,6 +13,7 @@ abstract class AppRouter {
   static const welcomView = "/onBoarding";
   static const roleSelectionPage = "/roleSelectionPage";
   static const signUp = "/signUp";
+  static const login = "/login";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -35,6 +38,13 @@ abstract class AppRouter {
         builder: (context, state) => BlocProvider<SignUpCubit>(
           create: (context) => SignUpCubit(),
           child: const SignUp(),
+        ),
+      ),
+      GoRoute(
+        path: login,
+        builder: (context, state) => BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(),
+          child: const LogInView(),
         ),
       ),
     ],

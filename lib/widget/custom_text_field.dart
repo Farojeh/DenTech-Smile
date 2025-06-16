@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final bool? iscoupon ;
   final bool? isnumber ;
   final double? height ;
+  final bool isEnglish ;
   const CustomTextField(
       {super.key,
       required this.hint,
@@ -33,7 +34,7 @@ class CustomTextField extends StatefulWidget {
       this.backgroundcolor,
       this.hintcolor,
       this.hintsize,
-      this.obscureText, this.isname, this.isemail, this.ispass, this.iscoupon, this.height, this.isnumber});
+      this.obscureText, this.isname, this.isemail, this.ispass, this.iscoupon, this.height, this.isnumber, required this.isEnglish});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -92,7 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         });
                       },
                       icon: Padding(
-                        padding: const EdgeInsets.only(left: 8),
+                        padding:widget.isEnglish?const EdgeInsets.only(right: 8) :const EdgeInsets.only(left: 8),
                         child: Icon(pv ? Icons.visibility_off : Icons.visibility , color: Colors.black87,),
                       ))
                   : widget.sufixicon,
@@ -100,7 +101,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ? SizedBox(
                       width: 50,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 15),
+                        padding:widget.isEnglish?const EdgeInsets.only( left: 15) :const EdgeInsets.only( right: 15),
                         child:  widget.prefixIcon!
                       ),
                     )

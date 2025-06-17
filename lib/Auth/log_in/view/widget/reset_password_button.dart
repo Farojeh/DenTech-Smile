@@ -1,26 +1,32 @@
+import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResetPasswordButton extends StatelessWidget {
   const ResetPasswordButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-     margin:const EdgeInsets.only(right: 30),
-     alignment: Alignment.centerRight,
-      child: Text(
-             "Forget Password ?",
-              style: TextStyle(
-                decoration: TextDecoration.underline,
-                decorationStyle: TextDecorationStyle.solid,
-                decorationThickness: 1,
-                fontFamily: Static.afacadfont,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
-                fontSize: (MediaQuery.of(context).size.width / 430) * 16,
-              ),
+    return BlocBuilder<TranslationCubit, TranslationState>(
+      builder: (context, state) {
+        return Container(
+          margin: const EdgeInsets.only(right: 30),
+          alignment: Alignment.centerRight,
+          child: Text(
+            state.isEn?"Forget Password ?":"هل نسيت كلمة المرور ؟",
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+              decorationStyle: TextDecorationStyle.solid,
+              decorationThickness: 1,
+              fontFamily: Static.afacadfont,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              fontSize: (MediaQuery.of(context).size.width / 430) * 16,
             ),
+          ),
+        );
+      },
     );
   }
 }

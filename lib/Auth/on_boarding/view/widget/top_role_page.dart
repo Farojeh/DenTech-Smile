@@ -1,4 +1,5 @@
 import 'package:dentech_smile/Auth/on_boarding/view/widget/buttom_curve.dart';
+import 'package:dentech_smile/Auth/on_boarding/view/widget/translate_widget.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,8 @@ class Toprolepage extends StatelessWidget {
               width: (MediaQuery.of(context).size.width / 430) * 370,
               fit: BoxFit.fitWidth,
             ),
-          )
+          ),
+          const Positioned(top: 30, right: 10, child: TranslateWidget())
         ],
       ),
     );

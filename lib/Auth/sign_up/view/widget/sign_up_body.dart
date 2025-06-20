@@ -46,51 +46,50 @@ class _SignUpbodyState extends State<SignUpbody> {
                   autovalidateMode: autovalidateMode,
                   key: formkey,
                   child: const CustomSignupFields()),
-             const LoginButton(),
+              const LoginButton(),
               SizedBox(
-                   height: (MediaQuery.of(context).size.height / 932) * 30,
-                  ),
+                height: (MediaQuery.of(context).size.height / 932) * 30,
+              ),
               CustomButton(
-                      color: Static.basiccolor,
-                      redbl: 20,
-                      redbr: 20,
-                      redtl: 20,
-                      redtr: 20,
-                      height: (MediaQuery.of(context).size.height / 932) * 58,
-                      width: MediaQuery.of(context).size.width * 0.47,
-                      onPressed: () async {
-                if (formkey.currentState!.validate()) {
-                  try {
-                    var cubit = BlocProvider.of<SignUpCubit>(context);
-                    formkey.currentState!.save();
-                    await cubit.register(
-                        context: context,
-                        name: cubit.name,
-                        number: cubit.number,
-                        password:cubit.password);
-                  } catch (error) {
-                    print(error);
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(CustomSnackBar().customSnackBar(
-                          'Oops',
-                          'password is\'t equal confirm password',
-                          ContentType.failure));
+                color: Static.basiccolor,
+                redbl: 20,
+                redbr: 20,
+                redtl: 20,
+                redtr: 20,
+                height: (MediaQuery.of(context).size.height / 932) * 58,
+                width: MediaQuery.of(context).size.width * 0.47,
+                onPressed: () async {
+                  if (formkey.currentState!.validate()) {
+                    try {
+                      var cubit = BlocProvider.of<SignUpCubit>(context);
+                      formkey.currentState!.save();
+                      await cubit.register(
+                          context: context,
+                          name: cubit.name,
+                          number: cubit.number,
+                          password: cubit.password);
+                    } catch (error) {
+                      print(error);
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(CustomSnackBar().customSnackBar(
+                            'Oops',
+                            'password is\'t equal confirm password',
+                            ContentType.failure));
+                    }
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
                   }
-                } else {
-                  autovalidateMode = AutovalidateMode.always;
-                }
-              },
-                      child: Text(
-                        "انشاء حساب",
-                        style: TextStyle(
-                            fontFamily: Static.afacadfont,
-                            fontWeight: FontWeight.w400,
-                            fontSize:
-                                (MediaQuery.of(context).size.width / 430) * 23,
-                            color: Colors.white),
-                      ),
-                    ),
+                },
+                child: Text(
+                  "انشاء حساب",
+                  style: TextStyle(
+                      fontFamily: Static.afacadfont,
+                      fontWeight: FontWeight.w400,
+                      fontSize: (MediaQuery.of(context).size.width / 430) * 23,
+                      color: Colors.white),
+                ),
+              ),
             ],
           )),
     );

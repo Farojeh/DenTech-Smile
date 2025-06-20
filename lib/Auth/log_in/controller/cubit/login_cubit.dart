@@ -1,4 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:dentech_smile/core/errors/failures.dart';
+import 'package:dentech_smile/core/utils/api_service.dart';
+import 'package:dentech_smile/core/utils/service_locator.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -7,24 +11,39 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
   String password = "";
-   String number = "";
+  String number = "";
+
+  final apiService = getIt<ApiService>();
 
   Future<void> register(
       {required String number,
       required String password,
       required BuildContext context}) async {
-        emit(LoginLoading());
-        Future.delayed(const Duration(seconds: 3),(){
-        if( password.isNotEmpty && number.isNotEmpty ){
-        //    mainuser = UserModel(email: email, password: password);
-        // userInfo!.setBool("user", true);
-        // userInfo!.setString("email", email);
-        // userInfo!.setString("password", password);
-          emit(LoginSuccess());
+    emit(LoginLoading());
+    if (password.isNotEmpty && number.isNotEmpty) {
+      Map<String, String> login = {
+        "national_number": number,
+        "password": password
+      };
+      Response response;
+      try {
+        response = await apiService.post(endPoint: "/login", data: login);
+        print(response.data);
+        if(response.statusCode!=200 && response.statusCode!=201){
+        var failure = ServerFaliure.fromResponse(response.statusCode!, response.data);
+        emit(LoginFailure(errorMessage: failure.errorMessage));
         }else{
-          emit(LoginFailure(errorMessage: "SomeThing error, please try again"));
+           emit(LoginSuccess());
+        }    
+      } catch (error) {
+        if (error is DioException) {
+          var failure = ServerFaliure.fromDioException(error);
+          emit(LoginFailure(errorMessage: failure.errorMessage));
         }
-        });
+      }
+    } else {
+      emit(LoginFailure(errorMessage: "SomeThing error, please try again"));
+    }
   }
 
   void setregisternumber({required String n}) {

@@ -37,7 +37,7 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
                   size: 30,
                 ),
               ),
-              isnumber: true,
+              iscoupon: true,
               height: (MediaQuery.of(context).size.height / 932) * 80,
               onsaved: (data) {
                 number = data;

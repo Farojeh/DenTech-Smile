@@ -40,7 +40,8 @@ class _LogInBodyState extends State<LogInBody> {
             }
           },
           child: Directionality(
-              textDirection:trstate.isEn? TextDirection.ltr:TextDirection.rtl,
+              textDirection:
+                  trstate.isEn ? TextDirection.ltr : TextDirection.rtl,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,14 +84,25 @@ class _LogInBodyState extends State<LogInBody> {
                         autovalidateMode = AutovalidateMode.always;
                       }
                     },
-                    child: Text(
-                      trstate.isEn? "Login":"تسجيل الدخول",
-                      style: TextStyle(
-                          fontFamily: Static.afacadfont,
-                          fontWeight: FontWeight.w700,
-                          fontSize:
-                              (MediaQuery.of(context).size.width / 430) * 23,
-                          color: Colors.white),
+                    child: BlocBuilder<LoginCubit, LoginState>(
+                      builder: (context, state) {
+                        if (state is LoginLoading) {
+                          return const CircularProgressIndicator(
+                            color: Colors.white,
+                          );
+                        } else {
+                          return Text(
+                            trstate.isEn ? "Login" : "تسجيل الدخول",
+                            style: TextStyle(
+                                fontFamily: Static.afacadfont,
+                                fontWeight: FontWeight.w700,
+                                fontSize:
+                                    (MediaQuery.of(context).size.width / 430) *
+                                        23,
+                                color: Colors.white),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

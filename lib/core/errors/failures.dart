@@ -46,7 +46,7 @@ abstract class Failures{
   factory ServerFaliure.fromResponse(int statusCode, dynamic resposne) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       try {
-      return ServerFaliure(errorMessage: resposne['error']['message']);        
+      return ServerFaliure(errorMessage: resposne['message']);        
       } catch (e) {
         debugPrint('e: ${e.toString()}');        
       return ServerFaliure(errorMessage: 'Error happened , please try again!');

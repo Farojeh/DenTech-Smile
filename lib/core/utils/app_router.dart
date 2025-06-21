@@ -51,17 +51,22 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: login,
-        builder: (context, state) => BlocProvider<LoginCubit>(
+        builder: (context, state) {
+          final patient = state.extra as bool? ?? false;
+          return BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(),
-          child: const LogInView(),
-        ),
+          child: LogInView(patient: patient,),
+        );}
       ),
       GoRoute(
         path: verifyPage,
-        builder: (context, state) => BlocProvider<VerifyCubit>(
-          create: (context) => VerifyCubit(),
-          child: const VerifyPage(),
-        ),
+        builder: (context, state) {
+          final isFromRegister = state.extra as bool? ?? false;
+          return BlocProvider<VerifyCubit>(
+            create: (context) => VerifyCubit(),
+            child: VerifyPage(fromregister: isFromRegister),
+          );
+        },
       ),
       GoRoute(
         path: resetpassword,

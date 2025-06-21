@@ -2,12 +2,15 @@ import 'package:dentech_smile/Auth/sign_up/controller/cubit/sign_up_cubit.dart';
 import 'package:dentech_smile/Auth/sign_up/view/widget/custom_signup_fields.dart';
 import 'package:dentech_smile/Auth/sign_up/view/widget/login_button.dart';
 import 'package:dentech_smile/Auth/sign_up/view/widget/top_sign_up.dart';
+import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/custom_snackbar.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpbody extends StatefulWidget {
   const SignUpbody({super.key});
@@ -30,9 +33,7 @@ class _SignUpbodyState extends State<SignUpbody> {
             ..showSnackBar(CustomSnackBar().customSnackBar(
                 'Oops', state.errorMessage, ContentType.failure));
         } else if (state is SignUpSuccess) {
-          // GoRouter.of(context).go(AppRouter.homeView);
-          print(
-              "******************************** SignUpSuccess ********************************");
+          GoRouter.of(context).push(AppRouter.verifyPage, extra: true);
         }
       },
       child: Directionality(
@@ -63,11 +64,7 @@ class _SignUpbodyState extends State<SignUpbody> {
                     try {
                       var cubit = BlocProvider.of<SignUpCubit>(context);
                       formkey.currentState!.save();
-                      await cubit.register(
-                          context: context,
-                          name: cubit.name,
-                          number: cubit.number,
-                          password: cubit.password);
+                      await cubit.register();
                     } catch (error) {
                       print(error);
                       ScaffoldMessenger.of(context)
@@ -81,13 +78,29 @@ class _SignUpbodyState extends State<SignUpbody> {
                     autovalidateMode = AutovalidateMode.always;
                   }
                 },
-                child: Text(
-                  "انشاء حساب",
-                  style: TextStyle(
-                      fontFamily: Static.afacadfont,
-                      fontWeight: FontWeight.w400,
-                      fontSize: (MediaQuery.of(context).size.width / 430) * 23,
-                      color: Colors.white),
+                child: BlocBuilder<TranslationCubit, TranslationState>(
+                  builder: (context, trstate) {
+                    return BlocBuilder<SignUpCubit, SignUpState>(
+                      builder: (context, state) {
+                        if (state is SignUpLoading) {
+                          return const CircularProgressIndicator(
+                            color: Colors.white,
+                          );
+                        } else {
+                          return Text(
+                           trstate.isEn?"Create " :"انشاء حساب",
+                            style: TextStyle(
+                                fontFamily: Static.afacadfont,
+                                fontWeight:trstate.isEn? FontWeight.w700:FontWeight.w400,
+                                fontSize:
+                                    (MediaQuery.of(context).size.width / 430) *
+                                        23,
+                                color: Colors.white),
+                          );
+                        }
+                      },
+                    );
+                  },
                 ),
               ),
             ],

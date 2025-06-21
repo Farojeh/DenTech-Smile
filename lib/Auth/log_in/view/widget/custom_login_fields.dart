@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomLoginFields extends StatefulWidget {
-  const CustomLoginFields({super.key});
+  final bool patient;
+  const CustomLoginFields({super.key, required this.patient});
 
   @override
   State<CustomLoginFields> createState() => _CustomLoginFieldsState();
@@ -28,23 +29,26 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
               height: (MediaQuery.of(context).size.height / 932) * 20,
             ),
             CustomTextField(
-              isEnglish:state.isEn? true:false,
-              prefixIcon: const Padding(
-                padding: EdgeInsets.only(right: 20),
+              isEnglish: state.isEn ? true : false,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(right: 20 ),
                 child: Icon(
-                  Icons.phone_in_talk,
+                  widget.patient
+                      ? Icons.phone_in_talk
+                      : Icons.privacy_tip_sharp,
                   color: Colors.black,
-                  size: 30,
+                  size: widget.patient ? 27 : 26,
                 ),
               ),
-              iscoupon: true,
+              iscoupon: widget.patient ? null : true,
+              isnumber: widget.patient ? true : null,
               height: (MediaQuery.of(context).size.height / 932) * 80,
               onsaved: (data) {
                 number = data;
                 BlocProvider.of<LoginCubit>(context)
                     .setregisternumber(n: number!);
               },
-              hint:state.isEn? "     Enter your Number      ":"    ادخل رقم الموبايل      ",
+              hint: sethint(state.isEn, widget.patient),
               backgroundcolor: const Color(0xffF5F5F5),
               hintcolor: Static.lightcolor,
               hintsize: (MediaQuery.of(context).size.width / 430) * 16,
@@ -53,7 +57,7 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
               height: (MediaQuery.of(context).size.height / 932) * 5,
             ),
             CustomTextField(
-              isEnglish:state.isEn? true:false,
+              isEnglish: state.isEn ? true : false,
               prefixIcon: const Padding(
                 padding: EdgeInsets.only(right: 20),
                 child: Icon(
@@ -70,7 +74,9 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
                     .setregisterpassword(p: password!);
               },
               obscureText: true,
-              hint:state.isEn? "     Enter your Password      ":"     ادخل كلمة المرور      ",
+              hint: state.isEn
+                  ? "     Enter your Password      "
+                  : "     ادخل كلمة المرور      ",
               backgroundcolor: const Color(0xffF5F5F5),
               hintcolor: Static.lightcolor,
               hintsize: (MediaQuery.of(context).size.width / 430) * 16,
@@ -79,5 +85,19 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
         );
       },
     );
+  }
+
+  String sethint(bool en, bool pat) {
+    String hint;
+    if (en) {
+      pat
+          ? hint = "     Enter your Number      "
+          : hint = "     Enter the national number      ";
+    } else {
+      pat
+          ? hint = "     ادخل رقم الموبايل      "
+          : hint = "     ادخل الرقم الوطني      ";
+    }
+    return hint;
   }
 }

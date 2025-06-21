@@ -77,7 +77,7 @@ class _NumberDialgState extends State<NumberDialg> {
                               await cubit.setnumber(
                                   context: context,
                                   number: cubit.number,);
-                           GoRouter.of(context).push(AppRouter.verifyPage);
+                           GoRouter.of(context).push(AppRouter.verifyPage , extra: false);
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                           }

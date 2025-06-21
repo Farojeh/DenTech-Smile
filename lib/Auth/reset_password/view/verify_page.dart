@@ -8,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class VerifyPage extends StatelessWidget {
-  const VerifyPage({super.key});
+  final bool fromregister ;
+  const VerifyPage({super.key, required this.fromregister});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class VerifyPage extends StatelessWidget {
         child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: const CustomVerifyPage()),
+            child: CustomVerifyPage(fromregister:fromregister)),
       )),
     );
   }

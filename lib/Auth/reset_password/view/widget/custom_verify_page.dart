@@ -7,12 +7,14 @@ import 'package:dentech_smile/Auth/reset_password/view/widget/top_verify_page.da
 import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/custom_snackbar.dart';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomVerifyPage extends StatefulWidget {
-  const CustomVerifyPage({super.key});
+  final bool fromregister ;
+  const CustomVerifyPage({super.key, required this.fromregister});
 
   @override
   State<CustomVerifyPage> createState() => _CustomVerifyPageState();
@@ -53,10 +55,20 @@ class _CustomVerifyPageState extends State<CustomVerifyPage> {
               onPressed: () async {
                 if (formkey.currentState!.validate()) {
                   try {
-                    var cubit = BlocProvider.of<VerifyCubit>(context);
+                     var cubit = BlocProvider.of<VerifyCubit>(context);
                     formkey.currentState!.save();
-                    await cubit.verify();
+                    if(widget.fromregister){
+                      print("from register");
+                       await cubit.verifyRegister(
+                        name: userInfo!.getString(Static.userName)!,
+                        number:userInfo!.getString(Static.userNumber)!,
+                        password: userInfo!.getString(Static.userPassword)!,
+                       );
+                    }else{
+                      await cubit.verify();
+                    }
                   } catch (error) {
+                    print(error);
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(CustomSnackBar().customSnackBar(

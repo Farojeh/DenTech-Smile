@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogInBody extends StatefulWidget {
-  const LogInBody({super.key});
+  final bool patient;
+  const LogInBody({super.key, required this.patient});
 
   @override
   State<LogInBody> createState() => _LogInBodyState();
@@ -36,7 +37,7 @@ class _LogInBodyState extends State<LogInBody> {
             } else if (state is LoginSuccess) {
               // GoRouter.of(context).go(AppRouter.homeView);
               print(
-                  "******************************** SignUpSuccess ********************************");
+                  "******************************** LoginSuccess ********************************");
             }
           },
           child: Directionality(
@@ -50,7 +51,7 @@ class _LogInBodyState extends State<LogInBody> {
                   Form(
                       autovalidateMode: autovalidateMode,
                       key: formkey,
-                      child: const CustomLoginFields()),
+                      child: CustomLoginFields(patient: widget.patient,)),
                   const ResetPasswordButton(),
                   SizedBox(
                     height: (MediaQuery.of(context).size.height / 932) * 35,
@@ -68,10 +69,7 @@ class _LogInBodyState extends State<LogInBody> {
                         try {
                           var cubit = BlocProvider.of<LoginCubit>(context);
                           formkey.currentState!.save();
-                          await cubit.register(
-                              context: context,
-                              number: cubit.number,
-                              password: cubit.password);
+                          await cubit.login(patient: widget.patient);
                         } catch (error) {
                           ScaffoldMessenger.of(context)
                             ..hideCurrentSnackBar()

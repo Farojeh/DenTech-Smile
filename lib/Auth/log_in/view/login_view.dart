@@ -3,12 +3,13 @@ import 'package:dentech_smile/Auth/log_in/view/widget/login_body.dart';
 import 'package:flutter/material.dart';
 
 class LogInView extends StatelessWidget {
-  const LogInView({super.key});
+  final bool patient;
+  const LogInView({super.key, required this.patient});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BackgroundLogin(screen: LogInBody(), goback: true),
+    return Scaffold(
+      body: BackgroundLogin(screen: LogInBody(patient: patient,), goback: true),
     );
   }
 }

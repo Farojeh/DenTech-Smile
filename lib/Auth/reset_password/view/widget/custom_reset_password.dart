@@ -6,6 +6,7 @@ import 'package:dentech_smile/Auth/reset_password/view/widget/top_verify_page.da
 import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/custom_snackbar.dart';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +45,7 @@ class _CustomResetPasswordState extends State<CustomResetPassword> {
         BlocBuilder<TranslationCubit, TranslationState>(
           builder: (context, trstate) {
             return CustomButton(
-              color:const Color(0xff3EAEB6),
+              color: const Color(0xff3EAEB6),
               redbl: 20,
               redbr: 20,
               redtl: 20,
@@ -56,8 +57,8 @@ class _CustomResetPasswordState extends State<CustomResetPassword> {
                   try {
                     var cubit = BlocProvider.of<ResetPasswordCubit>(context);
                     formkey.currentState!.save();
-                    await cubit.register(
-                        password: cubit.password, context: context);
+                    await cubit.resertpassword(
+                        number: userInfo!.getString(Static.userNumber)!);
                   } catch (error) {
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()

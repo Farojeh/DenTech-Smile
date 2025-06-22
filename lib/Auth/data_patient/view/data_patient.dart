@@ -1,5 +1,6 @@
 import 'package:dentech_smile/Auth/data_patient/view/widget/data_patient_body.dart';
 import 'package:dentech_smile/Auth/data_patient/view/widget/data_patient_button.dart';
+import 'package:dentech_smile/Auth/on_boarding/view/widget/translate_widget.dart';
 import 'package:flutter/material.dart';
 
 class DatePatient extends StatelessWidget {
@@ -11,11 +12,12 @@ class DatePatient extends StatelessWidget {
         body: SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: const Stack(
+      child:  Stack(
         children: [
-          DataPatientBody(),
+         const DataPatientBody(),
           // Onboardingbutton(),
-          Positioned(bottom: 20, child: DataPatientButton())
+          Positioned(bottom: MediaQuery.of(context).size.height*0.035, child:const DataPatientButton()),
+         const Positioned(top: 30, right: 10, child: TranslateWidget())
         ],
       ),
     ));

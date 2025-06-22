@@ -11,4 +11,5 @@ final class VerifyFailure extends VerifyState {
   VerifyFailure({required this.errorMessage});
 }
 final class VerifySuccess extends VerifyState {}
+final class ResendSuccess extends VerifyState {}
 

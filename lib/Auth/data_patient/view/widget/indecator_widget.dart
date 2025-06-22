@@ -11,22 +11,30 @@ class IndecatorWidget extends StatelessWidget {
     return BlocBuilder<DataPatientCubit, DataPatientState>(
       builder: (context, state) {
         return Container(
-            alignment: Alignment.center,
-            width: 55,
-            height: 40,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) => Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: (index == state.selectPage) ? 16 : 11,
-                      width: (index == state.selectPage) ? 16 : 11,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: (index == state.selectPage)
-                              ? Static.basiccolor
-                              : Static.basiccolor.withOpacity(0.3)),
-                    )));
+          alignment: Alignment.center,
+          width: 55,
+          height: 40,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              final isSelected = index == state.selectPage;
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+                margin: const EdgeInsets.symmetric(horizontal: 2),
+                height: isSelected ? 14 : 9,
+                width: isSelected ? 14 : 9,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: isSelected
+                      ? Static.basiccolor
+                      : Static.basiccolor.withOpacity(0.3),
+                ),
+              );
+            },
+          ),
+        );
       },
     );
   }

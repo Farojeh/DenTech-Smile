@@ -3,12 +3,13 @@ import 'package:dentech_smile/Auth/reset_password/controller/cubit/verify_cubit.
 import 'package:dentech_smile/Auth/reset_password/view/widget/custom_verify_page.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/custom_snackbar.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class VerifyPage extends StatelessWidget {
-  final bool fromregister ;
+  final bool fromregister;
   const VerifyPage({super.key, required this.fromregister});
 
   @override
@@ -25,7 +26,11 @@ class VerifyPage extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(CustomSnackBar().customSnackBar(
                 'perfect', "verify Success", ContentType.success));
-          GoRouter.of(context).push(AppRouter.resetpassword);
+          if (fromregister) {
+            Static.home(context);
+          } else {
+            GoRouter.of(context).push(AppRouter.resetpassword);
+          }
         }
       },
       child: Scaffold(
@@ -33,7 +38,7 @@ class VerifyPage extends StatelessWidget {
         child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: CustomVerifyPage(fromregister:fromregister)),
+            child: CustomVerifyPage(fromregister: fromregister)),
       )),
     );
   }

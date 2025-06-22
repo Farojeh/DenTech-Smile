@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomVerifyPage extends StatefulWidget {
-  final bool fromregister ;
+  final bool fromregister;
   const CustomVerifyPage({super.key, required this.fromregister});
 
   @override
@@ -55,17 +55,17 @@ class _CustomVerifyPageState extends State<CustomVerifyPage> {
               onPressed: () async {
                 if (formkey.currentState!.validate()) {
                   try {
-                     var cubit = BlocProvider.of<VerifyCubit>(context);
+                    var cubit = BlocProvider.of<VerifyCubit>(context);
                     formkey.currentState!.save();
-                    if(widget.fromregister){
-                      print("from register");
-                       await cubit.verifyRegister(
+                    if (widget.fromregister) {
+                      await cubit.verifyRegister(
                         name: userInfo!.getString(Static.userName)!,
-                        number:userInfo!.getString(Static.userNumber)!,
+                        number: userInfo!.getString(Static.userNumber)!,
                         password: userInfo!.getString(Static.userPassword)!,
-                       );
-                    }else{
-                      await cubit.verify();
+                      );
+                    } else {
+                      await cubit.verify(
+                          phonenumber: userInfo!.getString(Static.userNumber)!);
                     }
                   } catch (error) {
                     print(error);
@@ -86,7 +86,7 @@ class _CustomVerifyPageState extends State<CustomVerifyPage> {
                     );
                   } else {
                     return Text(
-                      trstate.isEn?"Verify":"تأكيد",
+                      trstate.isEn ? "Verify" : "تأكيد",
                       style: TextStyle(
                           fontFamily: Static.afacadfont,
                           fontWeight: FontWeight.w700,

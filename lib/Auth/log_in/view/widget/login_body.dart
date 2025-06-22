@@ -35,9 +35,7 @@ class _LogInBodyState extends State<LogInBody> {
                 ..showSnackBar(CustomSnackBar().customSnackBar(
                     'Oops', state.errorMessage, ContentType.failure));
             } else if (state is LoginSuccess) {
-              // GoRouter.of(context).go(AppRouter.homeView);
-              print(
-                  "******************************** LoginSuccess ********************************");
+              Static.home(context);
             }
           },
           child: Directionality(
@@ -51,7 +49,9 @@ class _LogInBodyState extends State<LogInBody> {
                   Form(
                       autovalidateMode: autovalidateMode,
                       key: formkey,
-                      child: CustomLoginFields(patient: widget.patient,)),
+                      child: CustomLoginFields(
+                        patient: widget.patient,
+                      )),
                   const ResetPasswordButton(),
                   SizedBox(
                     height: (MediaQuery.of(context).size.height / 932) * 35,

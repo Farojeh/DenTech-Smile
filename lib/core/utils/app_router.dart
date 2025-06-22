@@ -12,6 +12,9 @@ import 'package:dentech_smile/Auth/reset_password/view/verify_page.dart';
 import 'package:dentech_smile/Auth/sign_up/controller/cubit/sign_up_cubit.dart';
 import 'package:dentech_smile/Auth/sign_up/view/sign_up.dart';
 import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
+import 'package:dentech_smile/patient/patient.dart';
+import 'package:dentech_smile/professor/professor.dart';
+import 'package:dentech_smile/student/student.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,6 +26,9 @@ abstract class AppRouter {
   static const verifyPage = "/VerifyPage";
   static const resetpassword = "/ResetPassword";
   static const datapatient = "/datapatient";
+  static const patienthome = "/PatientHome";
+  static const studenthome = "/StudentHome";
+  static const professor = "/ProfessorHome";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -50,14 +56,16 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: login,
-        builder: (context, state) {
-          final patient = state.extra as bool? ?? false;
-          return BlocProvider<LoginCubit>(
-          create: (context) => LoginCubit(),
-          child: LogInView(patient: patient,),
-        );}
-      ),
+          path: login,
+          builder: (context, state) {
+            final patient = state.extra as bool? ?? false;
+            return BlocProvider<LoginCubit>(
+              create: (context) => LoginCubit(),
+              child: LogInView(
+                patient: patient,
+              ),
+            );
+          }),
       GoRoute(
         path: verifyPage,
         builder: (context, state) {
@@ -82,6 +90,19 @@ abstract class AppRouter {
           child: const DatePatient(),
         ),
       ),
+      GoRoute(
+        path: patienthome,
+        builder: (context, state) => const Patient(),
+      ),
+      GoRoute(
+        path: studenthome,
+        builder: (context, state) => const Student(),
+      ),
+      GoRoute(
+        path: professor,
+        builder: (context, state) => const Professor(),
+      ),
     ],
   );
+
 }

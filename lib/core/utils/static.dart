@@ -1,4 +1,7 @@
+import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Static{
   static String abhayaLibrefont = "AbhayaLibre";
@@ -10,5 +13,18 @@ class Static{
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";
+  static String userRole = "userRole";//2 for patient , 1 for student , 4 for doctor
+  static String token = "Token";
+
+
+static void home(BuildContext context){
+  if(userInfo!.getInt(userRole)==1){
+   GoRouter.of(context).pushReplacement(AppRouter.studenthome);
+  }else if(userInfo!.getInt(userRole)==2){
+    GoRouter.of(context).pushReplacement(AppRouter.patienthome);
+  }else{
+     GoRouter.of(context).pushReplacement(AppRouter.professor);
+  }
+}
 
 }

@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/errors/failures.dart';
 import 'package:dentech_smile/core/utils/api_service.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
+import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -30,12 +32,16 @@ class LoginCubit extends Cubit<LoginState> {
       Response response;
       try {
         response = await apiService.post(endPoint: "/login", data: login);
-        print(response.data);
         if (response.statusCode != 200 && response.statusCode != 201) {
           var failure =
               ServerFaliure.fromResponse(response.statusCode!, response.data);
           emit(LoginFailure(errorMessage: failure.errorMessage));
         } else {
+          userInfo!.clear();
+          userInfo!.setString(Static.userName , response.data["user"]["name"]);
+          userInfo!.setString(Static.userNumber , response.data["user"]["phone_number"]);
+          userInfo!.setInt(Static.userRole , response.data["user"]["role_id"]);
+          userInfo!.setString(Static.token , response.data["token"]);
           emit(LoginSuccess());
         }
       } catch (error) {

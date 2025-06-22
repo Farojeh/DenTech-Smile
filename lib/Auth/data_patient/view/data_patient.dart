@@ -16,7 +16,7 @@ class DatePatient extends StatelessWidget {
         children: [
          const DataPatientBody(),
           // Onboardingbutton(),
-          Positioned(bottom: MediaQuery.of(context).size.height*0.035, child:const DataPatientButton()),
+          Positioned(bottom: MediaQuery.of(context).size.height*0.025, child:const DataPatientButton()),
          const Positioned(top: 30, right: 10, child: TranslateWidget())
         ],
       ),

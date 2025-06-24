@@ -9,16 +9,19 @@ class DatePatient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SizedBox(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child:  Stack(
-        children: [
-         const DataPatientBody(),
-          // Onboardingbutton(),
-          Positioned(bottom: MediaQuery.of(context).size.height*0.025, child:const DataPatientButton()),
-         const Positioned(top: 30, right: 10, child: TranslateWidget())
-        ],
+        body: SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            const DataPatientBody(),
+            Positioned(
+                top: MediaQuery.of(context).size.height * 0.85,
+                child: const DataPatientButton()),
+            const Positioned(top: 30, right: 10, child: TranslateWidget())
+          ],
+        ),
       ),
     ));
   }

@@ -13,8 +13,7 @@ class DataPatientBody extends StatelessWidget {
         return PageView.builder(
             controller: cubit.controller,
             itemCount: state.pageArray.length,
-            itemBuilder: (context, index) => state.pageArray[index]
-        );
+            itemBuilder: (context, index) => state.pageArray[index]);
       },
     );
   }

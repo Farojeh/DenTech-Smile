@@ -1,6 +1,7 @@
 import 'package:dentech_smile/Auth/data_patient/controller/cubit/data_patient_cubit.dart';
 import 'package:dentech_smile/Auth/data_patient/controller/cubit/illness_cubit_cubit.dart';
 import 'package:dentech_smile/Auth/data_patient/controller/cubit/information_cubit.dart';
+import 'package:dentech_smile/Auth/data_patient/controller/cubit/medican_cubit.dart';
 import 'package:dentech_smile/Auth/data_patient/view/data_patient.dart';
 import 'package:dentech_smile/Auth/log_in/controller/cubit/login_cubit.dart';
 import 'package:dentech_smile/Auth/log_in/view/login_view.dart';
@@ -97,6 +98,9 @@ abstract class AppRouter {
             ),
             BlocProvider<InformationCubit>(
               create: (context) => InformationCubit(),
+            ),
+            BlocProvider<MedicanCubit>(
+              create: (context) => MedicanCubit(),
             ),
           ],
           child: const DatePatient(),

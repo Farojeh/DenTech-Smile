@@ -57,7 +57,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
               ),
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 5,
+                height: (MediaQuery.of(context).size.height / 932) * 10,
               ),
               CustomTextField(
                 isEnglish: state.isEn,
@@ -81,7 +81,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
               ),
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 5,
+                height: (MediaQuery.of(context).size.height / 932) * 10,
               ),
               CustomTextField(
                  isEnglish: state.isEn,
@@ -107,7 +107,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
               ),
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 5,
+                height: (MediaQuery.of(context).size.height / 932) * 10,
               ),
               CustomTextField(
                 isEnglish: state.isEn,

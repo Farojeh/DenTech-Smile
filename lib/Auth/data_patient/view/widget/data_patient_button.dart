@@ -1,6 +1,9 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:dentech_smile/Auth/data_patient/controller/cubit/data_patient_config_cubit.dart';
 import 'package:dentech_smile/Auth/data_patient/controller/cubit/data_patient_cubit.dart';
+import 'package:dentech_smile/Auth/data_patient/controller/cubit/illness_cubit_cubit.dart';
 import 'package:dentech_smile/Auth/data_patient/controller/cubit/information_cubit.dart';
+import 'package:dentech_smile/Auth/data_patient/controller/cubit/medican_cubit.dart';
 import 'package:dentech_smile/Auth/data_patient/view/widget/indecator_widget.dart';
 import 'package:dentech_smile/core/utils/custom_snackbar.dart';
 import 'package:dentech_smile/core/utils/static.dart';
@@ -43,22 +46,31 @@ class DataPatientButton extends StatelessWidget {
               return InkWell(
                 overlayColor:
                     MaterialStatePropertyAll(Colors.white.withOpacity(0)),
-                onTap: () {
+                onTap: ()async {
                   final cubit = context.read<InformationCubit>();
+                  final medcuibit = context.read<MedicanCubit>();
+                  final illcubit = context.read<IllnessCubitCubit>();
+                  final configcubit = context.read<DataPatientConfigCubit>();
                   if (state.selectPage < 2) {
                     BlocProvider.of<DataPatientCubit>(context).nextPage();
                   } else {
                     if (cubit.formkey.currentState!.validate()) {
                       try {
                         cubit.formkey.currentState!.save();
-                        print(cubit.age);
-                         print(cubit.hieght);
-                          print(cubit.wieght);
+                        if (cubit.checkdate()) {
+                          throw "Age is Required";
+                        }
+                       await configcubit.configData(
+                            illness: illcubit.activeillnesses,
+                            images: medcuibit.images,
+                            date: cubit.age,
+                            hieght: cubit.hieght,
+                            wieght: cubit.wieght);
                       } catch (error) {
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
-                          ..showSnackBar(CustomSnackBar().customSnackBar('Oops',
-                              'there is a problem', ContentType.failure));
+                          ..showSnackBar(CustomSnackBar().customSnackBar(
+                              'Oops', error.toString(), ContentType.failure));
                       }
                     } else {
                       cubit.check(aut: AutovalidateMode.always);
@@ -72,10 +84,23 @@ class DataPatientButton extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Static.basiccolor,
                   ),
-                  child: const Icon(
-                    Icons.arrow_forward_rounded,
-                    color: Colors.white,
-                    size: 30,
+                  child: BlocBuilder<DataPatientConfigCubit,
+                      DataPatientConfigState>(
+                    builder: (context, state) {
+                      if (state is DataPatientConfigLoading) {
+                        return const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                      return const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.white,
+                        size: 30,
+                      );
+                    },
                   ),
                 ),
               );

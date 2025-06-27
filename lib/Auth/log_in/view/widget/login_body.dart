@@ -54,7 +54,7 @@ class _LogInBodyState extends State<LogInBody> {
                       )),
                   const ResetPasswordButton(),
                   SizedBox(
-                    height: (MediaQuery.of(context).size.height / 932) * 35,
+                    height: (MediaQuery.of(context).size.height / 932) * 45,
                   ),
                   CustomButton(
                     color: Static.basiccolor,

@@ -26,11 +26,9 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     };
     Response response;
     try {
-      print(login);
       response = await apiService.post(endPoint: "/resetPassword", data: login);
       print(response.data);
       if (response.statusCode != 200 && response.statusCode != 201) {
-        print("hhhhhhhhhhhhhhhhhhhhh");
         print(response.data);
         var failure =
             ServerFaliure.fromResponse(response.statusCode!, response.data);
@@ -40,7 +38,6 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       }
     } catch (error) {
       if (error is DioException) {
-        print("jjjjjjjjjjjjjjjjjjjjj");
         var failure = ServerFaliure.fromDioException(error);
         emit(ResetPasswordFailure(errorMessage: failure.errorMessage));
       }

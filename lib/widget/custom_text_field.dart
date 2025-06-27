@@ -20,6 +20,7 @@ class CustomTextField extends StatefulWidget {
   final bool? ispass ;
   final bool? iscoupon ;
   final bool? isnumber ;
+  final bool? isint ;
   final double? height ;
   final bool isEnglish ;
   const CustomTextField(
@@ -34,7 +35,7 @@ class CustomTextField extends StatefulWidget {
       this.backgroundcolor,
       this.hintcolor,
       this.hintsize,
-      this.obscureText, this.isname, this.isemail, this.ispass, this.iscoupon, this.height, this.isnumber, required this.isEnglish});
+      this.obscureText, this.isname, this.isemail, this.ispass, this.iscoupon, this.height, this.isnumber, required this.isEnglish, this.isint});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -65,6 +66,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               return validat(data);
             }else if(widget.isnumber!= null && widget.isnumber == true){
               return FormValidators().phoneNumberValidator(data);
+            }else if(widget.isint!= null && widget.isint == true){
+              return FormValidators().isOnlyNumbers(data);
             }
             else {
               return null ;

@@ -9,7 +9,7 @@ class Static{
   static String arialRoundedMTfont = "ArialRoundedMT";
   static Color basiccolor = Color(0xff006A71);
   static Color lightcolor = Color(0xff353535);
-  static String ipconfig = "192.168.1.7";
+  static String ipconfig = "192.168.1.8";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";
@@ -21,7 +21,7 @@ static void home(BuildContext context){
   if(userInfo!.getInt(userRole)==1){
    GoRouter.of(context).pushReplacement(AppRouter.studenthome);
   }else if(userInfo!.getInt(userRole)==2){
-    GoRouter.of(context).pushReplacement(AppRouter.patienthome);
+    GoRouter.of(context).pushReplacement(AppRouter.datapatient);
   }else{
      GoRouter.of(context).pushReplacement(AppRouter.professor);
   }

@@ -10,7 +10,7 @@ class IlnessPage extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: (MediaQuery.of(context).size.height / 932) * 80,
+          height: (MediaQuery.of(context).size.height / 932) * 95,
         ),
         Image.asset(
           "assets/images/illness.png",

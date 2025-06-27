@@ -52,6 +52,7 @@ class FormValidators {
     if (!_phoneRegex.hasMatch(value)) {
       return "Phone number must be 10 digits";
     }
+    
 
     // نحول الأرقام العربية لأرقام إنجليزية لمطابقة البادئة
     String normalized = _convertArabicNumbersToEnglish(value);
@@ -61,6 +62,22 @@ class FormValidators {
 
     return null;
   }
+
+  // ------------------ تحقق إن كانت أرقام فقط ------------------
+String? isOnlyNumbers(String? value) {
+  if (value == null || value.isEmpty) {
+    return "Required Field";
+  }
+
+  // نستخدم RegExp لقبول الأرقام الإنجليزية والعربية
+  final numberRegex = RegExp(r'^[0-9\u0660-\u0669]+$');
+
+  if (!numberRegex.hasMatch(value)) {
+    return "Only digits are allowed";
+  }
+
+  return null; // valid
+}
 
   // دالة مساعدة لتحويل الأرقام العربية إلى أرقام إنجليزية
   String _convertArabicNumbersToEnglish(String input) {

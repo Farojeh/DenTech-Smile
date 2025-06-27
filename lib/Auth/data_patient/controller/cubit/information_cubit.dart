@@ -11,20 +11,36 @@ class InformationCubit extends Cubit<InformationState> {
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
+  String aged = "";
+  String agem = "";
+  String agey = "";
   String age = "";
+
   String hieght = "";
   String wieght = "";
 
-  void setage({required String a}){
-    age = a ;
+  void setage({required String d ,required String m ,required String y  }){
+    aged = d ;
+    agem = m ;
+    agey = y ;
+    emit(InformationDate(date: "$aged-$agem-$agey"));
+    age = "$aged-$agem-$agey";
   }
 
-  void sethieght({required String h}){
-    hieght = h ;
+  bool checkdate(){
+    if(aged.isNotEmpty&&agem.isNotEmpty&&agey.isNotEmpty){
+      return false;
+    }
+    return true ;
   }
 
-  void setwieght({required String w}){
-    wieght = w ;
+  void sethieght({required double h}){ 
+    h = h/100 ;
+    hieght = h.toString() ;
+  }
+
+  void setwieght({required int w}){
+    wieght = w.toString() ;
   }
 
   void check({required AutovalidateMode aut}){

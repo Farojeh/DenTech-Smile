@@ -17,7 +17,7 @@ class InformationPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 70,
+                height: (MediaQuery.of(context).size.height / 932) * 90,
               ),
               Image.asset(
                 "assets/images/information.png",

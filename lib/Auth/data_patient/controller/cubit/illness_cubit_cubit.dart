@@ -7,24 +7,33 @@ part 'illness_cubit_state.dart';
 class IllnessCubitCubit extends Cubit<IllnessCubitState> {
   IllnessCubitCubit()
       : super(IllnessCubitState(illnesses: [
-          Illness(enname: "Diabetes", arname: "داء السكري", active: false),
           Illness(
-              enname: "Heart disease", arname: "امراض القلب", active: false),
-          Illness(enname: "Smoking", arname: "تدخين", active: false),
-          Illness(enname: "Pregnant", arname: "حمل", active: false),
+              enname: "Diabetes", arname: "داء السكري", active: false, id: 1),
+          Illness(
+              enname: "Heart disease",
+              arname: "امراض القلب",
+              active: false,
+              id: 2),
+          Illness(enname: "Smoking", arname: "تدخين", active: false, id: 3),
+          Illness(enname: "Pregnant", arname: "حمل", active: false, id: 4),
           Illness(
               enname: "Endocrine diseases",
               arname: "امراض الغدد الصم",
+              id: 5,
               active: false),
           Illness(
               enname: "Drug allergy",
               arname: "حساسية دوائية ",
+              id: 6,
               active: false),
           Illness(
               enname: "Infectious diseases",
               arname: "امراض معدية ",
+              id: 7,
               active: false),
         ]));
+
+  List<Illness> activeillnesses = [];
 
   void toggleIllness(int index) {
     final updatedList = [...state.illnesses];
@@ -34,11 +43,10 @@ class IllnessCubitCubit extends Cubit<IllnessCubitState> {
     updatedList[index] = updatedIllness;
 
     emit(state.copyWith(illnesses: updatedList));
-    final selectedNames = updatedList
-      .where((illness) => illness.active)
-      .map((illness) => illness.enname)
-      .toList();
 
-  print("الأمراض المختارة: $selectedNames");
+    activeillnesses = updatedList
+        .where((illness) => illness.active)
+        .map((illness) => illness)
+        .toList();
   }
 }

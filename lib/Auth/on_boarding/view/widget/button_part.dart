@@ -17,7 +17,7 @@ class Buttonpart extends StatelessWidget {
         return Column(
           children: [
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 15,
+              height: (MediaQuery.of(context).size.height / 932) * 30,
             ),
             CustomButton(
               color: Static.basiccolor,
@@ -25,7 +25,7 @@ class Buttonpart extends StatelessWidget {
               redbr: 20,
               redtl: 20,
               redtr: 20,
-              height: (MediaQuery.of(context).size.height / 932) * 55,
+              height: (MediaQuery.of(context).size.height / 932) * 58,
               elevation: 7,
               width: (MediaQuery.of(context).size.width / 430) * 247,
               onPressed: () {
@@ -42,7 +42,7 @@ class Buttonpart extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 20,
+              height: (MediaQuery.of(context).size.height / 932) * 25,
             ),
             CustomButton(
                 color: Colors.white,
@@ -52,7 +52,7 @@ class Buttonpart extends StatelessWidget {
                 redtl: 20,
                 redtr: 20,
                 elevation: 7,
-                height: (MediaQuery.of(context).size.height / 932) * 55,
+                height: (MediaQuery.of(context).size.height / 932) * 58,
                 width: (MediaQuery.of(context).size.width / 430) * 247,
                 onPressed: () {
                   userInfo!.setInt(Static.userRole, 1);
@@ -67,7 +67,7 @@ class Buttonpart extends StatelessWidget {
                       color: Static.basiccolor),
                 )),
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 20,
+              height: (MediaQuery.of(context).size.height / 932) * 25,
             ),
             CustomButton(
                 color: Colors.white,
@@ -77,7 +77,7 @@ class Buttonpart extends StatelessWidget {
                 redtl: 20,
                 redtr: 20,
                 elevation: 7,
-                height: (MediaQuery.of(context).size.height / 932) * 55,
+                height: (MediaQuery.of(context).size.height / 932) * 58,
                 width: (MediaQuery.of(context).size.width / 430) * 247,
                 onPressed: () {
                   userInfo!.setInt(Static.userRole, 4);

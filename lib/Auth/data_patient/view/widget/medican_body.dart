@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:dentech_smile/Auth/data_patient/controller/cubit/medican_cubit.dart';
+import 'package:dentech_smile/Auth/data_patient/view/widget/image_dialog.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +14,7 @@ class MedicanBody extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         SizedBox(
-          height: (MediaQuery.of(context).size.height / 932) * 290,
+          height: (MediaQuery.of(context).size.height / 932) * 300,
           width: (MediaQuery.of(context).size.width / 430) * 360,
         ),
         BlocBuilder<MedicanCubit, MedicanState>(
@@ -27,7 +29,7 @@ class MedicanBody extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     vertical: x == 1 ? 30 : (x == 2 ? 35 : 27),
                     horizontal: x == 1 ? 40 : (x == 2 ? 30 : 20)),
-                height: (MediaQuery.of(context).size.height / 932) * 250,
+                height: (MediaQuery.of(context).size.height / 932) * 255,
                 width: (MediaQuery.of(context).size.width / 430) * 325,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -79,27 +81,49 @@ class MedicanBody extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Image.asset(
                   "assets/images/image (2).png",
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   fit: BoxFit.contain,
                 ),
               );
             }
           },
         ),
-        Positioned(
-            right: MediaQuery.of(context).size.width * 0.13,
-            child: InkWell(
-              onTap: () => BlocProvider.of<MedicanCubit>(context).pickImage(),
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                    color: Static.basiccolor, shape: BoxShape.circle),
-                child: Image.asset("assets/images/image.png"),
-              ),
-            ))
+        BlocBuilder<MedicanCubit, MedicanState>(
+          builder: (context, state) {
+            return Positioned(
+                right: MediaQuery.of(context).size.width * 0.13,
+                child: InkWell(
+                  onTap: () async {
+                    final image =
+                        await context.read<MedicanCubit>().pickImage();
+
+                    if (!context.mounted) return;
+
+                    if (image != null) {
+                    bool? result = await showDialog(
+                        context: context,
+                        builder: (context) =>
+                            ImageDialog(image: File(image.path)),
+                      );
+                      if(result!=null && result){
+                        if (!context.mounted) return;
+                        BlocProvider.of<MedicanCubit>(context)
+                              .addimagetolist();
+                      }
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                        color: Static.basiccolor, shape: BoxShape.circle),
+                    child: Image.asset("assets/images/image.png"),
+                  ),
+                ));
+          },
+        )
       ],
     );
   }

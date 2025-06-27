@@ -12,12 +12,13 @@ void main() async{
    WidgetsFlutterBinding.ensureInitialized();
    userInfo = await SharedPreferences.getInstance();
   setupServiceLocator();
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => const MyApp(),
+  //   ),
+  // );
 }
 
 class MyApp extends StatelessWidget {

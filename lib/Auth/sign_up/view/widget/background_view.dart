@@ -45,7 +45,7 @@ class BackgroundView extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  top: MediaQuery.of(context).size.height * 0.05,
+                  top: MediaQuery.of(context).size.height * 0.06,
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.16,
                     width: MediaQuery.of(context).size.width * 0.5,
@@ -85,7 +85,7 @@ class BackgroundView extends StatelessWidget {
                       ))
                   : Container(),
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.22,
+                top: MediaQuery.of(context).size.height * 0.23,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.8,
                   width: MediaQuery.of(context).size.width,

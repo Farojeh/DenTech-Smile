@@ -16,9 +16,9 @@ class IllnessBody extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.05,
-                vertical: MediaQuery.of(context).size.height * 0.025),
+                vertical: MediaQuery.of(context).size.height * 0.035),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            height: (MediaQuery.of(context).size.height / 932) * 321,
+            height: (MediaQuery.of(context).size.height / 932) * 325,
             width: (MediaQuery.of(context).size.width / 430) * 345,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),

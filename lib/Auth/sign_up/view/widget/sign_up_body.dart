@@ -49,7 +49,7 @@ class _SignUpbodyState extends State<SignUpbody> {
                   child: const CustomSignupFields()),
               const LoginButton(),
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 30,
+                height: (MediaQuery.of(context).size.height / 932) * 38,
               ),
               CustomButton(
                 color: Static.basiccolor,

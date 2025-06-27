@@ -18,7 +18,7 @@ class _MedicanPageState extends State<MedicanPage> {
       child: Column(
         children: [
           SizedBox(
-            height: (MediaQuery.of(context).size.height / 932) * 40,
+            height: (MediaQuery.of(context).size.height / 932) * 50,
           ),
           Image.asset(
             "assets/images/medican.png",

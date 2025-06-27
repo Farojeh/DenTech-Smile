@@ -13,7 +13,7 @@ class TitleIlness extends StatelessWidget {
         return Directionality(
            textDirection:state.isEn?TextDirection.ltr: TextDirection.rtl,
           child: Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.06),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

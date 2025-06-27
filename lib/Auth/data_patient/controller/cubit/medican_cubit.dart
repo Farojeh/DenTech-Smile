@@ -7,15 +7,23 @@ part 'medican_state.dart'; // ربط ملف الحالة
 
 class MedicanCubit extends Cubit<MedicanState> {
   MedicanCubit() : super(MedicanInitial());
+  
+   XFile? image ;
 
   final ImagePicker _picker = ImagePicker();        
-  final List<File> _images = [];                     
+  final List<File> images = [];    
 
-  Future<void> pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      _images.add(File(image.path));  
-      emit(MedicanImagesUpdated(List.from(_images))); 
+
+  void addimagetolist(){
+     images.add(File(image!.path));  
+      emit(MedicanImagesUpdated(List.from(images))); 
+  }                 
+
+  Future<XFile?> pickImage() async {
+    final XFile? img = await _picker.pickImage(source: ImageSource.gallery);
+    if (img != null) {
+      image = img ;
     }
+    return image ;
   }
 }

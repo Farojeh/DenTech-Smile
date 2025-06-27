@@ -26,7 +26,7 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 20,
+              height: (MediaQuery.of(context).size.height / 932) * 25,
             ),
             CustomTextField(
               isEnglish: state.isEn ? true : false,
@@ -54,7 +54,7 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
               hintsize: (MediaQuery.of(context).size.width / 430) * 16,
             ),
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 5,
+              height: (MediaQuery.of(context).size.height / 932) * 10,
             ),
             CustomTextField(
               isEnglish: state.isEn ? true : false,

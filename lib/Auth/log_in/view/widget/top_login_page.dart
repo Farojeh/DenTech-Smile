@@ -13,7 +13,7 @@ class TopLoginPage extends StatelessWidget {
         return Column(
           children: [
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 10,
+              height: (MediaQuery.of(context).size.height / 932) * 22,
             ),
             Text(
              state.isEn? "Welcome Back !":"أهلا بك مجددا",

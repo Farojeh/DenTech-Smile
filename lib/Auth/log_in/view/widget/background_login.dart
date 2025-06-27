@@ -91,7 +91,7 @@ class BackgroundLogin extends StatelessWidget {
                       ))
                   : Container(),
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.45,
+                top: MediaQuery.of(context).size.height * 0.46,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.6,
                   width: MediaQuery.of(context).size.width,

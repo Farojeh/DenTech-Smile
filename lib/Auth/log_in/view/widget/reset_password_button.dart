@@ -13,7 +13,7 @@ class ResetPasswordButton extends StatelessWidget {
     return BlocBuilder<TranslationCubit, TranslationState>(
       builder: (context, state) {
         return Container(
-          margin: const EdgeInsets.only(right: 30),
+          margin: const EdgeInsets.only(right: 30 , top: 1),
           alignment: Alignment.centerRight,
           child: InkWell(
             overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),

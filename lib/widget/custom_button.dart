@@ -51,7 +51,7 @@ class CustomButton extends StatelessWidget {
           ),
           overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
           backgroundColor: MaterialStatePropertyAll(
-            side == null ? color : const Color(0xffFEF7FF),
+            side == null ? color : Color.fromARGB(255, 255, 255, 255),
           ),
           elevation:elevation==null?null :const MaterialStatePropertyAll(6),
           surfaceTintColor: MaterialStatePropertyAll(Colors.transparent), // هذا التعديل المهم هنا

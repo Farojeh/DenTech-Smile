@@ -46,12 +46,12 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                   ),
                 ),
                 isname: true,
-                height: (MediaQuery.of(context).size.height / 932) * 80,
+                height: (MediaQuery.of(context).size.height / 932) * 82,
                 onsaved: (data) {
                   name = data;
                   BlocProvider.of<SignUpCubit>(context).setregistername(n: name!);
                 },
-                hint:state.isEn? "      Enter your name       ":"     ادخل اسمك بالكامل      ",
+                hint:state.isEn? "Enter your name       ":" ادخل اسمك بالكامل",
                 backgroundcolor: const Color(0xffF5F5F5),
                 hintcolor: Static.lightcolor,
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
@@ -70,12 +70,12 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                   ),
                 ),
                 isnumber: true,
-                height: (MediaQuery.of(context).size.height / 932) * 80,
+                height: (MediaQuery.of(context).size.height / 932) * 82,
                 onsaved: (data) {
                   number = data;
                   BlocProvider.of<SignUpCubit>(context).setregisternumber(n: number!);
                 },
-                hint:state.isEn? "      Enter mobile number       ": "     ادخل رقم الموبايل      ",
+                hint:state.isEn? "Enter mobile number       ": "ادخل رقم الموبايل",
                 backgroundcolor: const Color(0xffF5F5F5),
                 hintcolor: Static.lightcolor,
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
@@ -93,7 +93,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                     size: 27,
                   ),
                 ),
-                height: (MediaQuery.of(context).size.height / 932) * 80,
+                height: (MediaQuery.of(context).size.height / 932) * 82,
                 ispass: true,
                 onsaved: (data) {
                   password = data;
@@ -101,7 +101,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                       .setregisterpassword(p: password!);
                 },
                 obscureText: true,
-                hint:state.isEn? "      Enter password       ": "     ادخل كلمة المرور      ",
+                hint:state.isEn? "Enter password       ": "ادخل كلمة المرور",
                 backgroundcolor: const Color(0xffF5F5F5),
                 hintcolor: Static.lightcolor,
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
@@ -119,7 +119,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                     size: 30,
                   ),
                 ),
-                height: (MediaQuery.of(context).size.height / 932) * 80,
+                height: (MediaQuery.of(context).size.height / 932) * 82,
                 onsaved: (data) {
                   confirmpass = data;
                   if (confirmpass != password) {
@@ -127,7 +127,7 @@ class _CustomSignupFieldsState extends State<CustomSignupFields> {
                   }
                 },
                 obscureText: true,
-                hint:state.isEn? "      Enter confirm password       ": "     تأكيد كلمة المرور      ",
+                hint:state.isEn? "Enter confirm password       ": "تأكيد كلمة المرور ",
                 backgroundcolor: const Color(0xffF5F5F5),
                 hintcolor: Static.lightcolor,
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,

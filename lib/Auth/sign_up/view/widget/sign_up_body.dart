@@ -66,7 +66,6 @@ class _SignUpbodyState extends State<SignUpbody> {
                       formkey.currentState!.save();
                       await cubit.register();
                     } catch (error) {
-                      print(error);
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(CustomSnackBar().customSnackBar(

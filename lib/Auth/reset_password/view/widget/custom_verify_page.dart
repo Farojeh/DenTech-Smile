@@ -50,7 +50,7 @@ class _CustomVerifyPageState extends State<CustomVerifyPage> {
               redbr: 20,
               redtl: 20,
               redtr: 20,
-              height: (MediaQuery.of(context).size.height / 932) * 58,
+              height: (MediaQuery.of(context).size.height / 932) * 60,
               width: MediaQuery.of(context).size.width * 0.44,
               onPressed: () async {
                 if (formkey.currentState!.validate()) {

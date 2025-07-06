@@ -32,15 +32,15 @@ class _CustomResetPasswordState extends State<CustomResetPassword> {
         ),
         const TopVerifyPage(),
         const DesignResetPassword(),
-        const SizedBox(
-          height: 30,
+       SizedBox(
+          height: (MediaQuery.of(context).size.height / 932) * 40,
         ),
         Form(
             autovalidateMode: autovalidateMode,
             key: formkey,
             child: const ResetPasswordFields()),
-        const SizedBox(
-          height: 15,
+       SizedBox(
+          height: (MediaQuery.of(context).size.height / 932) * 40,
         ),
         BlocBuilder<TranslationCubit, TranslationState>(
           builder: (context, trstate) {

@@ -42,7 +42,7 @@ class Buttonpart extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 25,
+              height: (MediaQuery.of(context).size.height / 932) * 27,
             ),
             CustomButton(
                 color: Colors.white,
@@ -67,7 +67,7 @@ class Buttonpart extends StatelessWidget {
                       color: Static.basiccolor),
                 )),
             SizedBox(
-              height: (MediaQuery.of(context).size.height / 932) * 25,
+              height: (MediaQuery.of(context).size.height / 932) * 27,
             ),
             CustomButton(
                 color: Colors.white,

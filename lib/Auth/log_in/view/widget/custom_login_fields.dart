@@ -42,7 +42,7 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
               ),
               iscoupon: widget.patient ? null : true,
               isnumber: widget.patient ? true : null,
-              height: (MediaQuery.of(context).size.height / 932) * 80,
+              height: (MediaQuery.of(context).size.height / 932) * 81,
               onsaved: (data) {
                 number = data;
                 BlocProvider.of<LoginCubit>(context)
@@ -66,7 +66,7 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
                   size: 30,
                 ),
               ),
-              height: (MediaQuery.of(context).size.height / 932) * 80,
+              height: (MediaQuery.of(context).size.height / 932) * 81,
               ispass: true,
               onsaved: (data) {
                 password = data;
@@ -75,8 +75,8 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
               },
               obscureText: true,
               hint: state.isEn
-                  ? "     Enter your Password      "
-                  : "     ادخل كلمة المرور      ",
+                  ? "Enter your Password      "
+                  : "ادخل كلمة المرور",
               backgroundcolor: const Color(0xffF5F5F5),
               hintcolor: Static.lightcolor,
               hintsize: (MediaQuery.of(context).size.width / 430) * 16,
@@ -91,12 +91,12 @@ class _CustomLoginFieldsState extends State<CustomLoginFields> {
     String hint;
     if (en) {
       pat
-          ? hint = "     Enter your Number      "
-          : hint = "     Enter the national number      ";
+          ? hint = "Enter your Number"
+          : hint = "Enter the national number";
     } else {
       pat
-          ? hint = "     ادخل رقم الموبايل      "
-          : hint = "     ادخل الرقم الوطني      ";
+          ? hint = "ادخل رقم الموبايل"
+          : hint = " ادخل الرقم الوطني";
     }
     return hint;
   }

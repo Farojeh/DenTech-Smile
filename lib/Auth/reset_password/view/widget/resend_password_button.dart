@@ -19,7 +19,7 @@ class ResendPasswordButton extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 30,
+                height: (MediaQuery.of(context).size.height / 932) * 40,
               ),
               Text(
                 state.isEn ? "Don’t receive OTP?" : "الم تتلقى رمز التأكيد",
@@ -78,7 +78,7 @@ class ResendPasswordButton extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 20,
+                height: (MediaQuery.of(context).size.height / 932) * 40,
               ),
             ],
           ),

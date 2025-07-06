@@ -46,14 +46,14 @@ class _ResetPasswordFieldsState extends State<ResetPasswordFields> {
                 },
                 obscureText: true,
                 hint: state.isEn
-                    ? "     Enter your Password      "
-                    : "     ادخل كلمة المرور      ",
+                    ? "Enter your Password      "
+                    : "ادخل كلمة المرور",
                 backgroundcolor: const Color(0xffF5F5F5),
                 hintcolor: Static.lightcolor,
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,
               ),
               SizedBox(
-                height: (MediaQuery.of(context).size.height / 932) * 5,
+                height: (MediaQuery.of(context).size.height / 932) * 10,
               ),
               CustomTextField(
                 isEnglish: state.isEn ,
@@ -75,8 +75,8 @@ class _ResetPasswordFieldsState extends State<ResetPasswordFields> {
                 },
                 obscureText: true,
                 hint: state.isEn
-                    ? "     Confirm Password      "
-                    : "     تأكيد كلمة المرور      ",
+                    ? "Confirm Password"
+                    : "تأكيد كلمة المرور",
                 backgroundcolor: const Color(0xffF5F5F5),
                 hintcolor: Static.lightcolor,
                 hintsize: (MediaQuery.of(context).size.width / 430) * 16,

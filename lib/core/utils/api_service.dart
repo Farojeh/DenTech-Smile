@@ -28,10 +28,13 @@ class ApiService {
   Future<Response> post(
       {required String endPoint,
       required Map<String, dynamic> data,
-      bool token = false}) async {
+      bool? token}) async {
     Response response;
-    if (token == false) {
-      response = await _dio.post('$_baseUrl$endPoint', data: data);
+    if (token == null || token == false) {
+      print('$_baseUrl$endPoint');
+      print(data);
+      response = await _dio.post('$_baseUrl$endPoint',
+          data: data);
     } else {
       String token = userInfo!.getString(Static.token)!;
       response = await _dio.post('$_baseUrl$endPoint',
@@ -43,7 +46,6 @@ class ApiService {
             },
           ));
     }
-
     return response;
   }
 

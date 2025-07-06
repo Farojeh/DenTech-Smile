@@ -16,7 +16,7 @@ class DesignVerify extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.height / 932) * 50,
+                  top: (MediaQuery.of(context).size.height / 932) * 70,
                   left: (MediaQuery.of(context).size.width / 430) * 30,
                   right: (MediaQuery.of(context).size.width / 430) * 30,
                   bottom: (MediaQuery.of(context).size.height / 932) * 40,

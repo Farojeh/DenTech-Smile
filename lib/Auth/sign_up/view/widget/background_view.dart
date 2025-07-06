@@ -1,6 +1,8 @@
 import 'package:dentech_smile/Auth/on_boarding/view/widget/translate_widget.dart';
+import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class BackgroundView extends StatelessWidget {
@@ -45,7 +47,7 @@ class BackgroundView extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  top: MediaQuery.of(context).size.height * 0.06,
+                  top: MediaQuery.of(context).size.height * 0.065,
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.16,
                     width: MediaQuery.of(context).size.width * 0.5,
@@ -57,35 +59,39 @@ class BackgroundView extends StatelessWidget {
                   )),
               goback
                   ? Positioned(
-                      top: 35,
+                      top: 38,
                       left: 15,
                       child: InkWell(
                         overlayColor: MaterialStatePropertyAll(
                             Colors.white.withOpacity(0)),
                         onTap: () => GoRouter.of(context).pop(),
-                        child: const Row(
+                        child:  Row(
                           children: [
-                            Icon(
+                           const Icon(
                               Icons.arrow_back_ios_new,
                               color: Colors.white,
                               size: 18,
                             ),
-                            SizedBox(
+                           const SizedBox(
                               width: 6,
                             ),
-                            Text(
-                              "الرجوع",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
+                            BlocBuilder<TranslationCubit, TranslationState>(
+                              builder: (context, state) {
+                                return Text(
+                                 state.isEn?"Back": "الرجوع",
+                                  style:const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              },
                             )
                           ],
                         ),
                       ))
                   : Container(),
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.23,
+                top: MediaQuery.of(context).size.height * 0.235,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.8,
                   width: MediaQuery.of(context).size.width,

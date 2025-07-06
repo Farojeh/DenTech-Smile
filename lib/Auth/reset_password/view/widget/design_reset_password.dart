@@ -16,10 +16,10 @@ class DesignResetPassword extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.height / 932) * 50,
+                  top: (MediaQuery.of(context).size.height / 932) * 60,
                   left: (MediaQuery.of(context).size.width / 430) * 30,
                   right: (MediaQuery.of(context).size.width / 430) * 30,
-                  bottom: (MediaQuery.of(context).size.height / 932) * 20,
+                  bottom: (MediaQuery.of(context).size.height / 932) * 35,
                 ),
                 child: Image.asset(
                   "assets/images/reset-password.png",

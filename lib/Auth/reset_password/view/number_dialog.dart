@@ -45,7 +45,7 @@ class _NumberDialgState extends State<NumberDialg> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Container(
-                  height: MediaQuery.of(context).size.height * 0.27,
+                  height: MediaQuery.of(context).size.height * 0.26,
                   width: MediaQuery.of(context).size.width * 0.7,
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 20),

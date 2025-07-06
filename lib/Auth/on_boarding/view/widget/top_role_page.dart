@@ -9,23 +9,23 @@ class Toprolepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height:(MediaQuery.of(context).size.height / 932) * 510,
+      height:(MediaQuery.of(context).size.height / 932) * 525,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           ClipPath(
               clipper: BottomCurveClipper(),
               child: Container(
-                height:(MediaQuery.of(context).size.height / 932) * 510,
+                height:(MediaQuery.of(context).size.height / 932) * 525,
                 width: double.infinity,
                 color: Static.basiccolor,
               )),
           Positioned(
-            top: 40,
+            top: 45,
             child: Image.asset(
               "assets/images/role_page2.png",
               height: (MediaQuery.of(context).size.height / 932) * 401,
-              width: (MediaQuery.of(context).size.width / 430) * 370,
+              width: (MediaQuery.of(context).size.width / 430) * 380,
               fit: BoxFit.fitWidth,
             ),
           ),

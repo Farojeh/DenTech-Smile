@@ -15,14 +15,14 @@ class CustomTextField extends StatefulWidget {
   final double? hintsize;
   final bool? obscureText;
   //final String? Function(String?)? validator;
-  final bool? isname ;
-  final bool? isemail ;
-  final bool? ispass ;
-  final bool? iscoupon ;
-  final bool? isnumber ;
-  final bool? isint ;
-  final double? height ;
-  final bool isEnglish ;
+  final bool? isname;
+  final bool? isemail;
+  final bool? ispass;
+  final bool? iscoupon;
+  final bool? isnumber;
+  final bool? isint;
+  final double? height;
+  final bool isEnglish;
   const CustomTextField(
       {super.key,
       required this.hint,
@@ -35,7 +35,15 @@ class CustomTextField extends StatefulWidget {
       this.backgroundcolor,
       this.hintcolor,
       this.hintsize,
-      this.obscureText, this.isname, this.isemail, this.ispass, this.iscoupon, this.height, this.isnumber, required this.isEnglish, this.isint});
+      this.obscureText,
+      this.isname,
+      this.isemail,
+      this.ispass,
+      this.iscoupon,
+      this.height,
+      this.isnumber,
+      required this.isEnglish,
+      this.isint});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -49,28 +57,27 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       child: SizedBox(
-        height:widget.height??null,
-        width: MediaQuery.of(context).size.width*0.865,
+        height: widget.height ?? null,
+        width: MediaQuery.of(context).size.width * 0.865,
         child: TextFormField(
           obscureText: widget.obscureText != null ? pv : false,
           onChanged: widget.onChanged,
           onSaved: widget.onsaved,
-          validator:(data){
-            if(widget.isname!= null && widget.isname == true){
+          validator: (data) {
+            if (widget.isname != null && widget.isname == true) {
               return FormValidators().userNameValidator(data);
-            }else if(widget.isemail!= null && widget.isemail == true){
-               return FormValidators().emailValidator(data);
-            }else if(widget.ispass!= null && widget.ispass == true){
+            } else if (widget.isemail != null && widget.isemail == true) {
+              return FormValidators().emailValidator(data);
+            } else if (widget.ispass != null && widget.ispass == true) {
               return FormValidators().strongPasswordValidator(data);
-            }else if(widget.iscoupon!= null && widget.iscoupon == true){
+            } else if (widget.iscoupon != null && widget.iscoupon == true) {
               return validat(data);
-            }else if(widget.isnumber!= null && widget.isnumber == true){
+            } else if (widget.isnumber != null && widget.isnumber == true) {
               return FormValidators().phoneNumberValidator(data);
-            }else if(widget.isint!= null && widget.isint == true){
+            } else if (widget.isint != null && widget.isint == true) {
               return FormValidators().isOnlyNumbers(data);
-            }
-            else {
-              return null ;
+            } else {
+              return null;
             }
           },
           maxLines: widget.maxline,
@@ -96,17 +103,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         });
                       },
                       icon: Padding(
-                        padding:widget.isEnglish?const EdgeInsets.only(right: 8) :const EdgeInsets.only(left: 8),
-                        child: Icon(pv ? Icons.visibility_off : Icons.visibility , color: Colors.black87,),
+                        padding: widget.isEnglish
+                            ? const EdgeInsets.only(right: 8)
+                            : const EdgeInsets.only(left: 8),
+                        child: Icon(
+                          pv ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.black87,
+                        ),
                       ))
                   : widget.sufixicon,
               prefixIcon: widget.prefixIcon != null
-                  ? SizedBox(
+                  ? Container(
+                      margin: widget.isEnglish
+                          ? const EdgeInsets.only(right: 12)
+                          : const EdgeInsets.only(left: 12),
                       width: 50,
                       child: Padding(
-                        padding:widget.isEnglish?const EdgeInsets.only( left: 15) :const EdgeInsets.only( right: 15),
-                        child:  widget.prefixIcon!
-                      ),
+                          padding: widget.isEnglish
+                              ? const EdgeInsets.only(left: 15)
+                              : const EdgeInsets.only(right: 15),
+                          child: widget.prefixIcon!),
                     )
                   : null),
         ),
@@ -128,8 +144,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         wordSpacing: 2.5,
         letterSpacing: 0.5,
         fontFamily: Static.afacadfont,
-        fontWeight: FontWeight.w400
-        );
+        fontWeight: FontWeight.w400);
   }
 
   OutlineInputBorder buildborder(Color color, double red) {

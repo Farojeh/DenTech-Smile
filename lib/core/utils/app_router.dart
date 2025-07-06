@@ -18,6 +18,8 @@ import 'package:dentech_smile/Auth/sign_up/view/sign_up.dart';
 import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
 import 'package:dentech_smile/patient/patient.dart';
 import 'package:dentech_smile/professor/professor.dart';
+import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
+import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:dentech_smile/student/student.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -33,6 +35,7 @@ abstract class AppRouter {
   static const patienthome = "/PatientHome";
   static const studenthome = "/StudentHome";
   static const professor = "/ProfessorHome";
+  static const mainTabView = "/mainTabView";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -121,6 +124,13 @@ abstract class AppRouter {
       GoRoute(
         path: professor,
         builder: (context, state) => const Professor(),
+      ),
+      GoRoute(
+        path: mainTabView,
+        builder: (context, state) => BlocProvider<TabCubitCubit>(
+          create: (context) => TabCubitCubit(),
+          child: const MainTabView(),
+        ),
       ),
     ],
   );

@@ -9,6 +9,7 @@ class Static{
   static String arialRoundedMTfont = "ArialRoundedMT";
   static Color basiccolor = Color(0xff006A71);
   static Color lightcolor = Color(0xff353535);
+  static Color lightcolor2 = Color(0xff7C7979);
   static String ipconfig = "192.168.37.207";
   static String userName = "userName";
   static String userNumber = "userNumber";

@@ -28,4 +28,12 @@ static void home(BuildContext context){
   }
 }
 
+static double gethieght(BuildContext context , double size){
+  return (MediaQuery.of(context).size.height / 932) * size ;
+}
+
+static double getwieght(BuildContext context , double size){
+  return (MediaQuery.of(context).size.width / 430) * size ;
+}
+
 }

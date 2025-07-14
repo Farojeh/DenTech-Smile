@@ -24,6 +24,15 @@ import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:dentech_smile/student/student.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:dentech_smile/patient/About_app_page/AboutAppPage.dart';
+import 'package:dentech_smile/patient/Appointments_page/view/AppointmentsPage.dart';
+import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
+import 'package:dentech_smile/patient/Archive_page/view/archive_body.dart';
+import 'package:dentech_smile/patient/Available_doctor_page/view/available_doctor_body.dart';
+import 'package:dentech_smile/patient/Home_page/view/patient_home_page.dart';
+import 'package:dentech_smile/patient/Notifications_page/view/NotificationsPage.dart';
+import 'package:dentech_smile/patient/Profile_page/view/profile_page.dart';
+import 'package:dentech_smile/patient/Case_page/view/CasePage.dart';
 
 abstract class AppRouter {
   static const welcomView = "/onBoarding";
@@ -38,6 +47,14 @@ abstract class AppRouter {
   static const professor = "/ProfessorHome";
   static const mainTabView = "/mainTabView";
   static const statePage = "/StatePage";
+  static const kHomeView = '/homeView';
+  static const karchive = '/archive';
+  static const available = '/available';
+  static const profile = '/profile';
+  static const appointments = '/appointments';
+  static const status = '/status';
+  static const notifications = '/notifications';
+  static const aboutApp = '/aboutApp';
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -116,10 +133,6 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: patienthome,
-        builder: (context, state) => const Patient(),
-      ),
-      GoRoute(
         path: studenthome,
         builder: (context, state) => const Student(),
       ),
@@ -145,6 +158,34 @@ abstract class AppRouter {
 
             return StatePage(name: name, start: start, end: end);
           }),
+      GoRoute(
+        path: kHomeView,
+        builder: (context, state) => const PatientHomePage(),
+      ),
+      GoRoute(path: karchive, builder: (context, state) => const ArchivePage()),
+      GoRoute(
+          path: available,
+          builder: (context, state) => const AvailableDoctorPage()),
+      GoRoute(path: profile, builder: (context, state) => const ProfilePage()),
+      GoRoute(
+        path: appointments,
+        builder: (context, state) => const AppointmentsPage(),
+      ),
+      GoRoute(
+        path: AppRouter.status,
+        builder: (context, state) {
+          final student = state.extra as StudentsArchive;
+          return CasePage(student: student);
+        },
+      ),
+      GoRoute(
+        path: notifications,
+        builder: (context, state) => const NotificationPage(),
+      ),
+      GoRoute(
+        path: aboutApp,
+        builder: (context, state) => const AboutAppPage(),
+      ),
     ],
   );
 }

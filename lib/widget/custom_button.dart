@@ -11,7 +11,8 @@ class CustomButton extends StatelessWidget {
   final double? redbr;
   final double? paddingwidth;
   final Color? side;
-  final int? elevation ;
+  final int? elevation;
+  final Color? colorside;
   final void Function()? onPressed;
 
   const CustomButton({
@@ -26,7 +27,9 @@ class CustomButton extends StatelessWidget {
     this.redtr,
     this.redbl,
     this.redbr,
-    this.side, this.elevation,
+    this.side,
+    this.elevation,
+    this.colorside,
   });
 
   @override
@@ -44,17 +47,22 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(redtl ?? 0),
                 topRight: Radius.circular(redtr ?? 0),
-                bottomLeft: Radius.circular(redbl ?? 0), // ← هنا كان فيه تكرار خطأ أصلحناه
+                bottomLeft: Radius.circular(
+                    redbl ?? 0),
                 bottomRight: Radius.circular(redbr ?? 0),
               ),
             ),
           ),
           overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
           backgroundColor: MaterialStatePropertyAll(
-            side == null ? color : Color.fromARGB(255, 255, 255, 255),
+            side == null
+                ? color
+                : colorside ?? const Color.fromARGB(255, 255, 255, 255),
           ),
-          elevation:elevation==null?null :const MaterialStatePropertyAll(6),
-          surfaceTintColor: MaterialStatePropertyAll(Colors.transparent), // هذا التعديل المهم هنا
+          elevation:
+              elevation == null ? null : const MaterialStatePropertyAll(6),
+          surfaceTintColor: const MaterialStatePropertyAll(
+              Colors.transparent), // هذا التعديل المهم هنا
         ),
         child: Container(
           alignment: Alignment.center,

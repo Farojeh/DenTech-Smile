@@ -12,7 +12,7 @@ class AppointmentWidget extends StatelessWidget {
           left: MediaQuery.of(context).size.width * 0.05,
           right: MediaQuery.of(context).size.width * 0.05,
           bottom: MediaQuery.of(context).size.height * 0.035,
-          top: MediaQuery.of(context).size.height * 0.035),
+          top: MediaQuery.of(context).size.height * 0.03),
       height: (MediaQuery.of(context).size.height / 932) * 255,
       width: (MediaQuery.of(context).size.width / 430) * 373,
       decoration: BoxDecoration(
@@ -22,7 +22,7 @@ class AppointmentWidget extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 1,
-            blurRadius: 6,
+            blurRadius: 3,
             offset: const Offset(0, 3),
           ),
         ],

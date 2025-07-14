@@ -32,7 +32,7 @@ class ImageDialog extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
+                  margin:const EdgeInsets.only(top: 20, bottom: 20),
                   height: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.width * 0.65,
                   decoration: BoxDecoration(

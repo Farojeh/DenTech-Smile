@@ -12,6 +12,7 @@ class DayWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(height: 5),
         Container(
           alignment: Alignment.centerLeft,
           margin:
@@ -25,7 +26,7 @@ class DayWidget extends StatelessWidget {
           ),
         ),
         const SelectDayWidget(),
-       const AppointmentOfDayWidget()
+        const AppointmentOfDayWidget()
       ],
     );
   }

@@ -18,6 +18,7 @@ import 'package:dentech_smile/Auth/sign_up/view/sign_up.dart';
 import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
 import 'package:dentech_smile/patient/patient.dart';
 import 'package:dentech_smile/professor/professor.dart';
+import 'package:dentech_smile/student/Home/view/state_page.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:dentech_smile/student/student.dart';
@@ -36,6 +37,7 @@ abstract class AppRouter {
   static const studenthome = "/StudentHome";
   static const professor = "/ProfessorHome";
   static const mainTabView = "/mainTabView";
+  static const statePage = "/StatePage";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -132,6 +134,17 @@ abstract class AppRouter {
           child: const MainTabView(),
         ),
       ),
+      GoRoute(
+          path: statePage,
+          builder: (context, state) {
+            final data = state.extra as Map<String, String>?;
+
+            final name = data?['name'] ?? 'No name';
+            final start = data?['start'] ?? 'No start';
+            final end = data?['end'] ?? 'No end';
+
+            return StatePage(name: name, start: start, end: end);
+          }),
     ],
   );
 }

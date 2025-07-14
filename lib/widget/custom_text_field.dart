@@ -3,7 +3,7 @@ import 'package:dentech_smile/widget/form_validators.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
-  final String hint;
+  final String? hint;
   final int maxline;
   final void Function(String?)? onsaved;
   final void Function(String)? onChanged;
@@ -14,6 +14,7 @@ class CustomTextField extends StatefulWidget {
   final Color? hintcolor;
   final double? hintsize;
   final bool? obscureText;
+  final String? initialValue;
   //final String? Function(String?)? validator;
   final bool? isname;
   final bool? isemail;
@@ -23,9 +24,10 @@ class CustomTextField extends StatefulWidget {
   final bool? isint;
   final double? height;
   final bool isEnglish;
+  final TextStyle? initstyle ;
   const CustomTextField(
       {super.key,
-      required this.hint,
+       this.hint,
       this.maxline = 1,
       this.onsaved,
       this.onChanged,
@@ -43,7 +45,8 @@ class CustomTextField extends StatefulWidget {
       this.height,
       this.isnumber,
       required this.isEnglish,
-      this.isint});
+      this.isint,
+      this.initialValue, this.initstyle});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -57,9 +60,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       child: SizedBox(
-        height: widget.height ?? null,
+        height: widget.height,
         width: MediaQuery.of(context).size.width * 0.865,
         child: TextFormField(
+          initialValue: widget.initialValue,
+          style:widget.initstyle ,
           obscureText: widget.obscureText != null ? pv : false,
           onChanged: widget.onChanged,
           onSaved: widget.onsaved,

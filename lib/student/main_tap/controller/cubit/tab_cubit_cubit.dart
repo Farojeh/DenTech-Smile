@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/student/Home/view/home_page.dart';
-import 'package:dentech_smile/student/archive/archive_page.dart';
+import 'package:dentech_smile/student/archive/view/archive_page.dart';
 import 'package:dentech_smile/student/portfolio/portfolio_page.dart';
 import 'package:dentech_smile/student/profile/profile_page.dart';
 import 'package:dentech_smile/student/qr_code/qr_code.dart';

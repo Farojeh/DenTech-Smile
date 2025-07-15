@@ -18,6 +18,8 @@ import 'package:dentech_smile/Auth/sign_up/view/sign_up.dart';
 import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
 import 'package:dentech_smile/patient/patient.dart';
 import 'package:dentech_smile/professor/professor.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
+import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
@@ -38,6 +40,7 @@ abstract class AppRouter {
   static const professor = "/ProfessorHome";
   static const mainTabView = "/mainTabView";
   static const statePage = "/StatePage";
+  static const appointmentpage = "/appointmentpage";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -145,6 +148,13 @@ abstract class AppRouter {
 
             return StatePage(name: name, start: start, end: end);
           }),
+      GoRoute(
+        path: appointmentpage,
+        builder: (context, state) => BlocProvider<AppointmentPageCubit>(
+          create: (context) => AppointmentPageCubit(),
+          child: const AppointmentPage(),
+        ),
+      ),
     ],
   );
 }

@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? userInfo;
-void main() async{
-   WidgetsFlutterBinding.ensureInitialized();
-   userInfo = await SharedPreferences.getInstance();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  userInfo = await SharedPreferences.getInstance();
   setupServiceLocator();
   runApp(const MyApp());
   // runApp(
@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<TranslationCubit>(create: (context) => TranslationCubit()),
       ],
       child: MaterialApp.router(
+        theme: ThemeData(
+          primarySwatch: Colors.teal, 
+        ),
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,

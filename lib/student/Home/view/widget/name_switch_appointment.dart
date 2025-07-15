@@ -1,6 +1,7 @@
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/model/add_appointment.dart';
+import 'package:dentech_smile/student/Home/view/widget/delete_time_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,8 +43,17 @@ class NameSwitchAppointment extends StatelessWidget {
             final cubit = context.read<AppointmentPageCubit>();
             return Switch(
                 value: item.active,
-                onChanged: (nlan) {
-                  cubit.toggleDayActive(item.id);
+                onChanged: (nlan) async {
+                  if (item.active) {
+                    var result = await showDialog(
+                        context: context,
+                        builder: (context) => const DeleteTimeDialog());
+                    if (result) {
+                      cubit.toggleDayActive(item.id);
+                    }
+                  } else {
+                    cubit.toggleDayActive(item.id);
+                  }
                 },
                 activeTrackColor: Static.basiccolor,
                 activeColor: const Color(0xff004F54),

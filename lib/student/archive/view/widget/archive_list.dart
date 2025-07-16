@@ -19,120 +19,130 @@ class ArchiveList extends StatelessWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:state.allarchives.isNotEmpty? state.allarchives
-                      .map((e) => InkWell(
-                            overlayColor: MaterialStatePropertyAll(
-                                Colors.white.withOpacity(0)),
-                            // onTap: () => GoRouter.of(context)
-                            //     .push(AppRouter.statePage, extra: {
-                            //   "name": e.internship,
-                            //   "start": e.start,
-                            //   "end": e.end
-                            // }),
-                            child: Container(
-                              height: Static.gethieght(context, 90),
-                              width: Static.getwieght(context, 362),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 0.5,
-                                      color: Colors.black.withOpacity(0.25)),
-                                  borderRadius: BorderRadius.circular(10)),
-                              margin: const EdgeInsets.only(bottom: 18),
-                              child: Row(children: [
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  height: Static.gethieght(context, 70),
-                                  width: Static.getwieght(context, 80),
+                  children: state.allarchives.isNotEmpty
+                      ? state.allarchives
+                          .map((e) => InkWell(
+                                overlayColor: MaterialStatePropertyAll(
+                                    Colors.white.withOpacity(0)),
+                                // onTap: () => GoRouter.of(context)
+                                //     .push(AppRouter.statePage, extra: {
+                                //   "name": e.internship,
+                                //   "start": e.start,
+                                //   "end": e.end
+                                // }),
+                                child: Container(
+                                  height: Static.gethieght(context, 90),
+                                  width: Static.getwieght(context, 362),
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 0.6,
-                                        color: Colors.black.withOpacity(0.25)),
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "# ${e.tag}",
-                                    style: TextStyle(
-                                        fontFamily: Static.afacadfont,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: Static.getwieght(context, 35),
-                                        color: Colors.black),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 13, bottom: 2, top: 2),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        e.patient,
-                                        style: TextStyle(
-                                            fontFamily:
-                                                Static.arialRoundedMTfont,
-                                            fontSize:
-                                                Static.getwieght(context, 17),
-                                            color: Colors.black),
+                                      border: Border.all(
+                                          width: 0.5,
+                                          color:
+                                              Colors.black.withOpacity(0.25)),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  margin: const EdgeInsets.only(bottom: 18),
+                                  child: Row(children: [
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      height: Static.gethieght(context, 70),
+                                      width: Static.getwieght(context, 80),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 0.6,
+                                            color:
+                                                Colors.black.withOpacity(0.25)),
                                       ),
-                                      const SizedBox(
-                                        height: 2.5,
-                                      ),
-                                      Text(
-                                        e.internship,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "# ${e.tag}",
                                         style: TextStyle(
                                             fontFamily: Static.afacadfont,
-                                            fontWeight: FontWeight.w400,
-                                            color: Static.lightcolor,
+                                            fontWeight: FontWeight.w500,
                                             fontSize:
-                                                Static.getwieght(context, 15)),
+                                                Static.getwieght(context, 35),
+                                            color: Colors.black),
                                       ),
-                                      const SizedBox(
-                                        height: 2.5,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 13, bottom: 2, top: 2),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            e.patient,
+                                            style: TextStyle(
+                                                fontFamily:
+                                                    Static.arialRoundedMTfont,
+                                                fontSize: Static.getwieght(
+                                                    context, 17),
+                                                color: Colors.black),
+                                          ),
+                                          const SizedBox(
+                                            height: 2.5,
+                                          ),
+                                          Text(
+                                            e.internship,
+                                            style: TextStyle(
+                                                fontFamily: Static.afacadfont,
+                                                fontWeight: FontWeight.w400,
+                                                color: Static.lightcolor,
+                                                fontSize: Static.getwieght(
+                                                    context, 15)),
+                                          ),
+                                          const SizedBox(
+                                            height: 2.5,
+                                          ),
+                                          RatingBarIndicator(
+                                            rating: e.rate,
+                                            itemBuilder: (context, index) =>
+                                                const Icon(
+                                              Icons.star_rate_rounded,
+                                              color: Color(0xffE6CD0D),
+                                            ),
+                                            itemCount: 5,
+                                            itemSize: 15,
+                                            direction: Axis.horizontal,
+                                          )
+                                        ],
                                       ),
-                                      RatingBar.builder(
-                                        onRatingUpdate: (value) {},
-                                        initialRating: e.rate,
-                                        minRating: 0,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemSize: 15,
-                                        itemBuilder: (context, _) => const Icon(
-                                          Icons.star_rate_rounded,
-                                          color: Color(0xffE6CD0D),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ]),
+                                    )
+                                  ]),
+                                ),
+                              ))
+                          .toList()
+                      : [
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: Static.getwieght(context, 30),
+                                right: 80,
+                                top: 70),
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              "assets/images/File searching-rafiki.png",
+                              height: 250,
+                              width: 250,
+                              fit: BoxFit.contain,
                             ),
-                          ))
-                      .toList():[
-                        Container(
-                          margin: EdgeInsets.only(left: Static.getwieght(context, 30), right: 80 , top: 70),
-                          alignment: Alignment.center,
-                          child: Image.asset("assets/images/File searching-rafiki.png",
-                          height: 250,
-                          width: 250,
-                          fit: BoxFit.contain,
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only( left: Static.getwieght(context, 50) ),
-                          child: Text("No Emergencies In This Internship" ,
-                          textAlign: TextAlign.center,
-                           style: TextStyle(
-                            fontFamily: Static.afacadfont,
-                            fontWeight: FontWeight.w400,
-                            fontSize: Static.getwieght(context, 18),
-                            color:const Color(0xff325060)
-                          ),),
-                        )
-                      ]),
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: Static.getwieght(context, 50)),
+                            child: Text(
+                              "No Emergencies In This Internship",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: Static.afacadfont,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: Static.getwieght(context, 18),
+                                  color: const Color(0xff325060)),
+                            ),
+                          )
+                        ]),
             );
           } else {
             return Container();

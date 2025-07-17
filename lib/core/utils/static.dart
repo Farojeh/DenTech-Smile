@@ -12,9 +12,9 @@ class Static {
   static String abhayaLibrefont = "AbhayaLibre";
   static String afacadfont = "Afacad";
   static String arialRoundedMTfont = "ArialRoundedMT";
-  static Color basiccolor = Color(0xff006A71);
-  static Color lightcolor = Color(0xff353535);
-  static Color lightcolor2 = Color(0xff7C7979);
+  static Color basiccolor = const Color(0xff006A71);
+  static Color lightcolor = const Color(0xff353535);
+  static Color lightcolor2 = const Color(0xff7C7979);
   static String ipconfig = "192.168.37.207";
   static String userName = "userName";
   static String userNumber = "userNumber";
@@ -22,6 +22,7 @@ class Static {
   static String userRole =
       "userRole"; //2 for patient , 1 for student , 4 for doctor
   static String token = "Token";
+  static String studentimage = "studentimage";
 
   static void home(BuildContext context) {
     if (userInfo!.getInt(userRole) == 1) {
@@ -50,7 +51,7 @@ class Static {
     );
   }
 
- static Future<bool> pickeimage(BuildContext context) async {
+  static Future<bool> pickeimage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     XFile? image;
     final XFile? img = await picker.pickImage(source: ImageSource.gallery);
@@ -68,5 +69,29 @@ class Static {
       return result ?? false;
     }
     return false;
+  }
+
+  static Future<String?> pickeimageprofile(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    XFile? image;
+    final XFile? img = await picker.pickImage(source: ImageSource.gallery);
+    if (img != null) {
+      image = img;
+    }
+
+    if (!context.mounted) return null;
+
+    if (image != null) {
+      bool? result = await showDialog(
+        context: context,
+        builder: (context) => ImageDialog(image: File(image!.path)),
+      );
+      if (result == true) {
+        return image.path;
+      } else {
+        return null;
+      }
+    }
+    return null;
   }
 }

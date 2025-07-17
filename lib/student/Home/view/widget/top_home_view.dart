@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:flutter/material.dart';
 
 class TopHomeView extends StatelessWidget {
@@ -67,12 +70,15 @@ class TopHomeView extends StatelessWidget {
                 border: Border.all(width: 1, color: Colors.black),
                 borderRadius: BorderRadius.circular(16)),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                "assets/images/student.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
+                borderRadius: BorderRadius.circular(15),
+                child: userInfo!.getString(Static.studentimage) == null
+                    ? Image.asset(
+                        "assets/images/student.jpg",
+                        fit: BoxFit.cover,
+                      )
+                    : Image.file(
+                        File(userInfo!.getString(Static.studentimage)!),
+                        fit: BoxFit.cover)),
           )
         ],
       ),

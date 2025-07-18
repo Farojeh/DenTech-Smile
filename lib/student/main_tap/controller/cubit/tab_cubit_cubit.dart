@@ -3,7 +3,7 @@ import 'package:dentech_smile/student/Home/view/home_page.dart';
 import 'package:dentech_smile/student/archive/view/archive_page.dart';
 import 'package:dentech_smile/student/portfolio/view/portfolio_page.dart';
 import 'package:dentech_smile/student/profile/view/profile_page.dart';
-import 'package:dentech_smile/student/qr_code/qr_code.dart';
+import 'package:dentech_smile/student/qr_code/view/qr_code.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 

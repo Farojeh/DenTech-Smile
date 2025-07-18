@@ -1,3 +1,4 @@
+import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,7 @@ class CustomFloatingButton extends StatelessWidget {
           height: 60,
           child: FloatingActionButton(
             onPressed: () {
+              StaticDrawer.close(context);
               cubit.changeTab(2);
             },
             shape: const CircleBorder(),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/main.dart';
+import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:flutter/material.dart';
 
 class TopHomeView extends StatelessWidget {
@@ -16,10 +17,19 @@ class TopHomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/images/drawer.png",
-            height: (MediaQuery.of(context).size.height / 932) * 40,
-            width: (MediaQuery.of(context).size.height / 932) * 40,
+          InkWell(
+            overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
+            onTap: () {
+              StaticDrawer.toggleDrawer(
+                  context,
+                  (MediaQuery.of(context).size.width / 430) * 30,
+                  MediaQuery.of(context).padding.top + 25);
+            },
+            child: Image.asset(
+              "assets/images/drawer.png",
+              height: (MediaQuery.of(context).size.height / 932) * 40,
+              width: (MediaQuery.of(context).size.height / 932) * 40,
+            ),
           ),
           const SizedBox(
             width: 13,

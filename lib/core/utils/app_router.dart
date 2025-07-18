@@ -21,9 +21,7 @@ import 'package:dentech_smile/professor/professor.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
-import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
-import 'package:dentech_smile/student/student.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,7 +34,6 @@ abstract class AppRouter {
   static const resetpassword = "/ResetPassword";
   static const datapatient = "/datapatient";
   static const patienthome = "/PatientHome";
-  static const studenthome = "/StudentHome";
   static const professor = "/ProfessorHome";
   static const mainTabView = "/mainTabView";
   static const statePage = "/StatePage";
@@ -123,19 +120,12 @@ abstract class AppRouter {
         builder: (context, state) => const Patient(),
       ),
       GoRoute(
-        path: studenthome,
-        builder: (context, state) => const Student(),
-      ),
-      GoRoute(
         path: professor,
         builder: (context, state) => const Professor(),
       ),
       GoRoute(
         path: mainTabView,
-        builder: (context, state) => BlocProvider<TabCubitCubit>(
-          create: (context) => TabCubitCubit(),
-          child: const MainTabView(),
-        ),
+        builder: (context, state) => const MainTabView(),
       ),
       GoRoute(
           path: statePage,

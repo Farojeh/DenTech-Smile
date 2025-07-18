@@ -26,7 +26,7 @@ class Static {
 
   static void home(BuildContext context) {
     if (userInfo!.getInt(userRole) == 1) {
-      GoRouter.of(context).pushReplacement(AppRouter.studenthome);
+      GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
     } else if (userInfo!.getInt(userRole) == 2) {
       GoRouter.of(context).pushReplacement(AppRouter.datapatient);
     } else {

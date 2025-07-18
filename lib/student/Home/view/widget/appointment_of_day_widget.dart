@@ -1,6 +1,7 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
+import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -23,12 +24,15 @@ class AppointmentOfDayWidget extends StatelessWidget {
                       .map((e) => InkWell(
                             overlayColor: MaterialStatePropertyAll(
                                 Colors.white.withOpacity(0)),
-                            onTap: () => GoRouter.of(context)
-                                .push(AppRouter.statePage, extra: {
-                              "name": e.internship,
-                              "start": e.start,
-                              "end": e.end
-                            }),
+                            onTap: () {
+                              StaticDrawer.close(context);
+                              GoRouter.of(context).push(AppRouter.statePage,
+                                  extra: {
+                                    "name": e.internship,
+                                    "start": e.start,
+                                    "end": e.end
+                                  });
+                            },
                             child: Container(
                               height: Static.gethieght(context, 90),
                               width: Static.getwieght(context, 362),

@@ -1,5 +1,6 @@
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
+import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +26,10 @@ class SelectDayWidget extends StatelessWidget {
                 itemBuilder: (context, index) => InkWell(
                       overlayColor:
                           MaterialStatePropertyAll(Colors.white.withOpacity(0)),
-                      onTap: () => cubit.selectday(index),
+                      onTap: () {
+                        StaticDrawer.close(context);
+                        cubit.selectday(index);
+                      },
                       child: Container(
                         height: Static.gethieght(context, 45),
                         width: Static.getwieght(context, 100),

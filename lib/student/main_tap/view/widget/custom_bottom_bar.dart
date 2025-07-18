@@ -1,3 +1,4 @@
+import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/widget/tab_button.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class CustomBottomBar extends StatelessWidget {
         return Container(
           color: Colors.white.withOpacity(0),
           child: BottomAppBar(
-            color:const Color.fromARGB(255, 225, 225, 225),
+            color: const Color.fromARGB(255, 225, 225, 225),
             surfaceTintColor: Colors.white,
             shadowColor: Colors.black,
             elevation: 1,
@@ -29,6 +30,7 @@ class CustomBottomBar extends StatelessWidget {
                       title: "Qr Code",
                       icon: "assets/images/qr-code.png",
                       onTap: () {
+                        StaticDrawer.close(context);
                         cubit.changeTab(0);
                       },
                       isSelected: state.selectedIndex == 0),
@@ -36,6 +38,7 @@ class CustomBottomBar extends StatelessWidget {
                       title: "Portfolio",
                       icon: "assets/images/documents.png",
                       onTap: () {
+                        StaticDrawer.close(context);
                         cubit.changeTab(1);
                       },
                       isSelected: state.selectedIndex == 1),
@@ -47,6 +50,7 @@ class CustomBottomBar extends StatelessWidget {
                       title: "Archive",
                       icon: "assets/images/inbox.png",
                       onTap: () {
+                        StaticDrawer.close(context);
                         cubit.changeTab(3);
                       },
                       isSelected: state.selectedIndex == 3),
@@ -54,6 +58,7 @@ class CustomBottomBar extends StatelessWidget {
                       title: "Profile",
                       icon: "assets/images/profile.png",
                       onTap: () {
+                        StaticDrawer.close(context);
                         cubit.changeTab(4);
                       },
                       isSelected: state.selectedIndex == 4),

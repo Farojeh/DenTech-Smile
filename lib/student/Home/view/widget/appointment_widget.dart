@@ -1,5 +1,6 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:dentech_smile/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -67,7 +68,10 @@ class AppointmentWidget extends StatelessWidget {
               bottom: (MediaQuery.of(context).size.height / 932) * 35,
               right: (MediaQuery.of(context).size.width / 430) * 40,
               child: CustomButton(
-                onPressed: () => GoRouter.of(context).push(AppRouter.appointmentpage),
+                  onPressed: () {
+                    StaticDrawer.close(context);
+                    GoRouter.of(context).push(AppRouter.appointmentpage);
+                  },
                   redbl: 15,
                   redbr: 15,
                   redtl: 15,

@@ -7,7 +7,7 @@ class ApiService {
   final Dio _dio;
   ApiService(this._dio);
 
-  Future<Map<String, dynamic>> get(
+  Future<Response<dynamic>> get(
       {required String endPoint, bool token = false}) async {
     Response response;
     if (token == false) {
@@ -22,7 +22,7 @@ class ApiService {
             },
           ));
     }
-    return response.data;
+    return response;
   }
 
   Future<Response> post(

@@ -2,6 +2,7 @@ import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/view/drawer.dart';
+import 'package:dentech_smile/widget/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -13,14 +14,13 @@ class AppointmentOfDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        final cubit = context.read<HomeCubit>();
-        if (state is HomeInitial) {
+        if (state is HomeSuccess) {
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: cubit.days[state.select].appointments.isNotEmpty
-                  ? cubit.days[state.select].appointments
+              children: state.days[state.select].appointments.isNotEmpty
+                  ? state.days[state.select].appointments
                       .map((e) => InkWell(
                             overlayColor: MaterialStatePropertyAll(
                                 Colors.white.withOpacity(0)),
@@ -30,7 +30,7 @@ class AppointmentOfDayWidget extends StatelessWidget {
                                   extra: {
                                     "name": e.internship,
                                     "start": e.start,
-                                    "end": e.end
+                                    "end": e.date
                                   });
                             },
                             child: Container(
@@ -85,7 +85,7 @@ class AppointmentOfDayWidget extends StatelessWidget {
                                         height: 2.5,
                                       ),
                                       Text(
-                                        "${e.start}  →  ${e.end}",
+                                        "[${e.start}] [${e.date}]",
                                         style: TextStyle(
                                             fontFamily: Static.afacadfont,
                                             fontWeight: FontWeight.w400,
@@ -97,7 +97,7 @@ class AppointmentOfDayWidget extends StatelessWidget {
                                         height: 2.5,
                                       ),
                                       Text(
-                                        e.internship,
+                                        "${e.internship} internship",
                                         style: TextStyle(
                                             fontFamily: Static.afacadfont,
                                             fontWeight: FontWeight.w400,
@@ -135,8 +135,24 @@ class AppointmentOfDayWidget extends StatelessWidget {
                     ],
             ),
           );
+        } else if (state is HomeLoading) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                  3,
+                  (index) => Shimmergym.Rectangle(
+                        height: Static.gethieght(context, 90),
+                        width: Static.getwieght(context, 362),
+                        radius: 10,
+                        cc: Static.shimmer,
+                        margin: const EdgeInsets.only(bottom: 16),
+                      )),
+            ),
+          );
         } else {
-          return const Text("somthing wrong");
+          return Container();
         }
       },
     );

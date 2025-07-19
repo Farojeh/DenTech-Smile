@@ -39,7 +39,7 @@ class TopHomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Areej Mahfouz",
+                userInfo!.getString(Static.userName)!,
                 style: TextStyle(
                     fontFamily: Static.arialRoundedMTfont,
                     color: Colors.black,

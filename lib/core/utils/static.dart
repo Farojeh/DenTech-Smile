@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dentech_smile/Auth/data_patient/view/widget/image_dialog.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/main.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'custom_snackbar.dart';
+
 class Static {
   static String abhayaLibrefont = "AbhayaLibre";
   static String afacadfont = "Afacad";
@@ -15,7 +18,8 @@ class Static {
   static Color basiccolor = const Color(0xff006A71);
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
-  static String ipconfig = "192.168.37.207";
+  static Color? shimmer = Colors.grey[300];
+  static String ipconfig = "192.168.1.4";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";
@@ -93,5 +97,12 @@ class Static {
       }
     }
     return null;
+  }
+
+  static void failure(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(CustomSnackBar()
+          .customSnackBar('Oops', message, ContentType.failure));
   }
 }

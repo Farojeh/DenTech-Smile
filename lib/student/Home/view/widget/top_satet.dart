@@ -71,7 +71,7 @@ class TopState extends StatelessWidget {
             right: Static.getwieght(context, 90),
             bottom: Static.getwieght(context, 30),
             child: Text(
-              "[ $start  →  $end ]",
+              "[ $start ] [ $end ]",
               style: TextStyle(
                   fontFamily: Static.afacadfont,
                   fontWeight: FontWeight.w400,

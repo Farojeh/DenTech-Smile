@@ -10,19 +10,16 @@ class MainTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PageStorageBucket storageBucket = PageStorageBucket();
-    return BlocProvider(
-      create: (context) => TabCubitCubit(),
-      child: BlocBuilder<TabCubitCubit, TabCubitState>(
-        builder: (context, state) {
-          return Scaffold(
-              body:
-                  PageStorage(bucket: storageBucket, child: state.selectedPage),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.miniCenterDocked,
-              floatingActionButton: const CustomFloatingButton(),
-              bottomNavigationBar: const CustomBottomBar());
-        },
-      ),
+    return BlocBuilder<TabCubitCubit, TabCubitState>(
+      builder: (context, state) {
+        return Scaffold(
+            body:
+                PageStorage(bucket: storageBucket, child: state.selectedPage),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.miniCenterDocked,
+            floatingActionButton: const CustomFloatingButton(),
+            bottomNavigationBar: const CustomBottomBar());
+      },
     );
   }
 }

@@ -19,8 +19,10 @@ import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
 import 'package:dentech_smile/patient/patient.dart';
 import 'package:dentech_smile/professor/professor.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
+import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -125,7 +127,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: mainTabView,
-        builder: (context, state) => const MainTabView(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider<TabCubitCubit>(
+              create: (context) => TabCubitCubit(),
+            ),
+            BlocProvider<HomeCubit>(
+              create: (context) => HomeCubit(),
+            ),
+          ],
+          child: const MainTabView(),
+        ),
       ),
       GoRoute(
           path: statePage,

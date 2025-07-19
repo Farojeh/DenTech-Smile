@@ -1,15 +1,25 @@
 part of 'home_cubit.dart';
 
 @immutable
-sealed class HomeState {}
-
-final class HomeInitial extends HomeState {
+ class HomeState {
   final int select;
-  HomeInitial({this.select = 0});
+  HomeState({this.select = 0});
   
-  HomeInitial copyWith({int? select}) {
-    return HomeInitial(
+  HomeState copyWith({int? select}) {
+    return HomeState(
       select: select ?? this.select,
     );
-  }
+  }}
+
+final class HomeInitial extends HomeState {}
+final class HomeLoading extends HomeState {}
+final class HomeFailure extends HomeState {
+  final String errormessage;
+
+  HomeFailure({super.select, required this.errormessage});
+}
+final class HomeSuccess extends HomeState {
+  final List<Day> days;
+
+  HomeSuccess({super.select, required this.days});
 }

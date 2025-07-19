@@ -1,5 +1,6 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -78,8 +79,12 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
-        // GoRouter.of(context).pushReplacement(AppRouter.welcomView);
+        if(userInfo!.getString(Static.token)==null ){
+          GoRouter.of(context).pushReplacement(AppRouter.welcomView);
+        }else{
+          GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
+        }
+        // GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
         // GoRouter.of(context).pushReplacement(AppRouter.datapatient);
         // if (userInfo!.getBool("user") == null ||
         //     userInfo!.getBool("user") == false) {

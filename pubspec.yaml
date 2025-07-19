@@ -48,6 +48,7 @@ dependencies:
   image_picker: ^1.0.8
   flutter_rating_bar: ^4.0.1
   qr_flutter: ^4.1.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,14 +2,14 @@ class Appointment{
   String patient;
   String tag ;
   String start ;
-  String end ;
+  String date ;
   String internship ;
 
   Appointment({
     required this.patient,
     required this.tag ,
     required this.start ,
-    required this.end,
+    required this.date,
     required this.internship
   });
 }

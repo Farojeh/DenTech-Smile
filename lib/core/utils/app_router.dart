@@ -22,6 +22,7 @@ import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cub
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
+import 'package:dentech_smile/student/learning/learn.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +41,7 @@ abstract class AppRouter {
   static const mainTabView = "/mainTabView";
   static const statePage = "/StatePage";
   static const appointmentpage = "/appointmentpage";
+  static const learning = "/Learning";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -156,6 +158,10 @@ abstract class AppRouter {
           create: (context) => AppointmentPageCubit(),
           child: const AppointmentPage(),
         ),
+      ),
+       GoRoute(
+        path: learning,
+        builder: (context, state) => const Learnpage(),
       ),
     ],
   );

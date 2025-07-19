@@ -45,28 +45,35 @@ class _SplashViewBodyState extends State<SplashViewBody> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("DenTech Smile" , style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: Static.abhayaLibrefont,
-                    color: Colors.black
-                  ),),
-                  const SizedBox(width: 10,),
-                  Image.asset("assets/images/tooth.png",
-                  height: 30,
-                  width: 30,
-                  fit: BoxFit.contain,
+                  Text(
+                    "DenTech Smile",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: Static.abhayaLibrefont,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset(
+                    "assets/images/tooth.png",
+                    height: 30,
+                    width: 30,
+                    fit: BoxFit.contain,
                   )
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Text("make healthy teeth and beautiful smile with us" , style: TextStyle(
+                child: Text(
+                  "make healthy teeth and beautiful smile with us",
+                  style: TextStyle(
                       fontSize: 18,
                       fontFamily: Static.afacadfont,
                       fontWeight: FontWeight.w400,
-                      color:const Color(0xff615F5F)
-                    ),
-                    textAlign: TextAlign.center,),
+                      color: const Color(0xff615F5F)),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           )
@@ -79,11 +86,14 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        if(userInfo!.getString(Static.token)==null ){
-          GoRouter.of(context).pushReplacement(AppRouter.welcomView);
-        }else{
-          GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
-        }
+        GoRouter.of(context).pushReplacement(AppRouter.learning);
+
+        // if(userInfo!.getString(Static.token)==null ){
+        //   GoRouter.of(context).pushReplacement(AppRouter.welcomView);
+        // }else{
+        //   GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
+        // }
+
         // GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
         // GoRouter.of(context).pushReplacement(AppRouter.datapatient);
         // if (userInfo!.getBool("user") == null ||

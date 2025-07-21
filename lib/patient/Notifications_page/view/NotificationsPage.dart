@@ -1,6 +1,8 @@
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Notifications_page/model/NotificationModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -29,7 +31,9 @@ class NotificationPage extends StatelessWidget {
     ];
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.watch<ThemeCubit>().isArabic
+            ? TextDirection.rtl
+            : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Styles.basicColor,
         body: Stack(

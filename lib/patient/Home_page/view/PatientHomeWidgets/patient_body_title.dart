@@ -1,15 +1,20 @@
+import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientBodyTitle extends StatelessWidget {
   const PatientBodyTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'الأطباء المتاحين',
+          context.watch<ThemeCubit>().isArabic
+              ? Lang.arabLang["availabeDoctor"]!
+              : Lang.enLang["availabeDoctor"]!,
           style: TextStyle(
             fontFamily: 'Afacad',
             fontWeight: FontWeight.bold,
@@ -18,7 +23,9 @@ class PatientBodyTitle extends StatelessWidget {
           ),
         ),
         Text(
-          'طب الفم',
+          context.watch<ThemeCubit>().isArabic
+              ? Lang.arabLang["oral"]!
+              : Lang.enLang["oral"]!,
           style: TextStyle(
             fontFamily: 'Afacad',
             fontWeight: FontWeight.w400,

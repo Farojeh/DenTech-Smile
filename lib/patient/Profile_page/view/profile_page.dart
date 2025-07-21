@@ -1,6 +1,8 @@
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Profile_page/model/profile_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -47,6 +49,11 @@ class _ProfilePageState extends State<ProfilePage> {
       text: 'تغيير كلمة السر',
       icon: 'assets/images/padlock 1.png',
     ),
+    ProfileModel(
+      id: 9,
+      text: 'تغيير اللغة',
+      icon: 'assets/images/padlock 1.png',
+    ),
   ];
 
   @override
@@ -55,7 +62,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.watch<ThemeCubit>().isArabic
+            ? TextDirection.rtl
+            : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Styles.basicColor,
         body: Stack(

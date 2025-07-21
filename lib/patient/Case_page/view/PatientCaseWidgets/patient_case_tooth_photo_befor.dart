@@ -1,5 +1,8 @@
+import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/ImageScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientCaseToothPhotoBefor extends StatelessWidget {
   const PatientCaseToothPhotoBefor({super.key});
@@ -24,8 +27,10 @@ class PatientCaseToothPhotoBefor extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(right: size.width * 0.015),
-              child: const Text(
-                ' صور للاسنان قبل العلاج',
+              child: Text(
+                context.watch<ThemeCubit>().isArabic
+                    ? Lang.arabLang["photo_befor"]!
+                    : Lang.enLang["photo_befor"]!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,

@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/view/PatientHomeWidgets/patient_app_bar_image.dart';
 import 'package:dentech_smile/patient/Home_page/view/PatientHomeWidgets/patient_app_bar_show_menu.dart';
@@ -21,7 +22,9 @@ class PatientHomePage extends StatelessWidget {
         ..getAppointmentstatus()
         ..getOralDoctor(),
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: context.watch<ThemeCubit>().isArabic
+            ? TextDirection.rtl
+            : TextDirection.ltr,
         child: Scaffold(
           appBar: AppBar(
             leading: const PatientAppBarShowMenu(),
@@ -40,12 +43,10 @@ class PatientHomePage extends StatelessWidget {
                     const PatientHomeContainer(),
                     Padding(
                       padding: EdgeInsets.only(top: size.height * 0.04),
-                      child: Column(
+                      child: const Column(
                         children: [
-                          const PatientBodyTitle(),
-                          PatientBodyOralList(
-                            isFullHeight: false,
-                          ),
+                          PatientBodyTitle(),
+                          PatientBodyOralList(isFullHeight: false),
                         ],
                       ),
                     ),

@@ -1,5 +1,8 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class PatientHomeContainer extends StatelessWidget {
@@ -28,7 +31,9 @@ class PatientHomeContainer extends StatelessWidget {
                 top: size.height * 0.04 > 30 ? 30 : size.height * 0.04,
                 left: size.width * 0.05 > 20 ? 20 : size.width * 0.05,
                 child: Text(
-                  'أرشيف الحالات',
+                  context.watch<ThemeCubit>().isArabic
+                      ? Lang.arabLang["Archive_status"]!
+                      : Lang.enLang["Archive_status"]!,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: size.width * 0.05 > 20 ? 20 : size.width * 0.05,
@@ -42,7 +47,9 @@ class PatientHomeContainer extends StatelessWidget {
                 left: size.width * 0.012 > 5 ? 5 : size.width * 0.012,
                 right: size.width * 0.42 > 155 ? 155 : size.width * 0.42,
                 child: Text(
-                  'تتبع وضعك الصحي وحالتك بدقة من خلال هذا القسم',
+                  context.watch<ThemeCubit>().isArabic
+                      ? Lang.arabLang["follow"]!
+                      : Lang.enLang["follow"]!,
                   style: TextStyle(
                     color: const Color.fromARGB(255, 74, 74, 74),
                     fontSize: size.width * 0.03 > 13 ? 13 : size.width * 0.03,
@@ -64,7 +71,9 @@ class PatientHomeContainer extends StatelessWidget {
                     GoRouter.of(context).push(AppRouter.karchive);
                   },
                   child: Text(
-                    ' الأرشيف',
+                    context.watch<ThemeCubit>().isArabic
+                        ? Lang.arabLang["Archive"]!
+                        : Lang.enLang["Archive"]!,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Afacad',

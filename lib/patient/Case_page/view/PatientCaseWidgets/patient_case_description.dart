@@ -1,4 +1,7 @@
+import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientCaseDescription extends StatelessWidget {
   final String description;
@@ -18,8 +21,10 @@ class PatientCaseDescription extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(right: size.width * 0.015),
-              child: const Text(
-                'وصف الحالة',
+              child: Text(
+                context.watch<ThemeCubit>().isArabic
+                    ? Lang.arabLang["description"]!
+                    : Lang.enLang["description"]!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,

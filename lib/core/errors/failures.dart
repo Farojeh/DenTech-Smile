@@ -39,6 +39,7 @@ abstract class Failures{
           return ServerFaliure(errorMessage: 'No Internet Connection');
         }
         return ServerFaliure(errorMessage: 'unexpected Error ,try again');
+      // ignore: unreachable_switch_default
       default:
         return ServerFaliure(errorMessage: 'unexpected Error ,try again');
     }

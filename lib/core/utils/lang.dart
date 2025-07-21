@@ -1,0 +1,63 @@
+class Lang {
+  static Map<String, String> arabLang = {
+    "availabeDoctor": "الاطباء المتاحين",
+    "Profile": "الملف الشخصي'",
+    "About_app": "حول التطبيق'",
+    "Log_out": "تسجيل الخروج",
+    "change_lang": "تغيير اللغة",
+    "Hello": "مرحبا بك ",
+    "Archive_status": "أرشيف الحالات'",
+    "follow": "تتبع وضعك الصحي وحالتك بدقة من خلال هذا القسم'",
+    "Archive": "الأرشيف",
+    "oral": "طب الفم",
+    "message1": "لا يوجد أطباء أسنان في هذا المكان حالياً",
+    "message2": "يرجى التحقق لاحقًا أو اختيار موقع آخر.",
+    "book_appointmment": "احجز موعدك",
+    "OK": "موافق",
+    "NO": "لا",
+    "available_appointment": "المواعيد المتاحة",
+    "message3": "لا يوجد مواعيد متاحة",
+    "message4": "؟هل تريد تأكيد الموعد",
+    "hour": "الساعة :",
+    "message5": "لا يوجد حالات لرؤيتها حالياً'",
+    "description": "وصف الحالة",
+    "appointments": "مواعيد الجلسات العلاجية",
+    "xray": "صورة الاشعة للاسنان ",
+    "photo_befor": "صور للاسنان قبل العلاج",
+    "photo_after": "صور للاسنان بعد العلاج",
+    "message6":
+        "الرجاء اولا الذهاب الى الجامعة و اخذ صورة اشعة ثم سيتم معالجتها وتوجيهك الى مجموعة الاطباء المناسبين",
+    "message7": "طلبك قيد المعالجة الرجاء الانتظار قليلا"
+  };
+  static Map<String, String> enLang = {
+    "availabeDoctor": "Availabe Doctor",
+    "Profile": "Profile",
+    "About_app": "About App",
+    "Log_out": "Log Out",
+    "change_lang": "Change language",
+    "Hello": "Hello",
+    "Archive_status": "Archive status",
+    "follow":
+        "Track your health status and condition accurately through this section.",
+    "Archive": "Go Archive",
+    "oral": "Oral dentistry",
+    "message1": "There are no dentists in this location at the moment.",
+    "message2": "Please check back later or choose another location.",
+    "book_appointmment": "Book your appointment",
+    "OK": "OK",
+    "NO": "NO",
+    "available_appointment": "available appointment",
+    "message3": "No appointments available",
+    "message4": "Do you want to confirm the appointment?",
+    "hour": "Hour :",
+    "message5": "There are no cases to view currently.",
+    "description": "description case",
+    "appointments": "Therapy session dates",
+    "xray": "Dental X-ray",
+    "photo_befor": "Pictures of teeth before treatment",
+    "photo_after": "Pictures of teeth after treatment",
+    "message6":
+        "Please first go to the university and take an x-ray, then it will be processed and you will be directed to the appropriate group of doctors.",
+    "message7":"Your request is being processed. Please wait a moment."
+  };
+}

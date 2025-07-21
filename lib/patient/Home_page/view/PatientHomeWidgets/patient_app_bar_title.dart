@@ -1,5 +1,8 @@
+import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientAppBarTitle extends StatelessWidget {
   const PatientAppBarTitle({super.key});
@@ -28,7 +31,9 @@ class PatientAppBarTitle extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'مرحبا بك ',
+                  context.watch<ThemeCubit>().isArabic
+                      ? Lang.arabLang["Hello"]!
+                      : Lang.enLang["Hello"]!,
                   style: TextStyle(
                     fontFamily: 'Afacad',
                     fontWeight: FontWeight.w700,
@@ -37,7 +42,7 @@ class PatientAppBarTitle extends StatelessWidget {
                   ),
                 ),
                 Text(
-                 'hi',
+                  'أريج محفوظ',
                   style: TextStyle(
                     fontFamily: 'Afacad',
                     fontWeight: FontWeight.w700,

@@ -1,11 +1,13 @@
-import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
+import 'package:dentech_smile/patient/Home_page/model/request_status_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class PatientAppointmentsText extends StatelessWidget {
-  final Students student;
+class PatientAppointmentsDoctorText extends StatelessWidget {
+  final RequestStatusModel student;
+  final int index;
 
-  const PatientAppointmentsText({super.key, required this.student});
+  const PatientAppointmentsDoctorText(
+      {super.key, required this.student, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class PatientAppointmentsText extends StatelessWidget {
                 ),
               ),
               Text(
-                student.name!,
+                student.students![index].name!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w500,
@@ -55,7 +57,7 @@ class PatientAppointmentsText extends StatelessWidget {
                 ),
               ),
               Text(
-                student.year!,
+                student.students![index].year!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w500,
@@ -79,7 +81,7 @@ class PatientAppointmentsText extends StatelessWidget {
                 ),
               ),
               RatingBarIndicator(
-                rating: student.avgEvaluation!.toDouble(),
+                rating: student.students![index].avgEvaluation!.toDouble(),
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Color.fromARGB(255, 212, 175, 55),

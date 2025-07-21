@@ -5,8 +5,13 @@ class RequestStatusModel {
   String? stageName;
   List<StudentsStage>? students;
 
-  RequestStatusModel(
-      {this.id, this.status, this.stageId, this.stageName, this.students});
+  RequestStatusModel({
+    this.id,
+    this.status,
+    this.stageId,
+    this.stageName,
+    this.students,
+  });
 
   RequestStatusModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -46,7 +51,7 @@ class StudentsStage {
     id = json['id'];
     name = json['name'];
     year = json['year'];
-    avgEvaluation = json['avg_evaluation'];
+    avgEvaluation = json['avg_evaluation'] ?? 0.0;
   }
 
   Map<String, dynamic> toJson() {
@@ -58,4 +63,3 @@ class StudentsStage {
     return data;
   }
 }
-

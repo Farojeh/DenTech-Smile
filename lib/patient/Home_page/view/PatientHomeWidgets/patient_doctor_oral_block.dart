@@ -7,8 +7,7 @@ import 'package:go_router/go_router.dart';
 // ignore: must_be_immutable
 class PatientDoctorOralBlock extends StatelessWidget {
   final Students student;
-  PatientDoctorOralBlock({super.key, required this.student});
-  //OralDoctorModel? oralDoctorModel;
+  const PatientDoctorOralBlock({super.key, required this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class PatientDoctorOralBlock extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            GoRouter.of(context).push(AppRouter.appointments);
+            GoRouter.of(context).push(AppRouter.appointments, extra: student);
           },
           child: Row(
             children: [

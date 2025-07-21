@@ -90,7 +90,7 @@ class PatientArchiveBlock extends StatelessWidget {
                   onTap: () {
                     GoRouter.of(context).push(
                       AppRouter.status,
-                      extra: patientCase, 
+                      extra: patientCase,
                     );
                   },
                   child: Container(

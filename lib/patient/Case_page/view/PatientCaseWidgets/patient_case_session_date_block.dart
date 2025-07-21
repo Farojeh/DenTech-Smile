@@ -1,7 +1,8 @@
+import 'package:dentech_smile/patient/Case_page/model/CaseInfoModel.dart';
 import 'package:flutter/material.dart';
 
 class PatientCaseSessionDateBlock extends StatelessWidget {
-  final Map<String, dynamic> appointment;
+  final AppointmentDates appointment;
   const PatientCaseSessionDateBlock({super.key, required this.appointment});
 
   @override
@@ -9,7 +10,7 @@ class PatientCaseSessionDateBlock extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: appointment["isDone"]!
+        color: appointment.isDone == "true"
             ? const Color(0xFF66A8AC)
             : const Color(0xFFD9D9D9),
         borderRadius: BorderRadius.circular(12),
@@ -18,7 +19,7 @@ class PatientCaseSessionDateBlock extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            appointment["time"]!,
+            appointment.time!,
             style: const TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w500,
@@ -29,7 +30,7 @@ class PatientCaseSessionDateBlock extends StatelessWidget {
           ),
           const SizedBox(width: 3),
           Text(
-            appointment["date"]!,
+            appointment.date!,
             style: const TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w500,

@@ -1,8 +1,12 @@
+import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
+import 'package:dentech_smile/patient/Case_page/model/CaseInfoModel.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_session_date_block.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientCaseAppointments extends StatelessWidget {
-  final List<Map<String, dynamic>> appintments;
+  final List<AppointmentDates> appintments;
   const PatientCaseAppointments({super.key, required this.appintments});
 
   @override
@@ -25,8 +29,10 @@ class PatientCaseAppointments extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(right: size.width * 0.015),
-              child: const Text(
-                ' مواعيد الجلسات العلاجية',
+              child: Text(
+                context.watch<ThemeCubit>().isArabic
+                    ? Lang.arabLang["appointments"]!
+                    : Lang.enLang["appointments"]!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,

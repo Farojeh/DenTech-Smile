@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/patient/Available_doctor_page/model/argument_model.dart';
 import 'package:dentech_smile/patient/Home_page/model/request_status_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,8 +7,13 @@ import 'package:go_router/go_router.dart';
 
 // ignore: must_be_immutable
 class PatientDoctorBlock extends StatelessWidget {
-  final StudentsStage student;
-   const PatientDoctorBlock({super.key, required this.student});
+  final RequestStatusModel student;
+  final int index;
+  const PatientDoctorBlock({
+    super.key,
+    required this.student,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,10 @@ class PatientDoctorBlock extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            GoRouter.of(context).push(AppRouter.appointments);
+            GoRouter.of(context).push(
+              AppRouter.appointmentsDoctor,
+              extra: AppointmentArgs(student: student, index: index),
+            );
           },
           child: Row(
             children: [
@@ -43,8 +52,8 @@ class PatientDoctorBlock extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(
-                    student.name!,
+                  Text(
+                    student.students![index].name!,
                     style: TextStyle(
                       fontFamily: 'Afacad',
                       fontWeight: FontWeight.w500,
@@ -52,8 +61,8 @@ class PatientDoctorBlock extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 2),
-                   Text(
-                   student.year!,
+                  Text(
+                    student.students![index].year!,
                     style: TextStyle(
                       fontFamily: 'Afacad',
                       fontWeight: FontWeight.w400,
@@ -61,7 +70,7 @@ class PatientDoctorBlock extends StatelessWidget {
                     ),
                   ),
                   RatingBarIndicator(
-                    rating: student.avgEvaluation!.toDouble(),
+                    rating: student.students![index].avgEvaluation!.toDouble(),
                     itemBuilder: (context, index) => const Icon(
                       Icons.star,
                       color: Color.fromARGB(255, 212, 175, 55),

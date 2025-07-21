@@ -1,4 +1,6 @@
+import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/view/PatientHomeWidgets/patient_doctor_oral_block.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PatientBodyOralList extends StatelessWidget {
   final bool isFullHeight;
 
-  const PatientBodyOralList({
-    super.key,
-    required this.isFullHeight,
-  });
+  const PatientBodyOralList({super.key, required this.isFullHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +26,7 @@ class PatientBodyOralList extends StatelessWidget {
             ? MediaQuery.of(context).size.height
             : MediaQuery.of(context).size.height * 0.55;
 
-        if (state is PatientLoading) {
-          return SizedBox(
-            height: height,
-            width: MediaQuery.of(context).size.width,
-            child: const Center(child: CircularProgressIndicator()),
-          );
-        } else if (state is PatientOralSuccess &&
-            state.oralDoctorModel != null) {
-          final oralDoctorModel = state.oralDoctorModel!;
-          return SizedBox(
-            height: height,
-            width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-              itemCount: oralDoctorModel.students!.length,
-              itemBuilder: (context, index) {
-                return PatientDoctorOralBlock(
-                  student: oralDoctorModel.students![index],
-                );
-              },
-            ),
-          );
-        } else {
+        if (state is PatientFailure) {
           return Padding(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.08,
@@ -66,7 +44,9 @@ class PatientBodyOralList extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Text(
-                    'لا يوجد أطباء أسنان في هذا المكان حالياً',
+                    context.watch<ThemeCubit>().isArabic
+                        ? Lang.arabLang["message1"]!
+                        : Lang.enLang["message1"]!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.045,
@@ -76,7 +56,9 @@ class PatientBodyOralList extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Text(
-                    'يرجى التحقق لاحقًا أو اختيار موقع آخر.',
+                    context.watch<ThemeCubit>().isArabic
+                        ? Lang.arabLang["message2"]!
+                        : Lang.enLang["message2"]!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.035,
@@ -86,6 +68,27 @@ class PatientBodyOralList extends StatelessWidget {
                 ],
               ),
             ),
+          );
+        } else if (state is PatientOralSuccess &&
+            state.oralDoctorModel != null) {
+          final oralDoctorModel = state.oralDoctorModel!;
+          return SizedBox(
+            height: height,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+              itemCount: oralDoctorModel.students!.length,
+              itemBuilder: (context, index) {
+                return PatientDoctorOralBlock(
+                  student: oralDoctorModel.students![index],
+                );
+              },
+            ),
+          );
+        } else {
+          return SizedBox(
+            height: height,
+            width: MediaQuery.of(context).size.width,
+            child: const Center(child: CircularProgressIndicator()),
           );
         }
       },

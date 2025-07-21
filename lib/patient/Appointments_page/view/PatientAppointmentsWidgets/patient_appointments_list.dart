@@ -12,8 +12,9 @@ class PatientAppointmentsList extends StatelessWidget {
     return BlocConsumer<PatientCubit, PatientState>(
       listener: (context, state) {
         if (state is PatientFailure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
         }
       },
       builder: (context, state) {
@@ -23,23 +24,23 @@ class PatientAppointmentsList extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: const Center(child: CircularProgressIndicator()),
           );
-        } else if (state is PatientOralSuccess) {
+        } else if (state is PatientAppointmentSuccess) {
+          final appointmentModel = state.appointmentModel;
           return ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => PatientAppointmentsBlock(),
-                            separatorBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.02,
-                              ),
-                              child: Container(
-                                width: double.infinity,
-                                height: 0.5,
-                                color: const Color.fromRGBO(105, 105, 105, 1),
-                              ),
-                            ),
-                            itemCount: 5,
-                          );
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => PatientAppointmentsBlock(
+                appointments: appointmentModel.availableAppointments![index]),
+            separatorBuilder: (context, index) => Padding(
+              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+              child: Container(
+                width: double.infinity,
+                height: 0.5,
+                color: const Color.fromRGBO(105, 105, 105, 1),
+              ),
+            ),
+            itemCount: appointmentModel!.availableAppointments!.length,
+          );
         } else {
           return SizedBox(
             height: screenHeight,
@@ -49,6 +50,5 @@ class PatientAppointmentsList extends StatelessWidget {
         }
       },
     );
- 
   }
 }

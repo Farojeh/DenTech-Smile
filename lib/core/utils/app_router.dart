@@ -16,7 +16,10 @@ import 'package:dentech_smile/Auth/reset_password/view/verify_page.dart';
 import 'package:dentech_smile/Auth/sign_up/controller/cubit/sign_up_cubit.dart';
 import 'package:dentech_smile/Auth/sign_up/view/sign_up.dart';
 import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
-import 'package:dentech_smile/patient/patient.dart';
+import 'package:dentech_smile/patient/Appointments_doctor/AppointmentsDoctorPage.dart';
+import 'package:dentech_smile/patient/Appointments_page/view/AppointmentsOralPage.dart';
+import 'package:dentech_smile/patient/Available_doctor_page/model/argument_model.dart';
+import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
 import 'package:dentech_smile/professor/professor.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
@@ -25,7 +28,6 @@ import 'package:dentech_smile/student/student.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dentech_smile/patient/About_app_page/AboutAppPage.dart';
-import 'package:dentech_smile/patient/Appointments_page/view/AppointmentsPage.dart';
 import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
 import 'package:dentech_smile/patient/Archive_page/view/archive_body.dart';
 import 'package:dentech_smile/patient/Available_doctor_page/view/available_doctor_body.dart';
@@ -53,6 +55,7 @@ abstract class AppRouter {
   static const profile = '/profile';
   static const appointments = '/appointments';
   static const status = '/status';
+  static const appointmentsDoctor = '/appointmentsDoctor';
   static const notifications = '/notifications';
   static const aboutApp = '/aboutApp';
 
@@ -169,7 +172,20 @@ abstract class AppRouter {
       GoRoute(path: profile, builder: (context, state) => const ProfilePage()),
       GoRoute(
         path: appointments,
-        builder: (context, state) => const AppointmentsPage(),
+        builder: (context, state) {
+          final student = state.extra as Students;
+          return AppointmentsOralPage(student: student);
+        },
+      ),
+      GoRoute(
+        path: appointmentsDoctor,
+        builder: (context, state) {
+          final args = state.extra as AppointmentArgs;
+          return AppointmentsDoctorPage(
+            student: args.student,
+            index: args.index,
+          );
+        },
       ),
       GoRoute(
         path: AppRouter.status,

@@ -1,4 +1,6 @@
+import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Archive_page/view/PatientArchiveWidgets/patient_archive_block.dart';
 import 'package:dentech_smile/patient/Case_page/controller/patient_case_cubit.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +73,9 @@ class PatientArchiveList extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Text(
-                    'لا يوجد حالات لرؤيتها حالياً',
+                    context.watch<ThemeCubit>().isArabic
+                        ? Lang.arabLang["message5"]!
+                        : Lang.enLang["message5"]!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.045,
@@ -81,7 +85,9 @@ class PatientArchiveList extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Text(
-                    'يرجى التحقق لاحقًا أو اختيار موقع آخر.',
+                    context.watch<ThemeCubit>().isArabic
+                        ? Lang.arabLang["message2"]!
+                        : Lang.enLang["message2"]!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.035,

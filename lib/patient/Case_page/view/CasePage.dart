@@ -1,11 +1,12 @@
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_arrow.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_container_clip.dart';
-import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_image.dart';
-import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_text.dart';
 import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
 import 'package:dentech_smile/patient/Case_page/controller/patient_case_cubit.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_appointments.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_description.dart';
+import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_image.dart';
+import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_text.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_tooth_photo_befor.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_tooth_photo_after.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_xray_image.dart';
@@ -21,7 +22,8 @@ class CasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => PatientCaseCubit()..getCaseInfoByIdStudentStage(student.studentId!, student.stageId!),
+      create: (context) => PatientCaseCubit()
+        ..getCaseInfoByIdStudentStage(student.studentId!, student.stageId!),
       child: BlocConsumer<PatientCaseCubit, PatientCaseState>(
         listener: (context, state) {
           if (state is PatientCaseFailure) {
@@ -31,16 +33,12 @@ class CasePage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is PatientCaseLoading) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: const Center(child: CircularProgressIndicator()),
-            );
-          } else if (state is PatientCaseInfoSuccess) {
+          if (state is PatientCaseInfoSuccess) {
             final caseInfoModel = state.caseInfoModel;
             return Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: context.watch<ThemeCubit>().isArabic
+            ? TextDirection.rtl
+            : TextDirection.ltr,
               child: Scaffold(
                 backgroundColor: Colors.white,
                 body: SizedBox.expand(
@@ -49,7 +47,7 @@ class CasePage extends StatelessWidget {
                     children: [
                       ClipPath(
                         clipper: WaveClipper(),
-                        child: PatientAppointmentsContainerClip(),
+                        child: const PatientAppointmentsContainerClip(),
                       ),
                       Positioned.fill(
                         top: size.height * 0.30,
@@ -68,49 +66,38 @@ class CasePage extends StatelessWidget {
                                         caseInfoModel.sessionDescription!,
                                   ),
                                   PatientCaseAppointments(
-                                    appintments: [
-                                      {
-                                        "isDone": true,
-                                        "date": "12/12/2012",
-                                        "time": "9 AM",
-                                      },
-                                      {
-                                        "isDone": false,
-                                        "date": "12/10/2012",
-                                        "time": "10 AM",
-                                      },
-                                      {
-                                        "isDone": true,
-                                        "date": "12/11/2012",
-                                        "time": "11 AM",
-                                      },
-                                    ],
+                                    appintments:
+                                        caseInfoModel.appointmentDates!,
                                   ),
-                                  PatientCaseXrayImage(
+                                  const PatientCaseXrayImage(
                                     image: "assets/images/XRay.png",
                                   ),
-                                  PatientCaseToothPhotoBefor(),
-                                  PatientCaseToothPhotoAfter(),
+                                  const PatientCaseToothPhotoBefor(),
+                                  const PatientCaseToothPhotoAfter(),
                                 ],
                               ),
                             ),
                           ),
                         ),
                       ),
-                      PatientAppointmentsArrow(),
-                      PatientAppointmentsText(student: student,),
-                      PatientAppointmentsImage(),
+                      const PatientAppointmentsArrow(),
+                      PatientCaseText(student: student),
+                      const PatientCaseImage(),
                     ],
                   ),
                 ),
               ),
             );
           } else {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: const Center(child: Text("No data")),
-            );
+            {
+              return Scaffold(
+                body: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Center(child: CircularProgressIndicator()),
+                ),
+              );
+            }
           }
         },
       ),

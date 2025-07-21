@@ -1,6 +1,8 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,17 +33,29 @@ class PatientElevetedButton extends StatelessWidget {
           ),
           onPressed: () {
             if (cubit.appointmentStateNumb == 1) {
-              Static.showMyDialog(context, cubit.statusMessage);
+              Static.showMyDialog(
+                  context,
+                  context.watch<ThemeCubit>().isArabic
+                      ? Lang.arabLang["message6"]!
+                      : Lang.enLang["message6"]!,
+                  0);
             }
             if (cubit.appointmentStateNumb == 2) {
-              Static.showMyDialog(context, cubit.statusMessage);
+              Static.showMyDialog(
+                  context,
+                  context.watch<ThemeCubit>().isArabic
+                      ? Lang.arabLang["message7"]!
+                      : Lang.enLang["message7"]!,
+                  0);
             }
             if (cubit.appointmentStateNumb == 3) {
               GoRouter.of(context).push(AppRouter.available);
             }
           },
-          child: const Text(
-            'احجز موعدك',
+          child: Text(
+            context.watch<ThemeCubit>().isArabic
+                ? Lang.arabLang["book_appointmment"]!
+                : Lang.enLang["book_appointmment"]!,
             style: TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w600,

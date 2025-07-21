@@ -4,8 +4,11 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dentech_smile/Auth/data_patient/view/widget/image_dialog.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/main.dart';
+import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
+import 'package:dentech_smile/patient/Home_page/view/PatientHomeWidgets/patient_dialog.dart';
 import 'package:dentech_smile/student/Home/view/widget/show_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -74,6 +77,19 @@ class Static {
     }
     return false;
   }
+
+   static showMyDialog(BuildContext context, String message, int id) {
+  return showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext dialogContext) {
+      return BlocProvider.value(
+        value: context.read<PatientCubit>(), 
+        child: PatientDialog(message: message, id: id),
+      );
+    },
+  );
+}
 
   static Future<String?> pickeimageprofile(BuildContext context) async {
     final ImagePicker picker = ImagePicker();

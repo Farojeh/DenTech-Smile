@@ -32,6 +32,9 @@ abstract class Styles {
     color: Colors.white,
     fontWeight: FontWeight.w200,
   );
+
+    static const basicColor = Color.fromARGB(255, 0, 106, 113);
+
 }
 
 const TextStyle textStyle = TextStyle();

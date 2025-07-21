@@ -27,6 +27,8 @@ class PatientHomePage extends StatelessWidget {
             : TextDirection.ltr,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.white.withOpacity(0),
+            shadowColor: Colors.white.withOpacity(0),
             leading: const PatientAppBarShowMenu(),
             title: const PatientAppBarTitle(),
             actions: const [PatientAppBarImage()],

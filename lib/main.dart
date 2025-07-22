@@ -3,7 +3,6 @@ import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,8 +36,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
         ),
         useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        // locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
       ),

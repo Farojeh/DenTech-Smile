@@ -48,7 +48,7 @@ class StudentsArchive {
     year = json['year'];
     stageName = json['stage_name'];
     stageId = json['stage_id'];
-    averageEvaluation = json['average_evaluation'];
+    averageEvaluation = json['average_evaluation'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {

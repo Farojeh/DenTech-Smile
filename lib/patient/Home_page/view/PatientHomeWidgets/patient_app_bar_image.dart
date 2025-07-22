@@ -11,16 +11,16 @@ class PatientAppBarImage extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        left: size.width * 0.03,
-        top: size.height * 0.01,
+        left: size.width * 0.03,  
+        top: size.height * 0.01, 
       ),
       child: Container(
-        width: size.width * 0.12,
-        height: size.width * 0.12,
+        width: size.width * 0.12, 
+        height: size.width * 0.12, 
         decoration: BoxDecoration(
           color: Colors.white,
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.black, width: size.width * 0.002),
+          borderRadius: BorderRadius.circular(20),  
+          border: Border.all(color: Colors.black, width: size.width * 0.002), 
         ),
         alignment: Alignment.center,
         child: InkWell(
@@ -29,8 +29,8 @@ class PatientAppBarImage extends StatelessWidget {
           },
           child: Image.asset(
             'assets/images/ringing.png',
-            width: size.width * 0.065,
-            height: size.width * 0.065,
+            width: size.width * 0.065,  
+            height: size.width * 0.065, 
             fit: BoxFit.contain,
           ),
         ),

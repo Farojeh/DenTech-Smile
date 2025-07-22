@@ -1,8 +1,8 @@
 class Lang {
   static Map<String, String> arabLang = {
     "availabeDoctor": "الاطباء المتاحين",
-    "Profile": "الملف الشخصي'",
-    "About_app": "حول التطبيق'",
+    "Profile": "الملف الشخصي",
+    "About_app": "حول التطبيق",
     "Log_out": "تسجيل الخروج",
     "change_lang": "تغيير اللغة",
     "Hello": "مرحبا بك ",
@@ -19,7 +19,7 @@ class Lang {
     "message3": "لا يوجد مواعيد متاحة",
     "message4": "؟هل تريد تأكيد الموعد",
     "hour": "الساعة :",
-    "message5": "لا يوجد حالات لرؤيتها حالياً'",
+    "message5": "لا يوجد حالات لرؤيتها حالياً",
     "description": "وصف الحالة",
     "appointments": "مواعيد الجلسات العلاجية",
     "xray": "صورة الاشعة للاسنان ",

@@ -18,7 +18,7 @@ class PatientDoctorBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top :8.0, bottom: 8 ,left: 20,right: 20),
       child: Container(
         width: double.infinity,
         height: (MediaQuery.of(context).size.height / 932) * 95,

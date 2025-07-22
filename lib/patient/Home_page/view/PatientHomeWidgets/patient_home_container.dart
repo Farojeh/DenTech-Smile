@@ -16,7 +16,18 @@ class PatientHomeContainer extends StatelessWidget {
       child: Container(
         width: size.width * 0.85 > 350 ? 350 : size.width * 0.85,
         height: size.height * 0.25 > 190 ? 190 : size.height * 0.25,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              // ignore: deprecated_member_use
+              color: Colors.black.withOpacity(0.1),
+              offset: const Offset(0, 4),
+              blurRadius: 6,
+              spreadRadius: 0,
+            ),
+          ],
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Stack(
@@ -29,7 +40,7 @@ class PatientHomeContainer extends StatelessWidget {
               ),
               Positioned(
                 top: size.height * 0.04 > 30 ? 30 : size.height * 0.04,
-                left: size.width * 0.05 > 20 ? 20 : size.width * 0.05,
+                left: size.width * 0.5 > 20 ? 20 : size.width * 0.5,
                 child: Text(
                   context.watch<ThemeCubit>().isArabic
                       ? Lang.arabLang["Archive_status"]!
@@ -45,21 +56,32 @@ class PatientHomeContainer extends StatelessWidget {
               Positioned(
                 top: size.height * 0.08 > 65 ? 65 : size.height * 0.08,
                 left: size.width * 0.012 > 5 ? 5 : size.width * 0.012,
-                right: size.width * 0.42 > 155 ? 155 : size.width * 0.42,
-                child: Text(
-                  context.watch<ThemeCubit>().isArabic
-                      ? Lang.arabLang["follow"]!
-                      : Lang.enLang["follow"]!,
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 74, 74, 74),
-                    fontSize: size.width * 0.03 > 13 ? 13 : size.width * 0.03,
-                    fontFamily: 'Afacad',
-                    fontWeight: FontWeight.w400,
+                right: size.width * 0.46 > 155 ? 155 : size.width * 0.46,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Text(
+                    context.watch<ThemeCubit>().isArabic
+                        ? Lang.arabLang["follow"]!
+                        : Lang.enLang["follow"]!,
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 74, 74, 74),
+                      fontSize: size.width * 0.03 > 13 ? 13 : size.width * 0.03,
+                      fontFamily: 'Afacad',
+                      fontWeight: FontWeight.w400,
+                      height: 1.4,
+                    ),
+                    textAlign: TextAlign.center,
+                    textDirection: context.watch<ThemeCubit>().isArabic
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
               Positioned(
-                bottom: size.height * 0.04 > 30 ? 30 : size.height * 0.04,
+                top: (size.height * 0.08 > 65 ? 65 : size.height * 0.08) +
+                    50, // زيادة 50 نقطة تحت النص (يمكن تعديل الرقم حسب الحاجة)
                 left: size.width * 0.05 > 20 ? 20 : size.width * 0.05,
                 width: size.width * 0.3 > 117 ? 117 : size.width * 0.3,
                 height: size.height * 0.05 > 38 ? 38 : size.height * 0.05,

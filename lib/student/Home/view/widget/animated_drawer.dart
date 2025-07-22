@@ -73,11 +73,11 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 25),
           child: Column(
             children: [
-              StaticDrawer.title("assets/images/study.png", "Learning Community"),
+              StaticDrawer.title(context,"assets/images/study.png", "Learning Community"),
               const SizedBox(height: 5),
               const Divider(),
               const SizedBox(height: 5),
-              StaticDrawer.title("assets/images/men-exchanging-symbol.png", "Resources Exchanges"),
+              StaticDrawer.title(context,"assets/images/men-exchanging-symbol.png", "Resources Exchanges"),
             ],
           ),
         ),

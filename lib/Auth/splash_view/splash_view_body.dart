@@ -87,13 +87,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       const Duration(seconds: 3),
       () {
         // GoRouter.of(context).pushReplacement(AppRouter.learning);
-         GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
-
-        // if(userInfo!.getString(Static.token)==null ){
-        //   GoRouter.of(context).pushReplacement(AppRouter.welcomView);
-        // }else{
-        //   GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
-        // }
+        //  GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+        // userInfo!.clear();
+        if(userInfo!.getString(Static.token)==null ){
+          GoRouter.of(context).pushReplacement(AppRouter.welcomView);
+        }else{
+          Static.home(context);
+        }
 
         // GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
         // GoRouter.of(context).pushReplacement(AppRouter.datapatient);

@@ -22,7 +22,7 @@ class Static {
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
   static Color? shimmer = Colors.grey[300];
-  static String ipconfig = "192.168.1.4";
+  static String ipconfig = "192.168.134.207";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";

@@ -56,9 +56,10 @@ class PatientElevetedButton extends StatelessWidget {
             context.watch<ThemeCubit>().isArabic
                 ? Lang.arabLang["book_appointmment"]!
                 : Lang.enLang["book_appointmment"]!,
-            style: TextStyle(
+                textAlign: TextAlign.center,
+            style: const TextStyle(
               fontFamily: 'Afacad',
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               fontSize: 18,
               color: Colors.white,
             ),

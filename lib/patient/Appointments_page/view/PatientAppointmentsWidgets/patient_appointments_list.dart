@@ -27,6 +27,7 @@ class PatientAppointmentsList extends StatelessWidget {
         } else if (state is PatientAppointmentSuccess) {
           final appointmentModel = state.appointmentModel;
           return ListView.separated(
+            padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => PatientAppointmentsBlock(

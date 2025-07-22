@@ -1,6 +1,9 @@
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/student/Home/view/widget/animated_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class StaticDrawer {
   static OverlayEntry? _overlayEntry;
@@ -40,14 +43,18 @@ class StaticDrawer {
     Overlay.of(context).insert(_overlayEntry!);
   }
 
-  static Widget title(String image, String text) {
+  static Widget title(BuildContext context ,String image, String text) {
     return Row(
       children: [
-        Image.asset(
-          image,
-          height: 20,
-          width: 20,
-          fit: BoxFit.contain,
+        InkWell(
+          overlayColor:MaterialStatePropertyAll(Colors.white.withOpacity(0)),
+          onTap: () => GoRouter.of(context).pushReplacement(AppRouter.learning),
+          child: Image.asset(
+            image,
+            height: 20,
+            width: 20,
+            fit: BoxFit.contain,
+          ),
         ),
         const SizedBox(
           width: 10,

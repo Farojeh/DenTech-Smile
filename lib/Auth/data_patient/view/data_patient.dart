@@ -25,7 +25,7 @@ class DatePatient extends StatelessWidget {
                     'Oops', state.errorMessage, ContentType.failure));
             } else if (state is DataPatientSuccess) {
               print("****************************** Config Success **************************");
-              GoRouter.of(context).pushReplacement(AppRouter.patienthome);
+              GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
             }
         },
         child: SizedBox(

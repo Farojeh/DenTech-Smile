@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/style.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
@@ -29,7 +30,7 @@ class PatientBodyOralList extends StatelessWidget {
         if (state is PatientFailure) {
           return Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.08,
+              horizontal: MediaQuery.of(context).size.width * 0.05,
               vertical: MediaQuery.of(context).size.height * 0.05,
             ),
             child: Center(
@@ -72,7 +73,8 @@ class PatientBodyOralList extends StatelessWidget {
         } else if (state is PatientOralSuccess &&
             state.oralDoctorModel != null) {
           final oralDoctorModel = state.oralDoctorModel!;
-          return SizedBox(
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: Static.getwieght(context, 2)),
             height: height,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(

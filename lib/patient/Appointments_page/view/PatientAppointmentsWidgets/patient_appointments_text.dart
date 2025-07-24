@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,8 +13,8 @@ class PatientAppointmentsText extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Positioned(
-      top: screenHeight * 0.215,
-      right: screenWidth * 0.18,
+      top: Static.gethieght(context, 170),
+      right: Static.getwieght(context, 110),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,6 +31,7 @@ class PatientAppointmentsText extends StatelessWidget {
                   ),
                 ),
               ),
+             const SizedBox(width: 7,),
               Text(
                 student.name!,
                 style: TextStyle(
@@ -54,6 +56,7 @@ class PatientAppointmentsText extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(width: 7,),
               Text(
                 student.year!,
                 style: TextStyle(
@@ -78,6 +81,7 @@ class PatientAppointmentsText extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(width: 7,),
               RatingBarIndicator(
                 rating: student.avgEvaluation!.toDouble(),
                 itemBuilder: (context, index) => const Icon(

@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/style.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Notifications_page/model/NotificationModel.dart';
@@ -32,8 +33,8 @@ class NotificationPage extends StatelessWidget {
 
     return Directionality(
       textDirection: context.watch<ThemeCubit>().isArabic
-            ? TextDirection.rtl
-            : TextDirection.ltr,
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Styles.basicColor,
         body: Stack(
@@ -51,7 +52,7 @@ class NotificationPage extends StatelessWidget {
               right: 0,
               child: Center(
                 child: Image.asset(
-                  'assets/images/Logo.png',
+                  'assets/images/logo.png',
                   height: screenHeight * 0.075,
                   width: screenWidth * 0.47,
                   fit: BoxFit.contain,
@@ -60,7 +61,7 @@ class NotificationPage extends StatelessWidget {
             ),
             Positioned(
               top: screenHeight * 0.043,
-              right: screenWidth * 0.037,
+              right: screenWidth * 0.05,
               child: GestureDetector(
                 onTap: () => Navigator.of(context).maybePop(),
                 child: Container(
@@ -73,16 +74,17 @@ class NotificationPage extends StatelessWidget {
                     ),
                   ),
                   alignment: Alignment.center,
+                  padding: const EdgeInsets.only(left: 2),
                   child: Image.asset(
                     'assets/images/VectorWhite.png',
-                    width: screenWidth * 0.056,
-                    height: screenWidth * 0.056,
+                    width: screenWidth * 0.045,
+                    height: screenWidth * 0.045,
                   ),
                 ),
               ),
             ),
             Positioned(
-              top: screenHeight * 0.215,
+              top: screenHeight * 0.2,
               left: 0,
               right: 0,
               bottom: 0,
@@ -109,7 +111,7 @@ class NotificationPage extends StatelessWidget {
                       );
                     },
                     separatorBuilder: (context, index) =>
-                        SizedBox(height: screenHeight * 0.007),
+                        SizedBox(height: Static.gethieght(context, 20)),
                     itemCount: notifications.length,
                   ),
                 ),
@@ -129,6 +131,7 @@ class NotificationPage extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.018),
       child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 7),
         width: double.infinity,
         padding: EdgeInsets.all(screenWidth * 0.02),
         decoration: BoxDecoration(
@@ -136,14 +139,16 @@ class NotificationPage extends StatelessWidget {
           color: const Color.fromRGBO(243, 243, 243, 1),
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-              child: CircleAvatar(
-                radius: screenWidth * 0.07,
-                backgroundImage: const AssetImage('assets/images/notifi.png'),
-              ),
+            Container(
+                height: 60,
+                width: 60,
+                decoration: const BoxDecoration(shape: BoxShape.circle),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                child: Image.asset('assets/images/notifi.png')),
+            const SizedBox(
+              width: 10,
             ),
             Expanded(
               child: Column(

@@ -8,32 +8,35 @@ class PatientBodyTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          context.watch<ThemeCubit>().isArabic
-              ? Lang.arabLang["availabeDoctor"]!
-              : Lang.enLang["availabeDoctor"]!,
-          style: TextStyle(
-            fontFamily: 'Afacad',
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 18,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            context.watch<ThemeCubit>().isArabic
+                ? Lang.arabLang["availabeDoctor"]!
+                : Lang.enLang["availabeDoctor"]!,
+            style:const TextStyle(
+              fontFamily: 'Afacad',
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              fontSize: 20,
+            ),
           ),
-        ),
-        Text(
-          context.watch<ThemeCubit>().isArabic
-              ? Lang.arabLang["oral"]!
-              : Lang.enLang["oral"]!,
-          style: TextStyle(
-            fontFamily: 'Afacad',
-            fontWeight: FontWeight.w400,
-            color: Color.fromARGB(255, 54, 54, 54),
-            fontSize: 12,
+          Text(
+            context.watch<ThemeCubit>().isArabic
+                ? Lang.arabLang["oral"]!
+                : Lang.enLang["oral"]!,
+            style:const TextStyle(
+              fontFamily: 'Afacad',
+              fontWeight: FontWeight.w400,
+              color: Color.fromARGB(255, 54, 54, 54),
+              fontSize: 12,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

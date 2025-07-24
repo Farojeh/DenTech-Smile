@@ -25,7 +25,9 @@ import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cub
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
-import 'package:dentech_smile/student/learning/learn.dart';
+import 'package:dentech_smile/student/learning/controller/cubit/learning_cubit.dart';
+import 'package:dentech_smile/student/learning/views/learn.dart';
+import 'package:dentech_smile/student/learning/views/learning_details_page.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +64,7 @@ abstract class AppRouter {
   static const aboutApp = '/aboutApp';
   static const appointmentpage = "/appointmentpage";
   static const learning = "/Learning";
+  static const learningdetails = "/Learningdetails";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -175,7 +178,7 @@ abstract class AppRouter {
           child: const AppointmentPage(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: learning,
         builder: (context, state) => const Learnpage(),
       ),
@@ -220,6 +223,17 @@ abstract class AppRouter {
         path: aboutApp,
         builder: (context, state) => const AboutAppPage(),
       ),
+      GoRoute(
+          path: learningdetails,
+          builder: (context, state) {
+            final String data = state.extra as String;
+            return BlocProvider<LearningCubit>(
+              create: (context) => LearningCubit(),
+              child: LearningDetailsPage(
+                title: data,
+              ),
+            );
+          }),
     ],
   );
 }

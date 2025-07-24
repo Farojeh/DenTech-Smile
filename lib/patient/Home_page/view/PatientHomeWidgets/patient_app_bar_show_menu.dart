@@ -1,5 +1,6 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,7 @@ class PatientAppBarShowMenu extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: Colors.white,
       offset: const Offset(50, 50),
-      icon: Image.asset('assets/images/drawer.png', width: 40, height: 40),
+      icon: Image.asset('assets/images/drawer.png', width: Static.gethieght(context, 40), height: Static.gethieght(context, 40)),
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,

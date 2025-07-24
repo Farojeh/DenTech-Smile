@@ -1,5 +1,6 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class PatientHomeContainer extends StatelessWidget {
     return Center(
       child: Container(
         width: size.width * 0.85 > 350 ? 350 : size.width * 0.85,
-        height: size.height * 0.25 > 190 ? 190 : size.height * 0.25,
+        height: Static.gethieght(context, 230),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
@@ -40,21 +41,21 @@ class PatientHomeContainer extends StatelessWidget {
               ),
               Positioned(
                 top: size.height * 0.04 > 30 ? 30 : size.height * 0.04,
-                left: size.width * 0.5 > 20 ? 20 : size.width * 0.5,
+                left: Static.getwieght(context, 30),
                 child: Text(
                   context.watch<ThemeCubit>().isArabic
                       ? Lang.arabLang["Archive_status"]!
                       : Lang.enLang["Archive_status"]!,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: size.width * 0.05 > 20 ? 20 : size.width * 0.05,
+                    fontSize: Static.getwieght(context, 25),
                     fontFamily: 'Afacad',
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
               Positioned(
-                top: size.height * 0.08 > 65 ? 65 : size.height * 0.08,
+                top: Static.gethieght(context, 82),
                 left: size.width * 0.012 > 5 ? 5 : size.width * 0.012,
                 right: size.width * 0.46 > 155 ? 155 : size.width * 0.46,
                 child: Padding(
@@ -65,7 +66,7 @@ class PatientHomeContainer extends StatelessWidget {
                         : Lang.enLang["follow"]!,
                     style: TextStyle(
                       color: const Color.fromARGB(255, 74, 74, 74),
-                      fontSize: size.width * 0.03 > 13 ? 13 : size.width * 0.03,
+                      fontSize: Static.getwieght(context, 16),
                       fontFamily: 'Afacad',
                       fontWeight: FontWeight.w400,
                       height: 1.4,
@@ -80,13 +81,15 @@ class PatientHomeContainer extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: (size.height * 0.08 > 65 ? 65 : size.height * 0.08) +
-                    50, // زيادة 50 نقطة تحت النص (يمكن تعديل الرقم حسب الحاجة)
-                left: size.width * 0.05 > 20 ? 20 : size.width * 0.05,
+                bottom: Static.gethieght(context, 37),
+                left: Static.getwieght(context, 30),
                 width: size.width * 0.3 > 117 ? 117 : size.width * 0.3,
                 height: size.height * 0.05 > 38 ? 38 : size.height * 0.05,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15), 
+                    ),
                     backgroundColor: Colors.black,
                   ),
                   onPressed: () {

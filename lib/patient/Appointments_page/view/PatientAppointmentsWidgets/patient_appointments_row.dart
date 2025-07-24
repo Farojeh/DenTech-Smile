@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,28 +9,30 @@ class PatientAppointmentsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    return Row(
-      children: [
-        Image(
-          image: const AssetImage(
-            'assets/images/information.png',
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Image(
+            image: const AssetImage(
+              'assets/images/information 1.png',
+            ),
+            width:Static.gethieght(context, 32),
+            height: Static.gethieght(context, 32)
           ),
-          width: screenWidth * 0.07,
-          height: screenWidth * 0.07,
-        ),
-        SizedBox(width: screenWidth * 0.015),
-        Text(
-          context.watch<ThemeCubit>().isArabic
-              ? Lang.arabLang["available_appointment"]!
-              : Lang.enLang["available_appointment"]!,
-          style: TextStyle(
-            fontFamily: 'Afacad',
-            fontWeight: FontWeight.w600,
-            fontSize: screenWidth * 0.045,
+         const SizedBox(width: 15),
+          Text(
+            context.watch<ThemeCubit>().isArabic
+                ? Lang.arabLang["available_appointment"]!
+                : Lang.enLang["available_appointment"]!,
+            style: TextStyle(
+              fontFamily: 'Afacad',
+              fontWeight: FontWeight.w700,
+              fontSize: Static.getwieght(context, 25)
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

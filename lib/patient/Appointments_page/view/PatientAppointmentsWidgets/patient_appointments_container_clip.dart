@@ -7,7 +7,7 @@ class PatientAppointmentsContainerClip extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: screenHeight * 0.27,
+      height: screenHeight * 0.26,
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(

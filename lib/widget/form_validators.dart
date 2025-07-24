@@ -45,16 +45,16 @@ class FormValidators {
     if (value == null || value.isEmpty) {
       return "Required Field";
     } 
-    if (!_phoneRegex.hasMatch(value)) {
-      return "Phone number must be 10 digits";
-    }
+    // if (!_phoneRegex.hasMatch(value)) {
+    //   return "Phone number must be 10 digits";
+    // }
     
 
     // نحول الأرقام العربية لأرقام إنجليزية لمطابقة البادئة
-    String normalized = _convertArabicNumbersToEnglish(value);
-    if (!normalized.startsWith("09")) {
-      return "Enter correct phone number";
-    }
+    // String normalized = _convertArabicNumbersToEnglish(value);
+    // if (!normalized.startsWith("09")) {
+    //   return "Enter correct phone number";
+    // }
 
     return null;
   }

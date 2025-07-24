@@ -26,12 +26,19 @@ class PatientHomePage extends StatelessWidget {
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white.withOpacity(0),
-            shadowColor: Colors.white.withOpacity(0),
-            leading: const PatientAppBarShowMenu(),
-            title: const PatientAppBarTitle(),
-            actions: const [PatientAppBarImage()],
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 7),
+              child: AppBar(
+                backgroundColor: Colors.white.withOpacity(0),
+                shadowColor: Colors.white.withOpacity(0),
+                leading: const PatientAppBarShowMenu(),
+                title: const PatientAppBarTitle(),
+                actions: const [PatientAppBarImage()],
+              ),
+            ),
           ),
           body: Stack(
             children: [
@@ -42,12 +49,15 @@ class PatientHomePage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    const SizedBox(height: 10,), 
                     const PatientHomeContainer(),
+                    const SizedBox(height: 7,),
                     Padding(
                       padding: EdgeInsets.only(top: size.height * 0.04),
                       child: const Column(
                         children: [
                           PatientBodyTitle(),
+                           SizedBox(height: 7,),
                           PatientBodyOralList(isFullHeight: false),
                         ],
                       ),

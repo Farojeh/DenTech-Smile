@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_arrow.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_container_clip.dart';
@@ -19,7 +20,6 @@ class AppointmentsOralPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     return BlocProvider(
       create: (context) => PatientCubit()..getAppointmentDoctor(student.id!, 3),
@@ -29,31 +29,29 @@ class AppointmentsOralPage extends StatelessWidget {
             : TextDirection.ltr,
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: SizedBox.expand(
+          body: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: Stack(
-              clipBehavior: Clip.none,
               children: [
                 ClipPath(
                   clipper: WaveClipper(),
                   child: const PatientAppointmentsContainerClip(),
                 ),
                 Positioned(
-                  top: screenHeight * 0.32,
+                  top: Static.gethieght(context, 277),
                   child: Container(
+                    alignment: Alignment.topCenter,
+                    width: screenWidth,
                     color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.all(screenWidth * 0.04),
-                      child: SizedBox(
-                        width: screenWidth,
-                        child: const SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PatientAppointmentsRow(),
-                              PatientAppointmentsList(),
-                            ],
-                          ),
-                        ),
+                    child: const SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          PatientAppointmentsRow(),
+                           SizedBox(height: 10,),
+                          PatientAppointmentsList(),
+                        ],
                       ),
                     ),
                   ),

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 
 import 'custom_snackbar.dart';
 
@@ -22,10 +23,12 @@ class Static {
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
   static Color? shimmer = Colors.grey[300];
-  static String ipconfig = "192.168.1.4";
+  static String ipconfig = "192.168.160.207";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";
+  static String studentyear = "studentyear";
+  static String urlimage = "http://$ipconfig:8000/storage/"; 
   static String userRole =
       "userRole"; //2 for patient , 1 for student , 4 for doctor
   static String token = "Token";
@@ -122,4 +125,17 @@ class Static {
       ..showSnackBar(CustomSnackBar()
           .customSnackBar('Oops', message, ContentType.failure));
   }
+
+
+  static Widget loading (){
+    return Center(
+     child: Lottie.asset(
+          'assets/images/Doctor.json',
+          width: 300,
+          height: 300,
+          fit: BoxFit.contain,
+        )
+    );
+  }
+
 }

@@ -21,6 +21,7 @@ class ArchivePage extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
+            shadowColor: Colors.white.withOpacity(0),
             leading: const PatientArchiveAppBarArrow(),
             title: const PatientArchiveAppBarTitle(),
           ),

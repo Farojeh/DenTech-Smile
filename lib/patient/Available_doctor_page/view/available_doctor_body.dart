@@ -24,9 +24,10 @@ class AvailableDoctorPage extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
+            shadowColor: Colors.white.withOpacity(0),
             leading: const PatientAvailableAppBarArrow(),
             title: const PatientAvailabeAppBarTitle(),
-            actions: [const PatientAvailableAppBarAction()],
+            actions:const [ PatientAvailableAppBarAction()],
           ),
           body: const SingleChildScrollView(
               child: PatientBodyList(

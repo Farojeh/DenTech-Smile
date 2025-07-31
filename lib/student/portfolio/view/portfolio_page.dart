@@ -10,37 +10,50 @@ class PortfolioPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PortfolioCubit>(
-      create: (context) => PortfolioCubit(),
-      child: Scaffold(
-          body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top + 20,
-            ),
-            const TopPortfolio(),
-            Padding(
-              padding: const EdgeInsets.only(top: 35, left: 25),
-              child: Text(
-                "My works during my study years",
-                style: TextStyle(
-                    fontFamily: Static.arialRoundedMTfont,
-                    fontSize: Static.getwieght(context, 18),
-                    color: Colors.black),
+    return BlocListener<PortfolioCubit, PortfolioState>(
+      listener: (context, state) {
+        if (state is Portfoliofailure) {
+          Static.failure(context, state.errormessage);
+        }
+      },
+      child: Scaffold(body: BlocBuilder<PortfolioCubit, PortfolioState>(
+        builder: (context, state) {
+          if (state is PortfolioSuccess) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).padding.top + 20,
+                  ),
+                   TopPortfolio(degree: state.totaldegree,),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35, left: 25),
+                    child: Text(
+                      "My works during my study years",
+                      style: TextStyle(
+                          fontFamily: Static.arialRoundedMTfont,
+                          fontSize: Static.getwieght(context, 18),
+                          color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomPortfolio(),
+                  const SizedBox(
+                    height: 30,
+                  )
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const CustomPortfolio(),
-            const SizedBox(
-              height: 30,
-            )
-          ],
-        ),
+            );
+          } else if (state is PortfolioLoading) {
+            return Static.loading();
+          } else {
+            return Container();
+          }
+        },
       )),
     );
   }

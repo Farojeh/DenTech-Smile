@@ -26,10 +26,13 @@ import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
 import 'package:dentech_smile/student/learning/controller/cubit/learning_cubit.dart';
+import 'package:dentech_smile/student/learning/model/artical.dart';
+import 'package:dentech_smile/student/learning/views/articale_page.dart';
 import 'package:dentech_smile/student/learning/views/learn.dart';
 import 'package:dentech_smile/student/learning/views/learning_details_page.dart';
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
+import 'package:dentech_smile/student/portfolio/controller/cubit/portfolio_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dentech_smile/patient/About_app_page/AboutAppPage.dart';
@@ -65,6 +68,7 @@ abstract class AppRouter {
   static const appointmentpage = "/appointmentpage";
   static const learning = "/Learning";
   static const learningdetails = "/Learningdetails";
+  static const artical = "/artical";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -156,6 +160,9 @@ abstract class AppRouter {
             BlocProvider<HomeCubit>(
               create: (context) => HomeCubit(),
             ),
+            BlocProvider<PortfolioCubit>(
+              create: (context) => PortfolioCubit(),
+            ),
           ],
           child: const MainTabView(),
         ),
@@ -226,12 +233,24 @@ abstract class AppRouter {
       GoRoute(
           path: learningdetails,
           builder: (context, state) {
-            final String data = state.extra as String;
+            final Map<String, dynamic> data =
+                state.extra as Map<String, dynamic>;
+            final String title = data["title"];
+            final int type = data["type"];
             return BlocProvider<LearningCubit>(
-              create: (context) => LearningCubit(),
+              create: (context) => LearningCubit(title),
               child: LearningDetailsPage(
-                title: data,
+                title: title,
+                type: type,
               ),
+            );
+          }),
+      GoRoute(
+          path: artical,
+          builder: (context, state) {
+            final artical = state.extra as Artical;
+            return ArticalePage(
+              artical: artical,
             );
           }),
     ],

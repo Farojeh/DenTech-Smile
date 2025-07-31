@@ -30,31 +30,43 @@ class PatientArchiveList extends StatelessWidget {
           );
         } else if (state is PatientArchiveSuccess) {
           final archiveModel = state.archiveModel;
-          return Column(
-            children: [
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: archiveModel.students!.length,
-                separatorBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.05,
-                    vertical: screenHeight * 0.01,
+          return archiveModel.students!.isNotEmpty
+              ? Column(
+                  children: [
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: archiveModel.students!.length,
+                      separatorBuilder: (context, index) => Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.05,
+                          vertical: screenHeight * 0.01,
+                        ),
+                        child: Container(
+                          width: screenWidth * 0.85,
+                          height: 1,
+                          color: const Color.fromARGB(255, 34, 158, 189),
+                        ),
+                      ),
+                      itemBuilder: (context, index) {
+                        return PatientArchiveBlock(
+                          patientCase: archiveModel.students![index],
+                        );
+                      },
+                    ),
+                  ],
+                )
+              : Center(
+                  child: Padding(
+                    padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
+                    child: Image.asset(
+                      "assets/images/File searching-rafiki.png",
+                      height: 250,
+                      width: 250,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  child: Container(
-                    width: screenWidth * 0.85,
-                    height: 1,
-                    color: const Color.fromARGB(255, 34, 158, 189),
-                  ),
-                ),
-                itemBuilder: (context, index) {
-                  return PatientArchiveBlock(
-                    patientCase: archiveModel.students![index],
-                  );
-                },
-              ),
-            ],
-          );
+                );
         } else {
           return Padding(
             padding: EdgeInsets.symmetric(

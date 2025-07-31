@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/patient/Home_page/model/request_status_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -14,8 +15,8 @@ class PatientAppointmentsDoctorText extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Positioned(
-      top: screenHeight * 0.215,
-      right: screenWidth * 0.18,
+      top: Static.gethieght(context, 170),
+      right: Static.getwieght(context, 110),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

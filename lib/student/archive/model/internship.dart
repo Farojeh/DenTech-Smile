@@ -10,4 +10,16 @@ class Internship {
     required this.name,
     required this.archives,
   });
+
+  static Internship setdata(int type, Map<String, dynamic> json) {
+    print(type);
+    return Internship(
+      id: json["stage_id"].toString(),
+      name: json["stage_name"],
+      archives: (json['educational_contents'] as List?)
+              ?.map((p) => Archive.setdata(type, p))
+              .toList() ??
+          [],
+    );
+  }
 }

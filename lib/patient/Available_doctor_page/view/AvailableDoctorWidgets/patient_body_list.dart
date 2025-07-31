@@ -35,7 +35,8 @@ class PatientBodyList extends StatelessWidget {
             );
           } else if (state is PatientDoctorStageSuccess) {
             final doctorModel = state.requestStatusModel;
-            return SizedBox(
+            return Container(
+              margin:const EdgeInsets.only(top: 10),
               height: height,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(

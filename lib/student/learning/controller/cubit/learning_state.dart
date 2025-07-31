@@ -11,3 +11,9 @@ final class LearningSuccess extends LearningState {
 
   LearningSuccess({required this.allarchives,required this.select, required this.allinternships});
 }
+final class LearningLoading extends LearningState {}
+final class Learningfailure extends LearningState {
+  final String errormessage ;
+
+  Learningfailure({required this.errormessage});
+}

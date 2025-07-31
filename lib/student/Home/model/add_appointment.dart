@@ -1,18 +1,22 @@
+import 'package:dentech_smile/student/Home/model/time_appointment.dart';
+
 class AddAppointment{
   String id ;
   String name;
   String date ;
   bool active ;
-  List<String> schedule ;
+  List<TimeAppointment> schedule ;
+  List<String> internship ;
   
   AddAppointment({required this.id , 
   required this.name,
   required this.date,
   required this.active ,
-  required this.schedule
+  required this.schedule,
+  required this.internship
   });
 
-  void addtime(String time){
+  void addtime(TimeAppointment time){
     schedule.add(time);
   }
 
@@ -25,7 +29,8 @@ class AddAppointment{
     String? name,
      String? date,
     bool? active,
-    List<String>? schedule,
+    List<TimeAppointment>? schedule,
+    List<String>? internship,
   }) {
     return AddAppointment(
       id: id ?? this.id,
@@ -33,6 +38,7 @@ class AddAppointment{
       date: date??this.date,
       active: active ?? this.active,
       schedule: schedule ?? List.from(this.schedule),
+      internship: internship ?? List.from(this.internship),
     );
   }
 

@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class TopPortfolio extends StatelessWidget {
-  const TopPortfolio({super.key});
+  final double degree ;
+  const TopPortfolio({super.key, required this.degree});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +33,18 @@ class TopPortfolio extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 0.5, color: Colors.black)),
-                    child: Image.asset(
-                      "assets/images/student.jpg",
                       height: 85,
                       width: 90,
-                      fit: BoxFit.cover,
-                    ),
-                  ))
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 0.5, color: Colors.black)),
+                      child: userInfo!.getString(Static.studentimage) == null
+                          ? Image.asset(
+                              "assets/images/student.jpg",
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(
+                              File(userInfo!.getString(Static.studentimage)!),
+                              fit: BoxFit.cover)))
             ],
           ),
         ),
@@ -50,7 +57,9 @@ class TopPortfolio extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Areej Mahfouz",
+                userInfo!.getString(Static.studentimage) == null
+                    ? "Areej Mahfouz"
+                    : userInfo!.getString(Static.userName).toString(),
                 style: TextStyle(
                     fontFamily: Static.arialRoundedMTfont,
                     fontSize: Static.getwieght(context, 22),
@@ -71,7 +80,7 @@ class TopPortfolio extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                "Fourth academic year",
+                "${userInfo!.getString(Static.studentyear)} academic ",
                 style: TextStyle(
                     fontFamily: Static.afacadfont,
                     fontWeight: FontWeight.w400,
@@ -82,7 +91,7 @@ class TopPortfolio extends StatelessWidget {
                 height: 4,
               ),
               RatingBarIndicator(
-                rating: 3.5,
+                rating: degree,
                 itemBuilder: (context, index) => const Icon(
                   Icons.star_rate_rounded,
                   color: Color(0xffE6CD0D),

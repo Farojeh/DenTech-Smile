@@ -57,8 +57,8 @@ class HomeCubit extends Cubit<HomeState> {
                 appointmentsData.map<Appointment>((a) {
               return Appointment(
                 patient: a["patient_name"] ?? "",
-                tag: a["time"]?.substring(0, 2) ?? "",
-                start: a["time"]?.substring(0, 2) ?? "",
+                tag: a["time"]?.substring(0,1) ?? "",
+                start: a["time"]?? "",
                 date: date, // ← هنا نضيف التاريخ كـ end
                 internship: a["stage_name"] ?? "",
               );

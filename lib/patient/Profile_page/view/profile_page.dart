@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
               right: 0,
               child: Center(
                 child: Image.asset(
-                  'assets/images/Logo.png',
+                  'assets/images/logo.png',
                   height: screenHeight * 0.075,
                   width: screenWidth * 0.47,
                   fit: BoxFit.contain,
@@ -130,8 +130,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.07),
+                  padding:const EdgeInsets.only(top: 30 , left: 30 , right: 30),
                   child: ListView.separated(
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -144,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                     separatorBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: screenHeight * 0.017,
+                        vertical: screenHeight * 0.02,
                       ),
                       child: Container(
                         width: double.infinity,

@@ -12,41 +12,49 @@ class ArchiveCubit extends Cubit<ArchiveState> {
   void initialArchive() {
     List<Archive> archiveList = [
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",
           rate: 3),
       Archive(
+        id: 1,
           tag: "A",
           patient: "Aleen Morad ",
           internship: "Tooth extraction InternShip",

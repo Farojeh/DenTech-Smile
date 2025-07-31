@@ -2,6 +2,7 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/model/add_appointment.dart';
 import 'package:dentech_smile/student/Home/view/widget/delete_time_dialog.dart';
+import 'package:dentech_smile/student/Home/view/widget/internship_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,13 +15,25 @@ class NameSwitchAppointment extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          item.name,
-          style: TextStyle(
-              fontFamily: Static.afacadfont,
-              fontWeight: FontWeight.w500,
-              fontSize: Static.getwieght(context, 22),
-              color: Colors.black),
+        InkWell(
+          overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
+          onTap: () {
+            if (item.internship.isNotEmpty) {
+              showDialog(
+                  context: context,
+                  builder: (context) => InternShipDialog(
+                        item: item,
+                      ));
+            }
+          },
+          child: Text(
+            item.name,
+            style: TextStyle(
+                fontFamily: Static.afacadfont,
+                fontWeight: FontWeight.w500,
+                fontSize: Static.getwieght(context, 22),
+                color: Colors.black),
+          ),
         ),
         Text(
           " [${item.date}]",

@@ -24,6 +24,7 @@ class LearnInternship extends StatelessWidget {
                           MaterialStatePropertyAll(Colors.white.withOpacity(0)),
                       onTap: () => cubit.changeselect(index),
                       child: Container(
+                        padding:const EdgeInsets.symmetric(horizontal: 2),
                         height: Static.gethieght(context, 45),
                         width: Static.getwieght(context, 137),
                         margin: EdgeInsets.only(
@@ -36,6 +37,7 @@ class LearnInternship extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           state.allinternships[index].name,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: Static.afacadfont,
                               fontWeight: FontWeight.w400,
@@ -46,8 +48,10 @@ class LearnInternship extends StatelessWidget {
                         ),
                       ),
                     ));
+          }else if(state is LearningLoading){
+            return Container();
           } else {
-            return Text("Somthing error");
+            return const Text("Somthing error");
           }
         },
       ),

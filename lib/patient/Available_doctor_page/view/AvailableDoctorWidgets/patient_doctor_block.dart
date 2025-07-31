@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/patient/Available_doctor_page/model/argument_model.dart';
 import 'package:dentech_smile/patient/Home_page/model/request_status_model.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +19,10 @@ class PatientDoctorBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top :8.0, bottom: 8 ,left: 20,right: 20),
+      padding: const EdgeInsets.only(top :8.0, bottom: 11 ,left: 20,right: 20),
       child: Container(
         width: double.infinity,
-        height: (MediaQuery.of(context).size.height / 932) * 95,
+        height: (MediaQuery.of(context).size.height / 932) * 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: const Color.fromARGB(100, 217, 217, 217),
@@ -41,45 +42,47 @@ class PatientDoctorBlock extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
                     'assets/images/female-doctor.png',
-                    width: 80,
+                    width: Static.getwieght(context, 100),
                     height: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    student.students![index].name!,
-                    style: TextStyle(
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
+              Padding(
+                 padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      student.students![index].name!,
+                      style:const TextStyle(
+                        fontFamily: 'Afacad',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    student.students![index].year!,
-                    style: TextStyle(
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 11,
+                    Text(
+                      student.students![index].year!,
+                      style:const TextStyle(
+                        fontFamily: 'Afacad',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  RatingBarIndicator(
-                    rating: student.students![index].avgEvaluation!.toDouble(),
-                    itemBuilder: (context, index) => const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 212, 175, 55),
+                    RatingBarIndicator(
+                      rating: student.students![index].avgEvaluation!.toDouble(),
+                      itemBuilder: (context, index) => const Icon(
+                        Icons.star,
+                        color: Color.fromARGB(255, 212, 175, 55),
+                      ),
+                      itemCount: 5,
+                      itemSize: 15.0,
+                      direction: Axis.horizontal,
                     ),
-                    itemCount: 5,
-                    itemSize: 15.0,
-                    direction: Axis.horizontal,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

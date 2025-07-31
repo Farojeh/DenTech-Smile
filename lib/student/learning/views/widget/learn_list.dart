@@ -1,11 +1,15 @@
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/learning/controller/cubit/learning_cubit.dart';
+import 'package:dentech_smile/student/learning/views/widget/artical_dialog.dart';
+import 'package:dentech_smile/student/learning/views/widget/book_dialog.dart';
+import 'package:dentech_smile/student/learning/views/widget/youtube_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class LearnList extends StatelessWidget {
-  const LearnList({super.key});
+  final int type;
+  const LearnList({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +28,9 @@ class LearnList extends StatelessWidget {
                           .map((e) => InkWell(
                                 overlayColor: MaterialStatePropertyAll(
                                     Colors.white.withOpacity(0)),
-                                // onTap: () => GoRouter.of(context)
-                                //     .push(AppRouter.statePage, extra: {
-                                //   "name": e.internship,
-                                //   "start": e.start,
-                                //   "end": e.end
-                                // }),
+                                onTap: () async {
+                                  action(context, e.id, e.internship);
+                                },
                                 child: Container(
                                   height: Static.gethieght(context, 100),
                                   width: Static.getwieght(context, 362),
@@ -42,15 +43,26 @@ class LearnList extends StatelessWidget {
                                   margin: const EdgeInsets.only(bottom: 20),
                                   child: Row(children: [
                                     ClipRRect(
-                                      borderRadius:const BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10)
-                                     ),
-                                     child: Image.asset(e.tag,
-                                     height: Static.gethieght(context, 100),
-                                    width: Static.getwieght(context, 103),
-                                    fit: BoxFit.cover,
-                                     ),
+                                      borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10)),
+                                      child: e.isimage
+                                          ? Image.network(
+                                              "${Static.urlimage}${e.tag}",
+                                              height: Static.gethieght(
+                                                  context, 100),
+                                              width: Static.getwieght(
+                                                  context, 103),
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              setimage(e.tag),
+                                              height: Static.gethieght(
+                                                  context, 100),
+                                              width: Static.getwieght(
+                                                  context, 103),
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -67,7 +79,7 @@ class LearnList extends StatelessWidget {
                                                 fontFamily:
                                                     Static.arialRoundedMTfont,
                                                 fontSize: Static.getwieght(
-                                                    context, 19),
+                                                    context, 18),
                                                 color: Colors.black),
                                           ),
                                           const SizedBox(
@@ -121,7 +133,7 @@ class LearnList extends StatelessWidget {
                             margin: EdgeInsets.only(
                                 left: Static.getwieght(context, 50)),
                             child: Text(
-                              "No Emergencies In This Internship",
+                              "No Content In This Internship",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: Static.afacadfont,
@@ -132,11 +144,53 @@ class LearnList extends StatelessWidget {
                           )
                         ]),
             );
+          } else if (state is LearningLoading) {
+            return Static.loading();
           } else {
             return Container();
           }
         },
       ),
     );
+  }
+
+  String setimage(String image) {
+    if (type == 3) {
+      if (image == "null") {
+        return "assets/images/article.jpg";
+      } else {
+        return image;
+      }
+    } else if (type == 2) {
+      return "assets/images/youtube.jpg";
+    } else {
+      return "assets/images/book.jpg";
+    }
+  }
+
+  void action(BuildContext context, int id, String auther) {
+    if (type == 2) {
+      showDialog(
+        context: context,
+        builder: (context) => YoutubeDialod(
+          id: id,
+        ),
+      );
+    } else if (type == 3) {
+      showDialog(
+        context: context,
+        builder: (context) => ArticalDialog(
+          id: id,
+          auther: auther,
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => BookDialog(
+          id: id,
+        ),
+      );
+    }
   }
 }

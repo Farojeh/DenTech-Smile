@@ -35,7 +35,7 @@ class PatientElevetedButton extends StatelessWidget {
             if (cubit.appointmentStateNumb == 1) {
               Static.showMyDialog(
                   context,
-                  context.watch<ThemeCubit>().isArabic
+                  context.read<ThemeCubit>().isArabic
                       ? Lang.arabLang["message6"]!
                       : Lang.enLang["message6"]!,
                   0);

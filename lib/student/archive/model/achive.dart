@@ -1,8 +1,38 @@
-class Archive{
-  final String tag ;
-  final String patient ;
+class Archive {
+  final int id;
+  final String tag;
+  final String patient;
   final String internship;
-  final double rate ;
+  final double rate;
+  final bool isimage;
 
-  Archive({required this.tag, required this.patient, required this.internship, required this.rate});
+  Archive(
+      {this.isimage = false,
+      required this.id,
+      required this.tag,
+      required this.patient,
+      required this.internship,
+      required this.rate});
+
+  static Archive setdata(int type, Map<String, dynamic> json) {
+    if (type == 1 || type == 2) {
+      return Archive(
+          id: json["content_id"],
+          tag: "null",
+          patient: json["title"],
+          internship: json["supervisor_name"],
+          rate: (json["appropriate_rating"] as num?)?.toDouble() ?? 0.0);
+    } else {
+      List<String> images =
+          (json["images"] as List?)?.map((e) => e.toString()).toList() ?? [];
+      return Archive(
+        isimage:images.isEmpty ? false : true,
+        id: json["content_id"],
+        tag: images.isEmpty ? "null" : images[0],
+        patient: json["title"],
+        internship: json["supervisor_name"],
+        rate: (json["appropriate_rating"] as num?)?.toDouble() ?? 0.0,
+      );
+    }
+  }
 }

@@ -7,7 +7,7 @@ class PatientAppointmentsImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: Static.gethieght(context, 180),
+      top: Static.gethieght(context, 170),
       left: Static.gethieght(context, 30),
       child: Container(
         height: Static.gethieght(context, 100),

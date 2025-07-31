@@ -2,6 +2,7 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/model/add_appointment.dart';
 import 'package:dentech_smile/student/Home/view/widget/add_time_dialog.dart';
+import 'package:dentech_smile/student/Home/view/widget/delete_time_dialog.dart';
 import 'package:dentech_smile/student/Home/view/widget/name_switch_appointment.dart';
 import 'package:dentech_smile/widget/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -47,23 +48,39 @@ class CustomAppointmentPage extends StatelessWidget {
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: item.schedule.length,
-                            itemBuilder: (context, index) => Container(
-                                  alignment: Alignment.center,
-                                  height: Static.gethieght(context, 36),
-                                  width: Static.getwieght(context, 85),
-                                  margin: const EdgeInsets.only(right: 10),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 0.5, color: Colors.black45),
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Text(
-                                    item.schedule[index],
-                                    style: TextStyle(
-                                        fontFamily: Static.afacadfont,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                        fontSize:
-                                            Static.getwieght(context, 15)),
+                            itemBuilder: (context, index) => InkWell(
+                                  overlayColor: MaterialStatePropertyAll(
+                                      Colors.white.withOpacity(0)),
+                                  onTap: () async {
+                                    var result = await showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            const DeleteTimeDialog());
+                                    if (result) {
+                                     // ignore: use_build_context_synchronously
+                                     await BlocProvider.of<AppointmentPageCubit>(
+                                      context)
+                                  .deleteappointment(item.id ,item.schedule[index].id);
+                                    }
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: Static.gethieght(context, 36),
+                                    width: Static.getwieght(context, 85),
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 0.5, color: Colors.black45),
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Text(
+                                      item.schedule[index].time,
+                                      style: TextStyle(
+                                          fontFamily: Static.afacadfont,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                          fontSize:
+                                              Static.getwieght(context, 15)),
+                                    ),
                                   ),
                                 )),
                       ),
@@ -76,8 +93,9 @@ class CustomAppointmentPage extends StatelessWidget {
                                   context: context,
                                   builder: (context) => const AddTimeDialog());
                               // ignore: use_build_context_synchronously
-                              BlocProvider.of<AppointmentPageCubit>(context)
-                                  .addTimeToDay(item.id, result);
+                              await BlocProvider.of<AppointmentPageCubit>(
+                                      context)
+                                  .addTimeToDay(item.id, result, item.date);
                             },
                             color: const Color(0xff328F96),
                             redbl: 10,
@@ -86,13 +104,26 @@ class CustomAppointmentPage extends StatelessWidget {
                             redtr: 10,
                             height: Static.gethieght(context, 25),
                             width: Static.getwieght(context, 60),
-                            child: Text(
-                              "Add Time",
-                              style: TextStyle(
-                                  fontFamily: Static.afacadfont,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                  fontSize: Static.getwieght(context, 13)),
+                            child: BlocBuilder<AppointmentPageCubit,
+                                AppointmentPageState>(
+                              builder: (context, state) {
+                                if (state is Appointmentsubloading) {
+                                  return const CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  );
+                                } else {
+                                  return Text(
+                                    "Add Time",
+                                    style: TextStyle(
+                                        fontFamily: Static.afacadfont,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
+                                        fontSize:
+                                            Static.getwieght(context, 13)),
+                                  );
+                                }
+                              },
                             )),
                       ),
                     ],

@@ -68,7 +68,7 @@ class TopState extends StatelessWidget {
                   color: Colors.white),
             )),
         Positioned(
-            right: Static.getwieght(context, 90),
+            right: Static.getwieght(context, 70),
             bottom: Static.getwieght(context, 30),
             child: Text(
               "[ $start ] [ $end ]",

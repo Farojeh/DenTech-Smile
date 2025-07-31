@@ -133,7 +133,7 @@ class _LearnpageState extends State<Learnpage>
                             Colors.white.withOpacity(0)),
                         onTap: () => GoRouter.of(context).push(
                             AppRouter.learningdetails,
-                            extra: "Books and references"),
+                            extra:{"title": "Books and references", "type": 1}),
                         child: Image.asset("assets/images/references.png",
                             fit: BoxFit.contain),
                       ),
@@ -150,7 +150,7 @@ class _LearnpageState extends State<Learnpage>
                             Colors.white.withOpacity(0)),
                         onTap: () => GoRouter.of(context).push(
                             AppRouter.learningdetails,
-                            extra: "YouTube videos"),
+                            extra: {"title": "YouTube videos", "type": 2}),
                         child: Image.asset("assets/images/youtube.png",
                             fit: BoxFit.contain),
                       ),
@@ -167,7 +167,7 @@ class _LearnpageState extends State<Learnpage>
                             Colors.white.withOpacity(0)),
                         onTap: () => GoRouter.of(context).push(
                             AppRouter.learningdetails,
-                            extra: "Scientific articles"),
+                            extra: {"title": "Scientific articles", "type": 3} ),
                         child: Image.asset("assets/images/scientific.png",
                             fit: BoxFit.contain),
                       ),

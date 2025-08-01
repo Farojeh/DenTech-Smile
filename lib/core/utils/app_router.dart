@@ -25,6 +25,15 @@ import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cub
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
+import 'package:dentech_smile/student/exchange/controller/cubit/add_resource_cubit.dart';
+import 'package:dentech_smile/student/exchange/controller/cubit/my_exchanges_cubit.dart';
+import 'package:dentech_smile/student/exchange/controller/cubit/my_resources_cubit.dart';
+import 'package:dentech_smile/student/exchange/controller/cubit/resource_view_cubit.dart';
+import 'package:dentech_smile/student/exchange/view/add_resource.dart';
+import 'package:dentech_smile/student/exchange/view/exchange_page.dart';
+import 'package:dentech_smile/student/exchange/view/my_exchanges_page.dart';
+import 'package:dentech_smile/student/exchange/view/my_resources.dart';
+import 'package:dentech_smile/student/exchange/view/resource_view_page.dart';
 import 'package:dentech_smile/student/learning/controller/cubit/learning_cubit.dart';
 import 'package:dentech_smile/student/learning/model/artical.dart';
 import 'package:dentech_smile/student/learning/views/articale_page.dart';
@@ -69,6 +78,11 @@ abstract class AppRouter {
   static const learning = "/Learning";
   static const learningdetails = "/Learningdetails";
   static const artical = "/artical";
+  static const exchangepage = "/exchangepage";
+  static const addresource = "/addresource";
+  static const resourcepage = "/resourcepage";
+  static const myexchange = "/myexchange";
+  static const myresourcespage = "/myresourcespage";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -253,6 +267,39 @@ abstract class AppRouter {
               artical: artical,
             );
           }),
+      GoRoute(
+          path: exchangepage,
+          builder: (context, state) => const ExchangePage()),
+      GoRoute(
+          path: addresource,
+          builder: (context, state) => BlocProvider<AddResourceCubit>(
+                create: (context) => AddResourceCubit(),
+                child: const AddResource(),
+              )),
+      GoRoute(
+          path: resourcepage,
+          builder: (context, state) {
+            String title = state.extra as String;
+            return BlocProvider<ResourceViewCubit>(
+              create: (context) => ResourceViewCubit(),
+              child: ResourceViewPage(
+                type: title,
+              ),
+            );
+          }),
+      GoRoute(
+          path: myexchange,
+          builder: (context, state) => BlocProvider<MyExchangesCubit>(
+                create: (context) => MyExchangesCubit(),
+                child: const MyExchangesPage(),
+              )),
+      GoRoute(
+        path: myresourcespage,
+        builder: (context, state) => BlocProvider<MyResourcesCubit>(
+          create: (context) => MyResourcesCubit(),
+          child: const MyResourcesPage(),
+        ),
+      ),
     ],
   );
 }

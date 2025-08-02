@@ -7,15 +7,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ReservationDialog extends StatelessWidget {
-  const ReservationDialog({super.key});
+  final int resourceid;
+  const ReservationDialog({super.key, required this.resourceid});
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<ReservationCubit, ReservationState>(
       listener: (context, state) {
-        if(state is ReservationSuccess){
-         GoRouter.of(context).pushReplacement(AppRouter.myexchange);
-        }else if (state is Reservationfailure){
+        if (state is ReservationSuccess) {
+          GoRouter.of(context).pushReplacement(AppRouter.myexchange);
+        } else if (state is Reservationfailure) {
           Navigator.of(context).pop(state.errormessage);
         }
       },
@@ -36,10 +37,9 @@ class ReservationDialog extends StatelessWidget {
                     Text(
                       "Are you sure you want to reservation this Resource?",
                       style: TextStyle(
-                          fontFamily: Static.afacadfont,
-                          fontWeight: FontWeight.w700,
+                          fontFamily: Static.arialRoundedMTfont,
                           color: Colors.black,
-                          fontSize: 19),
+                          fontSize: 17),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(
@@ -71,7 +71,8 @@ class ReservationDialog extends StatelessWidget {
                         ),
                         CustomButton(
                             onPressed: () {
-                              BlocProvider.of<ReservationCubit>(context).save();
+                              BlocProvider.of<ReservationCubit>(context)
+                                  .save(resourceid);
                             },
                             color: Static.basiccolor,
                             height: 40,
@@ -80,12 +81,23 @@ class ReservationDialog extends StatelessWidget {
                             redbr: 10,
                             redtl: 10,
                             redtr: 10,
-                            child: Text(
-                              "Save",
-                              style: TextStyle(
-                                  fontFamily: Static.afacadfont,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white),
+                            child:
+                                BlocBuilder<ReservationCubit, ReservationState>(
+                              builder: (context, state) {
+                                if (state is ReservationLoading) {
+                                  return const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  );
+                                } else {
+                                  return Text(
+                                    "Save",
+                                    style: TextStyle(
+                                        fontFamily: Static.afacadfont,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  );
+                                }
+                              },
                             )),
                       ],
                     )

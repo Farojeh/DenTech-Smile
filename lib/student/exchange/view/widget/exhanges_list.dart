@@ -27,7 +27,7 @@ class ExchangesList extends StatelessWidget {
                                   builder: (context) =>
                                       BlocProvider<ExchangeDialogCubit>(
                                         create: (context) =>
-                                            ExchangeDialogCubit(),
+                                            ExchangeDialogCubit(item.id , item.image , true),
                                         child: const ExchangeDilaog(),
                                       ));
                               if (result != null) {
@@ -58,7 +58,10 @@ class ExchangesList extends StatelessWidget {
                             color: const Color(0xff325060)),
                       )
                     ]);
-        } else {
+        }else if(state is MyExchangesLoading){
+          return Static.loading();
+        }
+         else {
           return Container();
         }
       },

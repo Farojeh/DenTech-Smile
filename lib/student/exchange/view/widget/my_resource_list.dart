@@ -1,8 +1,10 @@
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/student/exchange/controller/cubit/exchange_dialog_cubit.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/my_resource_dialog_cubit.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/my_resources_cubit.dart';
 import 'package:dentech_smile/student/exchange/view/widget/custom_my_resource.dart';
 import 'package:dentech_smile/student/exchange/view/widget/my_resource_dialog.dart';
+import 'package:dentech_smile/student/exchange/view/widget/my_resource_main_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,18 +28,43 @@ class MyReourceList extends StatelessWidget {
                               String? result = await showDialog(
                                   context: context,
                                   builder: (context) =>
-                                      BlocProvider<MyResourceDialogCubit>(
+                                      BlocProvider<ExchangeDialogCubit>(
                                         create: (context) =>
-                                            MyResourceDialogCubit(),
-                                        child: const MyResourceDialog(),
+                                            ExchangeDialogCubit(
+                                                item.id, item.image, false),
+                                        child: const MyResourceMainDialog(),
                                       ));
-                              if (result != null && result == "success") {
-                                // ignore: use_build_context_synchronously
-                                BlocProvider.of<MyResourcesCubit>(context)
-                                    .updateStatus(item);
-                              } else if (result != null) {
-                                // ignore: use_build_context_synchronously
+                              if (result != null && result != "trans") {
+                                if (!context.mounted) {
+                                  return;
+                                }
                                 Static.failure(context, result);
+                              } else if (result == "trans") {
+                                if (!context.mounted) {
+                                  return;
+                                }
+                                String? result = await showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        BlocProvider<MyResourceDialogCubit>(
+                                          create: (context) =>
+                                              MyResourceDialogCubit(),
+                                          child: MyResourceDialog(
+                                            id: item.id,
+                                          ),
+                                        ));
+                                if (result != null && result == "success") {
+                                  if (!context.mounted) {
+                                    return;
+                                  }
+                                  BlocProvider.of<MyResourcesCubit>(context)
+                                      .updateStatus(item);
+                                } else if (result != null) {
+                                  if (!context.mounted) {
+                                    return;
+                                  }
+                                  Static.failure(context, result);
+                                }
                               }
                             }
                           }))
@@ -63,6 +90,8 @@ class MyReourceList extends StatelessWidget {
                             color: const Color(0xff325060)),
                       )
                     ]);
+        } else if (state is MyResourcesLoading) {
+          return Static.loading();
         } else {
           return Container();
         }

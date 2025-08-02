@@ -24,9 +24,12 @@ class ResourceViewList extends StatelessWidget {
                             onTap: () async {
                               String? result = await showDialog(
                                   context: context,
-                                  builder: (context) => BlocProvider<ReservationCubit>(
+                                  builder: (context) =>
+                                      BlocProvider<ReservationCubit>(
                                         create: (context) => ReservationCubit(),
-                                        child: const ReservationDialog(),
+                                        child: ReservationDialog(
+                                          resourceid: item.id,
+                                        ),
                                       ));
                               if (result != null) {
                                 // ignore: use_build_context_synchronously
@@ -56,6 +59,8 @@ class ResourceViewList extends StatelessWidget {
                             color: const Color(0xff325060)),
                       )
                     ]);
+        } else if (state is ResourceViewLoading) {
+          return Static.loading();
         } else {
           return Container();
         }

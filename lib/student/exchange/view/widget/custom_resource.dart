@@ -14,7 +14,7 @@ class CustomResource extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(left: 15, right: 30, bottom: 20),
-        height: Static.gethieght(context, 100),
+        height:item.name.length>23?Static.gethieght(context, 113):Static.gethieght(context, 100),
         decoration: BoxDecoration(
             border: Border.all(width: 0.5, color: Static.lightcolor2),
             borderRadius: BorderRadius.circular(10)),
@@ -24,9 +24,9 @@ class CustomResource extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
-              child: Image.asset(
-                item.image,
-                height: Static.gethieght(context, 100),
+              child: Image.network(
+                "${Static.urlimage}${item.image}",
+                height: item.name.length>23?Static.gethieght(context, 113):Static.gethieght(context, 100),
                 width: Static.getwieght(context, 110),
                 fit: BoxFit.cover,
               ),
@@ -39,14 +39,20 @@ class CustomResource extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(
-                  height: 1,
+                  height: 3,
                 ),
-                Text(
-                  item.name,
-                  style: TextStyle(
-                      fontFamily: Static.arialRoundedMTfont,
-                      fontSize: Static.getwieght(context, 19),
-                      color: Colors.black),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.52,
+                  child: Text(
+                    item.name,
+                    style: TextStyle(
+                        fontFamily: Static.arialRoundedMTfont,
+                        fontSize: Static.getwieght(context, 19),
+                        color: Colors.black),
+                  ),
+                ),
+                const SizedBox(
+                  height: 4,
                 ),
                 Text(
                   item.type,
@@ -55,6 +61,9 @@ class CustomResource extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       fontSize: Static.getwieght(context, 16),
                       color: Static.lightcolor2),
+                ),
+                const SizedBox(
+                  height: 4,
                 ),
                 Text(
                   "${item.startdate} to ${item.enddate}",
@@ -65,7 +74,7 @@ class CustomResource extends StatelessWidget {
                       color: Static.lightcolor2),
                 ),
                 const SizedBox(
-                  height: 1,
+                  height: 3,
                 ),
               ],
             )

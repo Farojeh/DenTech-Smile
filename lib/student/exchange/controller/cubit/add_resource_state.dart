@@ -44,7 +44,8 @@ final class AddResourceLoading extends AddResourceState {
 }
 
 final class AddResourcefailure extends AddResourceState {
-  AddResourcefailure({required super.name, required super.category, required super.date, required super.startdate, required super.enddate, required super.image});
+  final String errormessage ;
+  AddResourcefailure({required super.name, required super.category, required super.date, required super.startdate, required super.enddate, required super.image , required this.errormessage});
 }
 
 final class AddResourceSuccess extends AddResourceState {

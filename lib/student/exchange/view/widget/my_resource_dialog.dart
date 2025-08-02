@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyResourceDialog extends StatelessWidget {
-  const MyResourceDialog({super.key});
+  final int id;
+  const MyResourceDialog({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +35,9 @@ class MyResourceDialog extends StatelessWidget {
                     Text(
                       "Are you sure you want to change status from reservation to not reservation",
                       style: TextStyle(
-                          fontFamily: Static.afacadfont,
-                          fontWeight: FontWeight.w700,
+                          fontFamily: Static.arialRoundedMTfont,
                           color: Colors.black,
-                          fontSize: 19),
+                          fontSize: 16),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(
@@ -70,7 +70,7 @@ class MyResourceDialog extends StatelessWidget {
                         CustomButton(
                             onPressed: () {
                               BlocProvider.of<MyResourceDialogCubit>(context)
-                                  .changestatus();
+                                  .changestatus(id);
                             },
                             color: Static.basiccolor,
                             height: 40,
@@ -79,12 +79,23 @@ class MyResourceDialog extends StatelessWidget {
                             redbr: 10,
                             redtl: 10,
                             redtr: 10,
-                            child: Text(
-                              "Change",
-                              style: TextStyle(
-                                  fontFamily: Static.afacadfont,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white),
+                            child: BlocBuilder<MyResourceDialogCubit,
+                                MyResourceDialogState>(
+                              builder: (context, state) {
+                                if (state is MyResourceDialogLoading) {
+                                  return const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  );
+                                } else {
+                                  return Text(
+                                    "Change",
+                                    style: TextStyle(
+                                        fontFamily: Static.afacadfont,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  );
+                                }
+                              },
                             )),
                       ],
                     )

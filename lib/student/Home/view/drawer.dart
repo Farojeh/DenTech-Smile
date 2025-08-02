@@ -46,8 +46,13 @@ class StaticDrawer {
     return InkWell(
       overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
       onTap: () {
-        close(context);
-        GoRouter.of(context).push(AppRouter.learning);
+        if (text == "Learning Community") {
+          close(context);
+          GoRouter.of(context).push(AppRouter.learning);
+        } else {
+          close(context);
+          GoRouter.of(context).push(AppRouter.exchangepage);
+        }
       },
       child: Row(
         children: [

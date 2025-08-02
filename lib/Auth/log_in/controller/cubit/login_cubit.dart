@@ -44,6 +44,7 @@ class LoginCubit extends Cubit<LoginState> {
           userInfo!.setString(Static.token , response.data["token"]);
           if(response.data["user"]["role_id"] == 1){
             userInfo!.setString(Static.studentyear , response.data["user"]["student"]["year"]);
+            userInfo!.setString(Static.studentid , response.data["user"]["student"]["id"].toString());
           }
           emit(LoginSuccess());
         }

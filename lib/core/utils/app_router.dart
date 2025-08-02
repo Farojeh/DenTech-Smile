@@ -281,7 +281,7 @@ abstract class AppRouter {
           builder: (context, state) {
             String title = state.extra as String;
             return BlocProvider<ResourceViewCubit>(
-              create: (context) => ResourceViewCubit(),
+              create: (context) => ResourceViewCubit(title),
               child: ResourceViewPage(
                 type: title,
               ),

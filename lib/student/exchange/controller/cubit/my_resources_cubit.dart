@@ -1,5 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:dentech_smile/core/errors/failures.dart';
+import 'package:dentech_smile/core/utils/api_service.dart';
+import 'package:dentech_smile/core/utils/service_locator.dart';
 import 'package:dentech_smile/student/exchange/model/resource.dart';
+import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
 part 'my_resources_state.dart';
@@ -8,27 +12,32 @@ class MyResourcesCubit extends Cubit<MyResourcesState> {
   MyResourcesCubit() : super(MyResourcesInitial()) {
     initial();
   }
+  final apiService = getIt<ApiService>();
 
-  void initial() {
-    List<Resource> resources = [
-      Resource(
-          name: "Dental Materials",
-          id: 1,
-          image: "assets/images/resorce.png",
-          type: "Book and Refrences",
-          startdate: "2/2/2023",
-          status: true,
-          enddate: "2/4/2023"),
-      Resource(
-          name: "Dental Materials",
-          id: 2,
-          image: "assets/images/resorce.png",
-          type: "Book and Refrences",
-          startdate: "2/2/2023",
-          enddate: "2/4/2023"),
-    ];
+  void initial() async {
+    try {
+      emit(MyResourcesLoading());
+      Response response;
+      response = await apiService.get(endPoint: "/myResources", token: true);
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        var failure =
+            ServerFaliure.fromResponse(response.statusCode!, response.data);
+        emit(MyResourcesfailure(errormessage: failure.errorMessage));
+        return;
+      }
+      List<dynamic> resourcejason = response.data["resources"];
 
-    emit(MyResourcesSuccess(resources: resources));
+      List<Resource> resources = resourcejason
+          .map((stageJson) => Resource.setdata2(stageJson))
+          .toList();
+
+      emit(MyResourcesSuccess(resources: resources));
+    } catch (error) {
+      if (error is DioException) {
+        var failure = ServerFaliure.fromDioException(error);
+        emit(MyResourcesfailure(errormessage: failure.errorMessage));
+      }
+    }
   }
 
   void updateStatus(Resource resource) {

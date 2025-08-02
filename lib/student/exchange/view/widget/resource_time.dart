@@ -86,8 +86,7 @@ class _ResourceTimeState extends State<ResourceTime> {
                       if (picked != null) {
                         if (!context.mounted) return;
                         setState(() {
-                          date =
-                            "${twoDigits(picked.day)}-${twoDigits(picked.month)}-${picked.year.toString()}";
+                          date ="${picked.year.toString()}-${twoDigits(picked.month)}-${twoDigits(picked.day)}";
                         });
                       }
                     },

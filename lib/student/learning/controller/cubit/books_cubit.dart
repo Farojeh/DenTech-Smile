@@ -1,13 +1,18 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/errors/failures.dart';
 import 'package:dentech_smile/core/utils/api_service.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
-import 'package:dio/dio.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:meta/meta.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 part 'books_state.dart';
 
 class BooksCubit extends Cubit<BooksState> {
+   final Dio dio = Dio();
   BooksCubit(int id) : super(BooksInitial()) {
     initialbook(id);
   }
@@ -28,7 +33,7 @@ class BooksCubit extends Cubit<BooksState> {
         return;
       }
       String path = response.data["content"]["file_path"];
-      // await downloadFile("${Static.urlimage}$path");
+      await downloadFile("${Static.urlimage}$path" , path);
       emit(BooksSuccess(path: path));
     } catch (error) {
       if (error is DioException) {
@@ -38,31 +43,40 @@ class BooksCubit extends Cubit<BooksState> {
     }
   }
 
-//   Future<void> downloadFile(String url) async {
-//     // طلب صلاحية التخزين
-//     var status = await Permission.storage.request();
-//     if (!status.isGranted) {
-//       emit(Booksfailure(errormessage: "Storage permission denied"));
-//       return;
-//     }
+   Future<void> downloadFile(String url, String fileName) async {
+    // طلب الصلاحيات (يدعم Android 11+)
+    if (await Permission.manageExternalStorage.request().isGranted ||
+        await Permission.storage.request().isGranted) {
+      try {
+        // مسار مجلد Download
+        final downloadsDir = Directory('/storage/emulated/0/Download');
+        if (!await downloadsDir.exists()) {
+          throw Exception('Downloads directory not found');
+        }
 
-//     try {
-//       final downloadsDir = Directory('/storage/emulated/0/Download');
-//       if (!downloadsDir.existsSync()) {
-//         downloadsDir.createSync(recursive: true);
-//       }
+        final filePath = '${downloadsDir.path}/$fileName';
 
-//       final fileName = url.split('/').last;
-//       final savePath = '${downloadsDir.path}/$fileName';
+        // تحميل الملف باستخدام Dio
+        final response = await dio.download(
+          url,
+          filePath,
+          options: Options(responseType: ResponseType.bytes),
+        );
 
-//       await Dio().download(url, savePath);
+        if (response.statusCode == 200) {
+          print('PDF saved to $filePath');
+          await OpenFilex.open(filePath); // فتح الملف بعد التحميل
+        } else {
+          throw Exception('Failed to download file: ${response.statusCode}');
+        }
+      } catch (e) {
+        throw Exception('Error downloading PDF: $e');
+      }
+    } else {
+      // إذا تم رفض الإذن
+      throw Exception('Storage permission denied. Please enable it from settings.');
+    }
+  }
 
-//       emit(BooksSuccess(path: "File downloaded to $savePath"));
-//     } catch (e) {
-//       emit(Booksfailure(errormessage: "Download failed: $e"));
-//     }
-//   }
-//   // path provider
-//   // Permission
 }
 

@@ -1,6 +1,7 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/view/widget/animated_drawer.dart';
+import 'package:dentech_smile/student/Home/view/widget/pdf_portfolio_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,16 +43,22 @@ class StaticDrawer {
     Overlay.of(context).insert(_overlayEntry!);
   }
 
-  static Widget title(BuildContext context, String image, String text) {
+  static Widget title(BuildContext context, String image, String text , int id ) {
     return InkWell(
       overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
       onTap: () {
-        if (text == "Learning Community") {
+        if (id==1) {
           close(context);
           GoRouter.of(context).push(AppRouter.learning);
-        } else {
+        } else if(id == 2) {
           close(context);
           GoRouter.of(context).push(AppRouter.exchangepage);
+        }else{
+           close(context);
+           showDialog(
+        context: context,
+        builder: (context) => const PdfPortfolioDialog(),
+      );
         }
       },
       child: Row(

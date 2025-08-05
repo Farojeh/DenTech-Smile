@@ -1,8 +1,10 @@
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/archive/controller/cubit/archive_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class ArchiveList extends StatelessWidget {
   const ArchiveList({super.key});
@@ -24,12 +26,12 @@ class ArchiveList extends StatelessWidget {
                           .map((e) => InkWell(
                                 overlayColor: MaterialStatePropertyAll(
                                     Colors.white.withOpacity(0)),
-                                // onTap: () => GoRouter.of(context)
-                                //     .push(AppRouter.statePage, extra: {
-                                //   "name": e.internship,
-                                //   "start": e.start,
-                                //   "end": e.end
-                                // }),
+                                onTap: () => GoRouter.of(context)
+                                    .push(AppRouter.stategeneral, extra: {
+                                  "name": e.internship,
+                                  "patient": e.patient,
+                                  "rate": e.rate
+                                }),
                                 child: Container(
                                   height: Static.gethieght(context, 90),
                                   width: Static.getwieght(context, 362),

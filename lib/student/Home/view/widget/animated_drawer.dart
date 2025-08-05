@@ -7,7 +7,8 @@ class AnimatedDrawer extends StatefulWidget {
   final double top;
   final VoidCallback onClose;
 
-  const AnimatedDrawer({super.key, 
+  const AnimatedDrawer({
+    super.key,
     required this.left,
     required this.top,
     required this.onClose,
@@ -25,8 +26,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 400));
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 400));
     _scaleAnimation =
         CurvedAnimation(parent: _controller, curve: Curves.easeOutBack);
 
@@ -47,8 +48,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
         elevation: 8,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          width: Static.getwieght(context, 250),
-          height: Static.gethieght(context, 120),
+          width: Static.getwieght(context, 260),
+          height: Static.gethieght(context, 180),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -73,11 +74,21 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 25),
           child: Column(
             children: [
-              StaticDrawer.title(context,"assets/images/study.png", "Learning Community"),
+              StaticDrawer.title(
+                  context, "assets/images/study.png", "Learning Community", 1),
               const SizedBox(height: 5),
               const Divider(),
               const SizedBox(height: 5),
-              StaticDrawer.title(context,"assets/images/men-exchanging-symbol.png", "Resources Exchanges"),
+              StaticDrawer.title(
+                  context,
+                  "assets/images/men-exchanging-symbol.png",
+                  "Resources Exchanges",
+                  2),
+              const SizedBox(height: 5),
+              const Divider(),
+              const SizedBox(height: 5),
+              StaticDrawer.title(context, "assets/images/file.png",
+                  "Dwonload porfolio pdf", 3),
             ],
           ),
         ),

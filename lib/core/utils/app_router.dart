@@ -23,8 +23,10 @@ import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
 import 'package:dentech_smile/professor/professor.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/state_general_cubit.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/state_page_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
+import 'package:dentech_smile/student/Home/view/state_general.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/add_resource_cubit.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/my_exchanges_cubit.dart';
@@ -84,6 +86,7 @@ abstract class AppRouter {
   static const resourcepage = "/resourcepage";
   static const myexchange = "/myexchange";
   static const myresourcespage = "/myresourcespage";
+  static const stategeneral = "/stategeneral";
 
   static final router = GoRouter(
     initialLocation: '/',
@@ -311,6 +314,22 @@ abstract class AppRouter {
           child: const MyResourcesPage(),
         ),
       ),
+      GoRoute(
+          path: stategeneral,
+          builder: (context, state) {
+            final data = state.extra as Map<String, Object>?;
+            final name = data?['name'] ?? 'No name';
+            final patient = data?['patient'] ?? 'No patient';
+            final double rate = data?['rate'] as double;
+            return BlocProvider<StateGeneralCubit>(
+              create: (context) => StateGeneralCubit("1"),
+              child: StateGeneral(
+                name: name.toString(),
+                patien: patient.toString(),
+                rate: rate,
+              ),
+            );
+          }),
     ],
   );
 }

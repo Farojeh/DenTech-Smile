@@ -30,6 +30,7 @@ class Static {
   static String studentyear = "studentyear";
   static String studentid = "studentid";
   static String urlimage = "http://$ipconfig:8000/storage/"; 
+  static String urlimagewithoutsplash = "http://$ipconfig:8000/storage"; 
   static String userRole =
       "userRole"; //2 for patient , 1 for student , 4 for doctor
   static String token = "Token";

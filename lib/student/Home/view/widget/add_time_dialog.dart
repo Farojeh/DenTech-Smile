@@ -87,12 +87,11 @@ class _AddTimeDialogState extends State<AddTimeDialog> {
 
                         final String hour =
                             twoDigits(picked.hourOfPeriod); // 01 to 12
-                        final String minute = twoDigits(picked.minute);
                         final String am =
                             picked.period == DayPeriod.am ? "AM" : "PM";
 
                         setState(() {
-                          time = "$hour:$minute";
+                          time = hour;
                           amtime = am;
                         });
                       }

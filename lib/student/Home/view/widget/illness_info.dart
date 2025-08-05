@@ -2,7 +2,8 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 
 class IllnessInfo extends StatelessWidget {
-  const IllnessInfo({super.key});
+  final List<String> illness ;
+  const IllnessInfo({super.key, required this.illness});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class IllnessInfo extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        children: List.generate(4, (index) {
+        children: List.generate(illness.length, (index) {
           return Container(
             height: Static.gethieght(context, 31),
             width: Static.getwieght(context, 163),
@@ -35,7 +36,7 @@ class IllnessInfo extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "Diabetes",
+                  illness[index],
                   style: TextStyle(
                       fontFamily: Static.afacadfont,
                       fontWeight: FontWeight.w400,

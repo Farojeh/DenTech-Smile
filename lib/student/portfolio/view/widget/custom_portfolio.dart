@@ -13,53 +13,78 @@ class CustomPortfolio extends StatelessWidget {
       builder: (context, state) {
         if (state is PortfolioSuccess) {
           return Column(
-            children: state.internship
-                .map((e) => Container(
-                      height: 147,
-                      margin: const EdgeInsets.only(bottom: 10, left: 40),
-                      child: Column(
-                        children: [
-                          Row(
+            children: state.internship.isNotEmpty
+                ? state.internship
+                    .map((e) => Container(
+                          height: 147,
+                          margin: const EdgeInsets.only(bottom: 10, left: 40),
+                          child: Column(
                             children: [
-                              Container(
-                                height: 8,
-                                width: 8,
-                                decoration: const BoxDecoration(
-                                    color: Colors.black,
-                                    shape: BoxShape.circle),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 8,
+                                    width: 8,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.black,
+                                        shape: BoxShape.circle),
+                                  ),
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text(
+                                    e.name,
+                                    style: TextStyle(
+                                        fontFamily: Static.afacadfont,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: Static.getwieght(context, 17),
+                                        color: Colors.black),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    "${e.degree} / ${e.total}",
+                                    style: TextStyle(
+                                        fontFamily: Static.afacadfont,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: Static.getwieght(context, 17),
+                                        color: Colors.black),
+                                  ),
+                                  const SizedBox(
+                                    width: 30,
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                e.name,
-                                style: TextStyle(
-                                    fontFamily: Static.afacadfont,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: Static.getwieght(context, 17),
-                                    color: Colors.black),
-                              ),
-                              const Spacer(),
-                              Text(
-                                "${e.degree} / ${e.total}",
-                                style: TextStyle(
-                                    fontFamily: Static.afacadfont,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: Static.getwieght(context, 17),
-                                    color: Colors.black),
-                              ),
-                              const SizedBox(
-                                width: 30,
+                              CaseWidget(
+                                e: e,
                               )
                             ],
                           ),
-                          CaseWidget(
-                            e: e,
-                          )
-                        ],
+                        ))
+                    .toList()
+                : [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: Static.getwieght(context, 30),
+                          right: 80,
+                          top: 70),
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        "assets/images/File searching-rafiki.png",
+                        height: 250,
+                        width: 250,
+                        fit: BoxFit.contain,
                       ),
-                    ))
-                .toList(),
+                    ),
+                    Text(
+                      "No Content yet",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: Static.afacadfont,
+                          fontWeight: FontWeight.w400,
+                          fontSize: Static.getwieght(context, 18),
+                          color: const Color(0xff325060)),
+                    )
+                  ],
           );
         } else {
           return Container();

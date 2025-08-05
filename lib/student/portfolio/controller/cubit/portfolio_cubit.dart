@@ -29,7 +29,7 @@ class PortfolioCubit extends Cubit<PortfolioState> {
       }
 
       List<dynamic> stagesJson = response.data["stages"];
-      double totaldegree = response.data["overall_grade"];
+      double totaldegree = response.data["overall_grade"]??0.0;
 
       List<PortfolioIntership> internships = stagesJson
           .map((stageJson) => PortfolioIntership.setdata(stageJson))

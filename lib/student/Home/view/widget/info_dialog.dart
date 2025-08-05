@@ -1,8 +1,10 @@
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/patient_info_cubit.dart';
 import 'package:dentech_smile/student/Home/view/widget/custom_info_dialog.dart';
 import 'package:dentech_smile/student/Home/view/widget/illness_info.dart';
 import 'package:dentech_smile/student/Home/view/widget/medicines_info.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InfoDialog extends StatelessWidget {
   const InfoDialog({super.key});
@@ -17,36 +19,61 @@ class InfoDialog extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.85,
             padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 15),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  title(context, "assets/images/info.png",
-                      "Aleen Morad Information"),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const CustomInfoDialog(
-                    title: "Patient Age",
-                    child: "30 y",
-                  ),
-                  const CustomInfoDialog(
-                      title: "Patient Hieght", child: "167 cm"),
-                  const CustomInfoDialog(
-                      title: "Patient Wieght", child: "67 kg"),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  title(context, "assets/images/ill.png", "Patient's diseases"),
-                  const IllnessInfo(),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  title(context, "assets/images/syrup.png",
-                      "Patient's Medicines"),
-                  const MedicinesInfo()
-                ])));
+            child: BlocBuilder<PatientInfoCubit, PatientInfoState>(
+              builder: (context, state) {
+                if (state is PatientInfoSuccess) {
+                  return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        title(context, "assets/images/info.png",
+                            "Patient Information"),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                         CustomInfoDialog(
+                          title: "Patient Age",
+                          child: state.age,
+                        ),
+                         CustomInfoDialog(
+                            title: "Patient Hieght", child: "${state.height} m"),
+                         CustomInfoDialog(
+                            title: "Patient Wieght", child: "${state.wieght} kg"),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        title(context, "assets/images/ill.png",
+                            "Patient's diseases"),
+                         IllnessInfo(illness: state.ilness,),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        title(context, "assets/images/syrup.png",
+                            "Patient's Medicines"),
+                         MedicinesInfo(images: state.images,)
+                      ]);
+                } else if (state is PatientInfoLoading) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: Static.basiccolor,
+                      )
+                    ],
+                  );
+                } else if (state is PatientInfofailure) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text(state.errormessage)],
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            )));
   }
 
   Widget title(BuildContext context, String image, String title) {

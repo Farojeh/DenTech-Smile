@@ -28,7 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeLoading());
 
       final response =
-          await apiService.get(endPoint: "/weekly-schedule", token: true);
+          await apiService.get(endPoint: "/student-weekly-schedule", token: true);
 
       if (response.statusCode != 200 && response.statusCode != 201) {
         var failure =
@@ -56,6 +56,7 @@ class HomeCubit extends Cubit<HomeState> {
             List<Appointment> appointments =
                 appointmentsData.map<Appointment>((a) {
               return Appointment(
+                id: a["appointment_id"],
                 patient: a["patient_name"] ?? "",
                 tag: a["time"]?.substring(0,1) ?? "",
                 start: a["time"]?? "",

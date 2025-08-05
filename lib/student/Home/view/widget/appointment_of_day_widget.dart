@@ -28,9 +28,11 @@ class AppointmentOfDayWidget extends StatelessWidget {
                               StaticDrawer.close(context);
                               GoRouter.of(context).push(AppRouter.statePage,
                                   extra: {
+                                    "id":e.id.toString(),
                                     "name": e.internship,
                                     "start": e.start,
-                                    "end": e.date
+                                    "end": e.date,
+                                    "patient":e.patient
                                   });
                             },
                             child: Container(

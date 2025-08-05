@@ -3,7 +3,8 @@ import 'package:dentech_smile/student/Home/view/widget/custom_title.dart';
 import 'package:flutter/material.dart';
 
 class XRayWidget extends StatelessWidget {
-  const XRayWidget({super.key});
+  final String image;
+  const XRayWidget({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class XRayWidget extends StatelessWidget {
         ),
         InkWell(
           overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
-          onTap: () => Static.showimage(context, "assets/images/OIP.png"),
+          onTap: () => Static.showimage(context, "radiology/$image", false),
           child: Container(
             margin: EdgeInsets.symmetric(
                 horizontal: Static.getwieght(context, 40),
@@ -28,8 +29,8 @@ class XRayWidget extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                "assets/images/OIP.png",
+              child: Image.network(
+                "${Static.urlimage}radiology/$image",
                 fit: BoxFit.cover,
               ),
             ),

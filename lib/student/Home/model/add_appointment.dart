@@ -6,14 +6,12 @@ class AddAppointment{
   String date ;
   bool active ;
   List<TimeAppointment> schedule ;
-  List<String> internship ;
   
   AddAppointment({required this.id , 
   required this.name,
   required this.date,
   required this.active ,
   required this.schedule,
-  required this.internship
   });
 
   void addtime(TimeAppointment time){
@@ -38,7 +36,6 @@ class AddAppointment{
       date: date??this.date,
       active: active ?? this.active,
       schedule: schedule ?? List.from(this.schedule),
-      internship: internship ?? List.from(this.internship),
     );
   }
 

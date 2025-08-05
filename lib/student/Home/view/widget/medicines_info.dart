@@ -2,18 +2,14 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 
 class MedicinesInfo extends StatefulWidget {
-  const MedicinesInfo({super.key});
+  final List<String> images ;
+  const MedicinesInfo({super.key, required this.images});
 
   @override
   State<MedicinesInfo> createState() => _MedicinesInfoState();
 }
 
 class _MedicinesInfoState extends State<MedicinesInfo> {
-  List<String> imges = [
-    "assets/images/test3.jpg",
-    "assets/images/test4.jpg",
-    "assets/images/test5.jpg"
-  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,11 +21,11 @@ class _MedicinesInfoState extends State<MedicinesInfo> {
       ),
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: imges.length,
+          itemCount: widget.images.length,
           itemBuilder: (context, index) => InkWell(
                 overlayColor:
                     MaterialStatePropertyAll(Colors.white.withOpacity(0)),
-                onTap: () => Static.showimage(context, imges[index]),
+                onTap: () => Static.showimage(context, widget.images[index] , false),
                 child: Container(
                   margin: const EdgeInsets.only(right: 7),
                   height: Static.gethieght(context, 90),
@@ -38,8 +34,8 @@ class _MedicinesInfoState extends State<MedicinesInfo> {
                       BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      imges[index],
+                    child: Image.network(
+                      "${Static.urlimage}${widget.images[index]}",
                       fit: BoxFit.cover,
                     ),
                   ),

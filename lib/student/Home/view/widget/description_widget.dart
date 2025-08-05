@@ -1,12 +1,15 @@
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/description_cubit.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/state_page_cubit.dart';
 import 'package:dentech_smile/student/Home/view/widget/custom_title.dart';
 import 'package:dentech_smile/student/Home/view/widget/description_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DescriptionWidget extends StatelessWidget {
-  const DescriptionWidget({super.key});
+  final String? des;
+  final String id;
+  const DescriptionWidget({super.key, this.des, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +21,20 @@ class DescriptionWidget extends StatelessWidget {
           title: "Case description",
           more: "Add more",
           ismore: true,
-          onTapfun: () {
-            showDialog(
+          onTapfun: () async {
+            String? result = await showDialog(
                 context: context,
                 builder: (context) => BlocProvider<DescriptionCubit>(
-                      create: (context) => DescriptionCubit(),
-                      child: const DescriotionDialog(init: "Patient with tooth decay",),
+                      create: (context) => DescriptionCubit(des ?? ""),
+                      child: DescriotionDialog(
+                        init: des ?? "",
+                        appointmentid: id,
+                      ),
                     ));
+            if (result != null) {
+              if (!context.mounted) return;
+              BlocProvider.of<StatePageCubit>(context).setdes(result);
+            }
           },
         ),
         Container(
@@ -39,7 +49,7 @@ class DescriptionWidget extends StatelessWidget {
               horizontal: Static.getwieght(context, 17),
               vertical: Static.getwieght(context, 7)),
           child: Text(
-            "Patient with tooth decay",
+            des ?? "no description yet!",
             style: TextStyle(
                 fontFamily: Static.afacadfont,
                 fontWeight: FontWeight.w400,

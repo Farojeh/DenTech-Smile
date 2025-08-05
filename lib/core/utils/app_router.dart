@@ -23,6 +23,7 @@ import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
 import 'package:dentech_smile/professor/professor.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/state_page_cubit.dart';
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/add_resource_cubit.dart';
@@ -185,12 +186,22 @@ abstract class AppRouter {
           path: statePage,
           builder: (context, state) {
             final data = state.extra as Map<String, String>?;
-
+            final id = data?["id"] ?? "0";
             final name = data?['name'] ?? 'No name';
             final start = data?['start'] ?? 'No start';
             final end = data?['end'] ?? 'No end';
+            final patient = data?['patient'] ?? 'No patient';
 
-            return StatePage(name: name, start: start, end: end);
+            return BlocProvider<StatePageCubit>(
+              create: (context) => StatePageCubit(id),
+              child: StatePage(
+                name: name,
+                start: start,
+                end: end,
+                id: id,
+                patien: patient,
+              ),
+            );
           }),
       GoRoute(
         path: appointmentpage,

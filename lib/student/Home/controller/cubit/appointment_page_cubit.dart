@@ -24,7 +24,6 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         date: "",
         active: false,
         schedule: [],
-        internship: [],
       ),
       AddAppointment(
         id: '2',
@@ -32,7 +31,6 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         date: "",
         active: false,
         schedule: [],
-        internship: [],
       ),
       AddAppointment(
         id: '3',
@@ -40,7 +38,6 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         date: "",
         active: false,
         schedule: [],
-        internship: [],
       ),
       AddAppointment(
         id: '4',
@@ -48,7 +45,6 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         date: "",
         active: false,
         schedule: [],
-        internship: [],
       ),
       AddAppointment(
         id: '5',
@@ -56,7 +52,6 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         date: "",
         active: false,
         schedule: [],
-        internship: [],
       ),
     ];
     try {
@@ -70,49 +65,43 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         return;
       }
 
-      List<dynamic> week = response.data["available_appointments"];
+      List<dynamic> week = response.data["appointments"];
 
-      for (var stage in week) {
-        String stageName = stage["stage_name"];
-        for (var day in stage["days"]) {
-          String dayName = day["day"];
-          String date = day["date"];
-          List<dynamic> times = day["times"];
+      for (var day in week) {
+        String dayName = day["day"];
+        String date = day["date"];
+        List<dynamic> times = day["times"];
+        // البحث عن اليوم المطابق داخل weekAppointments
+        var appointmentIndex = weekAppointments.indexWhere(
+          (a) => a.name.toLowerCase() == dayName.toLowerCase(),
+        );
 
-          // البحث عن اليوم المطابق داخل weekAppointments
-          var appointmentIndex = weekAppointments.indexWhere(
-            (a) => a.name.toLowerCase() == dayName.toLowerCase(),
-          );
+        if (appointmentIndex != -1) {
+          var appointment = weekAppointments[appointmentIndex];
 
-          if (appointmentIndex != -1) {
-            var appointment = weekAppointments[appointmentIndex];
-
-            // تفعيل اليوم
+          // تفعيل اليوم
+          if (times.isNotEmpty) {
             appointment.active = true;
-
-            // تحديث التاريخ (يمكن أن نأخذ آخر تاريخ إذا تكرر)
-            appointment.date = date;
-
-            // إضافة اسم الستاج إذا لم يكن موجود مسبقاً
-            if (!appointment.internship.contains(stageName)) {
-              appointment.internship.add(stageName);
-            }
-
-            // إضافة الأوقات بدون تكرار
-            for (var t in times) {
-              if (!appointment.schedule.any((sch) => sch.id == t["id"])) {
-                appointment.schedule.add(TimeAppointment(
-                  id: t["id"],
-                  time: t["time"],
-                ));
-              }
-            }
-
-            // تحديث العنصر في القائمة
-            weekAppointments[appointmentIndex] = appointment;
           }
+
+          // تحديث التاريخ (يمكن أن نأخذ آخر تاريخ إذا تكرر)
+          appointment.date = date;
+
+          // إضافة الأوقات بدون تكرار
+          for (var t in times) {
+            if (!appointment.schedule.any((sch) => sch.id == t["id"])) {
+              appointment.schedule.add(TimeAppointment(
+                id: t["id"],
+                time: t["time"],
+              ));
+            }
+          }
+
+          // تحديث العنصر في القائمة
+          weekAppointments[appointmentIndex] = appointment;
         }
       }
+
       emit(AppointmentPageSuccess(appointments: weekAppointments));
     } catch (error) {
       if (error is DioException) {
@@ -122,7 +111,7 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
     }
   }
 
-  void toggleDayActive(String id) {
+  void toggleDayActive(String id, String date) async {
     if (state is AppointmentPageSuccess) {
       final current = (state as AppointmentPageSuccess).appointments;
       final index = current.indexWhere((element) => element.id == id);
@@ -130,9 +119,35 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
       if (index == -1) return;
       final updated = List<AddAppointment>.from(current);
       final currentItem = updated[index];
+      bool deal = false;
 
-      updated[index] = currentItem.copyWith(active: !currentItem.active);
-
+      if (currentItem.active) {
+        try {
+          emit(Appointmentsubloading(appointments: current));
+          Map<String, String> data = {"date": date, "status": "off"};
+          final response = await apiService.post(
+              endPoint: "/change-day-status", data: data, token: true);
+          if (response.statusCode != 200 && response.statusCode != 201) {
+            var failure =
+                ServerFaliure.fromResponse(response.statusCode!, response.data);
+            emit(Appointmentsubfailure(
+                appointments: current, errormessage: failure.errorMessage));
+            return;
+          }
+          deal = true;
+        } catch (error) {
+          if (error is DioException) {
+            var failure = ServerFaliure.fromDioException(error);
+            emit(Appointmentsubfailure(
+                errormessage: failure.errorMessage, appointments: current));
+          }
+        }
+        if (deal == true) {
+          updated[index] = currentItem.copyWith(active: !currentItem.active);
+        }
+      } else {
+        updated[index] = currentItem.copyWith(active: !currentItem.active);
+      }
       emit(AppointmentPageSuccess(appointments: updated));
     }
   }
@@ -141,10 +156,9 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
     if (state is AppointmentPageSuccess) {
       final current = (state as AppointmentPageSuccess).appointments;
       bool deal = false;
+      int appointmentid = -1;
       try {
         emit(Appointmentsubloading(appointments: current));
-        List<String> parts = date.split('-');
-        date = "${parts[2]}-${parts[1]}-${parts[0]}";
         Map<String, String> data = {"date": date, "time": time};
         final response = await apiService.post(
             endPoint: "/add-appointment", data: data, token: true);
@@ -155,6 +169,7 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
               appointments: current, errormessage: failure.errorMessage));
           return;
         }
+        appointmentid = response.data["available_id"];
         deal = true;
       } catch (error) {
         if (error is DioException) {
@@ -170,7 +185,7 @@ class AppointmentPageCubit extends Cubit<AppointmentPageState> {
         final updated = List<AddAppointment>.from(current);
         final updatedSchedule =
             List<TimeAppointment>.from(updated[index].schedule);
-        TimeAppointment time1 = TimeAppointment(time: time, id: 1);
+        TimeAppointment time1 = TimeAppointment(time: time, id: appointmentid);
         updatedSchedule.add(time1);
 
         updated[index] = updated[index].copyWith(schedule: updatedSchedule);

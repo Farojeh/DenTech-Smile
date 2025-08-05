@@ -54,11 +54,11 @@ class Static {
     return (MediaQuery.of(context).size.width / 430) * size;
   }
 
-  static void showimage(BuildContext context, String path) {
+  static void showimage(BuildContext context, String path , bool? file) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Showimage(imagePath: path),
+        builder: (context) => Showimage(imagePath: path , file: file??false,),
       ),
     );
   }

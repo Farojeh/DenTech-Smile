@@ -1,21 +1,28 @@
+import 'package:dentech_smile/student/Home/controller/cubit/patient_info_cubit.dart';
 import 'package:dentech_smile/student/Home/view/widget/custom_title.dart';
 import 'package:dentech_smile/student/Home/view/widget/info_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InfoWidget extends StatelessWidget {
-  const InfoWidget({super.key});
+  final String patient ;
+  final int patientid;
+  const InfoWidget({super.key, required this.patient, required this.patientid});
 
   @override
   Widget build(BuildContext context) {
     return  CustomTitle(
       image: "assets/images/info.png",
-      title: "Aleen Morad",
+      title: patient,
       more: "Show Info",
       ismore: true,
       onTapfun: () {
         showDialog(
         context: context,
-        builder: (context) =>const InfoDialog(),
+        builder: (context) => BlocProvider<PatientInfoCubit>(
+          create: (context) => PatientInfoCubit(patientid),
+          child: const InfoDialog(),
+        ),
       );
       },
     );

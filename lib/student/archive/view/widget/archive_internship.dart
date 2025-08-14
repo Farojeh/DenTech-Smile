@@ -24,8 +24,9 @@ class ArchiveInternship extends StatelessWidget {
                           MaterialStatePropertyAll(Colors.white.withOpacity(0)),
                       onTap: () => cubit.changeselect(index),
                       child: Container(
+                        padding:const EdgeInsets.symmetric(horizontal: 4),
                         height: Static.gethieght(context, 45),
-                        width: Static.getwieght(context, 137),
+                        width: Static.getwieght(context, 145),
                         margin: EdgeInsets.only(
                             right: Static.getwieght(context, 13)),
                         decoration: BoxDecoration(
@@ -36,6 +37,7 @@ class ArchiveInternship extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           state.allinternships[index].name,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: Static.afacadfont,
                               fontWeight: FontWeight.w400,
@@ -47,7 +49,7 @@ class ArchiveInternship extends StatelessWidget {
                       ),
                     ));
           } else {
-            return Text("Somthing error");
+            return Container();
           }
         },
       ),

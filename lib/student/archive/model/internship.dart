@@ -12,7 +12,6 @@ class Internship {
   });
 
   static Internship setdata(int type, Map<String, dynamic> json) {
-    print(type);
     return Internship(
       id: json["stage_id"].toString(),
       name: json["stage_name"],

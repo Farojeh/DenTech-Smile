@@ -19,7 +19,7 @@ class IllnessInfo extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        children: List.generate(illness.length, (index) {
+        children:illness.isNotEmpty? List.generate(illness.length, (index) {
           return Container(
             height: Static.gethieght(context, 31),
             width: Static.getwieght(context, 163),
@@ -45,7 +45,15 @@ class IllnessInfo extends StatelessWidget {
               ],
             ),
           );
-        }),
+        }):[
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text("no illness" , style: TextStyle(
+              fontFamily: Static.afacadfont,
+              fontWeight: FontWeight.w400
+            ),),
+          )
+        ],
       ),
     );
   }

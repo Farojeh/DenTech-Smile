@@ -28,6 +28,9 @@ import 'package:dentech_smile/student/Home/controller/cubit/state_page_cubit.dar
 import 'package:dentech_smile/student/Home/view/appointment_page.dart';
 import 'package:dentech_smile/student/Home/view/state_general.dart';
 import 'package:dentech_smile/student/Home/view/state_page.dart';
+import 'package:dentech_smile/student/archive/controller/cubit/archive_cubit.dart';
+import 'package:dentech_smile/student/archive/model/archive_two.dart';
+import 'package:dentech_smile/student/archive/view/archive_page.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/add_resource_cubit.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/my_exchanges_cubit.dart';
 import 'package:dentech_smile/student/exchange/controller/cubit/my_resources_cubit.dart';
@@ -181,6 +184,10 @@ abstract class AppRouter {
             BlocProvider<PortfolioCubit>(
               create: (context) => PortfolioCubit(),
             ),
+            BlocProvider<ArchiveCubit>(
+              create: (context) => ArchiveCubit(),
+              child: const ArchivePagee(),
+            )
           ],
           child: const MainTabView(),
         ),
@@ -321,8 +328,9 @@ abstract class AppRouter {
             final name = data?['name'] ?? 'No name';
             final patient = data?['patient'] ?? 'No patient';
             final double rate = data?['rate'] as double;
+            final ArchiveTwo model = data?['model'] as ArchiveTwo;
             return BlocProvider<StateGeneralCubit>(
-              create: (context) => StateGeneralCubit("1"),
+              create: (context) => StateGeneralCubit(model),
               child: StateGeneral(
                 name: name.toString(),
                 patien: patient.toString(),

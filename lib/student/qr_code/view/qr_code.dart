@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/qr_code/controller/cubit/qr_code_cubit.dart';
 import 'package:dentech_smile/student/qr_code/view/widget/qr_body.dart';
 import 'package:dentech_smile/student/qr_code/view/widget/qr_design.dart';
@@ -14,17 +15,27 @@ class QrCodePage extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).padding.top + 20,
-              ),
-              const QrDesign(),
-              const SizedBox(height: 40),
-              const QrBody(),
-            ],
+          child: BlocBuilder<QrCodeCubit, QrCodeState>(
+            builder: (context, state) {
+              if (state is QrCodeSuccess) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top + 20,
+                    ),
+                    const QrDesign(),
+                    const SizedBox(height: 40),
+                    const QrBody(),
+                  ],
+                );
+              } else if (state is QrCodeLoading) {
+                return Static.loading();
+              } else {
+                return Container();
+              }
+            },
           ),
         ),
       ),

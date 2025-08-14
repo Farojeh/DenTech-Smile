@@ -30,7 +30,8 @@ class ArchiveList extends StatelessWidget {
                                     .push(AppRouter.stategeneral, extra: {
                                   "name": e.internship,
                                   "patient": e.patient,
-                                  "rate": e.rate
+                                  "rate": e.rate,
+                                  "model":e
                                 }),
                                 child: Container(
                                   height: Static.gethieght(context, 90),
@@ -88,7 +89,7 @@ class ArchiveList extends StatelessWidget {
                                             height: 2.5,
                                           ),
                                           Text(
-                                            e.internship,
+                                            "${e.internship} Internship",
                                             style: TextStyle(
                                                 fontFamily: Static.afacadfont,
                                                 fontWeight: FontWeight.w400,
@@ -146,6 +147,8 @@ class ArchiveList extends StatelessWidget {
                           )
                         ]),
             );
+          }else if(state is Archiveloading){
+            return Static.loading();
           } else {
             return Container();
           }

@@ -3,17 +3,18 @@ import 'package:dentech_smile/student/Home/view/widget/custom_title.dart';
 import 'package:flutter/material.dart';
 
 class DesGeneral extends StatelessWidget {
-  final String des ;
-  const DesGeneral({super.key, required this.des});
+  final String des;
+  final String? supervisor;
+  const DesGeneral({super.key, required this.des, this.supervisor});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-       const CustomTitle(
+        CustomTitle(
           image: "assets/images/info_des.png",
-          title: "Case description",
+          title: supervisor ?? "Case description",
           more: "",
           ismore: false,
         ),
@@ -29,7 +30,7 @@ class DesGeneral extends StatelessWidget {
               horizontal: Static.getwieght(context, 17),
               vertical: Static.getwieght(context, 7)),
           child: Text(
-            des ,
+            des,
             style: TextStyle(
                 fontFamily: Static.afacadfont,
                 fontWeight: FontWeight.w400,

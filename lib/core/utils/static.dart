@@ -23,14 +23,15 @@ class Static {
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
   static Color? shimmer = Colors.grey[300];
-  static String ipconfig = "192.168.1.8";
+  static String ipconfig = "192.168.125.207";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";
   static String studentyear = "studentyear";
   static String studentid = "studentid";
-  static String urlimage = "http://$ipconfig:8000/storage/"; 
-  static String urlimagewithoutsplash = "http://$ipconfig:8000/storage"; 
+  static String patientdata = "patientdata";
+  static String urlimage = "http://$ipconfig:8000/storage/";
+  static String urlimagewithoutsplash = "http://$ipconfig:8000/storage";
   static String userRole =
       "userRole"; //2 for patient , 1 for student , 4 for doctor
   static String token = "Token";
@@ -40,8 +41,12 @@ class Static {
     if (userInfo!.getInt(userRole) == 1) {
       GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
     } else if (userInfo!.getInt(userRole) == 2) {
-      if(userInfo!.getString(Static.token)==null){}
-      GoRouter.of(context).pushReplacement(AppRouter.datapatient);
+      if (userInfo!.getBool(patientdata) != null &&
+          userInfo!.getBool(patientdata)!) {
+        GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+      } else {
+        GoRouter.of(context).pushReplacement(AppRouter.datapatient);
+      }
     } else {
       GoRouter.of(context).pushReplacement(AppRouter.professor);
     }
@@ -55,11 +60,14 @@ class Static {
     return (MediaQuery.of(context).size.width / 430) * size;
   }
 
-  static void showimage(BuildContext context, String path , bool? file) {
+  static void showimage(BuildContext context, String path, bool? file) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Showimage(imagePath: path , file: file??false,),
+        builder: (context) => Showimage(
+          imagePath: path,
+          file: file ?? false,
+        ),
       ),
     );
   }
@@ -84,18 +92,18 @@ class Static {
     return false;
   }
 
-   static showMyDialog(BuildContext context, String message, int id) {
-  return showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext dialogContext) {
-      return BlocProvider.value(
-        value: context.read<PatientCubit>(), 
-        child: PatientDialog(message: message, id: id),
-      );
-    },
-  );
-}
+  static showMyDialog(BuildContext context, String message, int id) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return BlocProvider.value(
+          value: context.read<PatientCubit>(),
+          child: PatientDialog(message: message, id: id),
+        );
+      },
+    );
+  }
 
   static Future<String?> pickeimageprofile(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
@@ -128,16 +136,13 @@ class Static {
           .customSnackBar('Oops', message, ContentType.failure));
   }
 
-
-  static Widget loading (){
+  static Widget loading() {
     return Center(
-     child: Lottie.asset(
-          'assets/images/Doctor.json',
-          width: 300,
-          height: 300,
-          fit: BoxFit.contain,
-        )
-    );
+        child: Lottie.asset(
+      'assets/images/Doctor.json',
+      width: 300,
+      height: 300,
+      fit: BoxFit.contain,
+    ));
   }
-
 }

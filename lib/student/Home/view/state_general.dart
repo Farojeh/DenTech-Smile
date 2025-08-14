@@ -54,6 +54,13 @@ class StateGeneral extends StatelessWidget {
                       const SizedBox(
                         height: 25,
                       ),
+                      DesGeneral(
+                          supervisor: "Supervisor Comments",
+                          des: state.supervisorcomments ??
+                              "no descresption yet!"),
+                      const SizedBox(
+                        height: 25,
+                      ),
                       XRayWidget(
                         image: state.xrayimage,
                       ),

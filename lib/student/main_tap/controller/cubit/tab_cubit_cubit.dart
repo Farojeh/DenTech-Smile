@@ -25,7 +25,7 @@ class TabCubitCubit extends Cubit<TabCubitState> {
         newPage = const HomePage();
         break;
       case 3:
-        newPage = const ArchivePage();
+        newPage = const ArchivePagee();
         break;
       case 4:
         newPage = const ProfilePage();

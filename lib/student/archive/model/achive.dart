@@ -35,4 +35,14 @@ class Archive {
       );
     }
   }
+
+    static Archive setdatafromarchive(Map<String, dynamic> json) {
+    return Archive(
+          id: json["session_id"],
+          tag: "null",
+          patient: json["patient"]["name"],
+          internship: json["date"],
+          rate: (json["evaluation_score"] as num?)?.toDouble() ?? 0.0);
+  }
+
 }

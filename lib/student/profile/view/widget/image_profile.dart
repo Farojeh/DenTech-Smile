@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/main.dart';
+import 'package:dentech_smile/student/profile/controller/cubit/profile_image_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ImageProfile extends StatefulWidget {
   const ImageProfile({super.key});
@@ -40,34 +42,61 @@ class _ImageProfileState extends State<ImageProfile> {
                   : Image.file(File(imageprofile!), fit: BoxFit.cover),
             ),
           ),
-          Positioned(
-              right: 10,
-              bottom: 8,
-              child: InkWell(
-                overlayColor:
-                    MaterialStatePropertyAll(Colors.white.withOpacity(0)),
-                onTap: () async {
-                  String? result = await Static.pickeimageprofile(context);
-                  if (result != null) {
-                    setState(() {
-                      imageprofile = result;
-                    });
-                    userInfo!.setString(Static.studentimage, result);
-                  }
-                },
-                child: Container(
-                    height: Static.gethieght(context, 40),
-                    width: Static.gethieght(context, 40),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        border: Border.all(width: 0.5, color: Colors.black)),
-                    padding: const EdgeInsets.all(6),
-                    child: Image.asset(
-                      "assets/images/edit-image (1) 1.png",
-                      fit: BoxFit.contain,
-                    )),
-              ))
+          BlocListener<ProfileImageCubit, ProfileImageState>(
+            listener: (context, state) {
+              if (state is ProfileImagefailure) {
+                Static.failure(context, state.errormessage);
+              }
+            },
+            child: Positioned(
+                right: 10,
+                bottom: 8,
+                child: InkWell(
+                  overlayColor:
+                      MaterialStatePropertyAll(Colors.white.withOpacity(0)),
+                  onTap: () async {
+                    String? result = await Static.pickeimageprofile(context);
+                    if (result != null) {
+                      if (!context.mounted) return;
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const Dialog(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        },
+                      );
+                      bool res =
+                          await BlocProvider.of<ProfileImageCubit>(context)
+                              .setimage(result);
+                      if (!context.mounted) return;
+                      Navigator.of(context).pop();
+                      if (res) {
+                        setState(() {
+                          imageprofile = result;
+                        });
+                        userInfo!.setString(Static.studentimage, result);
+                      }
+                    }
+                  },
+                  child: Container(
+                      height: Static.gethieght(context, 40),
+                      width: Static.gethieght(context, 40),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          border: Border.all(width: 0.5, color: Colors.black)),
+                      padding: const EdgeInsets.all(6),
+                      child: Image.asset(
+                        "assets/images/edit-image (1) 1.png",
+                        fit: BoxFit.contain,
+                      )),
+                )),
+          )
         ],
       ),
     );

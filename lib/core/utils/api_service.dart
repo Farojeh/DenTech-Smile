@@ -19,6 +19,7 @@ class ApiService {
             headers: {
               'Accept': 'application/json',
               'Authorization': 'Bearer $token',
+              'Accept-Language': 'en'
             },
           ));
     }
@@ -33,8 +34,7 @@ class ApiService {
     if (token == null || token == false) {
       print('$_baseUrl$endPoint');
       print(data);
-      response = await _dio.post('$_baseUrl$endPoint',
-          data: data);
+      response = await _dio.post('$_baseUrl$endPoint', data: data);
     } else {
       String token = userInfo!.getString(Static.token)!;
       response = await _dio.post('$_baseUrl$endPoint',
@@ -43,6 +43,7 @@ class ApiService {
             headers: {
               'Accept': 'application/json',
               'Authorization': 'Bearer $token',
+              'Accept-Language': 'en'
             },
           ));
     }
@@ -64,6 +65,7 @@ class ApiService {
             headers: {
               'Accept': 'application/json',
               'Authorization': 'Bearer $token',
+              'Accept-Language': 'en'
             },
           ));
     }

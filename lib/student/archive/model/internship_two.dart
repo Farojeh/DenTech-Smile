@@ -12,7 +12,6 @@ class InternshipTwo {
   });
 
   static InternshipTwo setdatafromarchive(Map<String, dynamic> json) {
-    print("osssssssssss");
     return InternshipTwo(
       id: json["stage_id"].toString(),
       name: json["stage_name"],

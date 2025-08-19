@@ -1,6 +1,7 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
+import 'package:dentech_smile/student/Home/model/day.dart';
 import 'package:dentech_smile/student/Home/view/drawer.dart';
 import 'package:dentech_smile/widget/custom_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -15,25 +16,34 @@ class AppointmentOfDayWidget extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is HomeSuccess) {
+          List<Day> days;
+          if (state.type == 0) {
+            days = state.days;
+          } else {
+            days = state.practical;
+          }
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: state.days[state.select].appointments.isNotEmpty
-                  ? state.days[state.select].appointments
+              children: days[state.select].appointments.isNotEmpty
+                  ? days[state.select]
+                      .appointments
                       .map((e) => InkWell(
                             overlayColor: MaterialStatePropertyAll(
                                 Colors.white.withOpacity(0)),
                             onTap: () {
                               StaticDrawer.close(context);
-                              GoRouter.of(context).push(AppRouter.statePage,
-                                  extra: {
-                                    "id":e.id.toString(),
-                                    "name": e.internship,
-                                    "start": e.start,
-                                    "end": e.date,
-                                    "patient":e.patient
-                                  });
+                              if (state.type == 0) {
+                                GoRouter.of(context)
+                                    .push(AppRouter.statePage, extra: {
+                                  "id": e.id.toString(),
+                                  "name": e.internship,
+                                  "start": e.start,
+                                  "end": e.date,
+                                  "patient": e.patient
+                                });
+                              }
                             },
                             child: Container(
                               height: Static.gethieght(context, 90),
@@ -75,7 +85,7 @@ class AppointmentOfDayWidget extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        e.patient,
+                                       state.type==0? e.patient:"${e.patient} Internship",
                                         style: TextStyle(
                                             fontFamily:
                                                 Static.arialRoundedMTfont,
@@ -84,10 +94,10 @@ class AppointmentOfDayWidget extends StatelessWidget {
                                             color: Colors.black),
                                       ),
                                       const SizedBox(
-                                        height: 2.5,
+                                        height: 4,
                                       ),
                                       Text(
-                                        "[${e.start}] [${e.date}]",
+                                       state.type==0? "[${e.start}] [${e.date}]" :"from  ${e.start} to  ${e.date}" ,
                                         style: TextStyle(
                                             fontFamily: Static.afacadfont,
                                             fontWeight: FontWeight.w400,
@@ -96,10 +106,10 @@ class AppointmentOfDayWidget extends StatelessWidget {
                                                 Static.getwieght(context, 15)),
                                       ),
                                       const SizedBox(
-                                        height: 2.5,
+                                        height: 2,
                                       ),
                                       Text(
-                                        "${e.internship} internship",
+                                       state.type==0? "${e.internship} internship":e.internship,
                                         style: TextStyle(
                                             fontFamily: Static.afacadfont,
                                             fontWeight: FontWeight.w400,

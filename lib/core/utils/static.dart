@@ -23,7 +23,7 @@ class Static {
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
   static Color? shimmer = Colors.grey[300];
-  static String ipconfig = "192.168.125.207";
+  static String ipconfig = "192.168.1.10";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userPassword = "userPassword";
@@ -32,6 +32,7 @@ class Static {
   static String patientdata = "patientdata";
   static String urlimage = "http://$ipconfig:8000/storage/";
   static String urlimagewithoutsplash = "http://$ipconfig:8000/storage";
+  static String urlimagewithoutstorage = "http://$ipconfig:8000";
   static String userRole =
       "userRole"; //2 for patient , 1 for student , 4 for doctor
   static String token = "Token";

@@ -33,7 +33,7 @@ class PortfolioPdfCubit extends Cubit<PortfolioPdfState> {
         return;
       }
       String path = response.data["url"];
-      await downloadFile("${Static.urlimagewithoutsplash}$path", path);
+      await downloadFile("${Static.urlimagewithoutstorage}$path", path);
       emit(PortfolioPdfSuccess(path: path));
     } catch (error) {
       if (error is DioException) {

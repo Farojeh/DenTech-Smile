@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/errors/failures.dart';
 import 'package:dentech_smile/core/utils/api_service.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
+import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/student/Home/model/appointment.dart';
 import 'package:dentech_smile/student/Home/model/day.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
@@ -16,6 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
   final apiService = getIt<ApiService>();
 
   Future<void> initialhome() async {
+    
     List<Day> days = [
       Day(name: "Sunday", id: 0, appointments: []),
       Day(name: "Monday", id: 1, appointments: []),
@@ -36,18 +42,31 @@ class HomeCubit extends Cubit<HomeState> {
 
     try {
       emit(HomeLoading());
+      bool internetConnection = await checkInternet();
+      dynamic data;
+      if (internetConnection) {
+        Response<dynamic> response;
+        response = await apiService.get(
+            endPoint: "/student-weekly-schedule", token: true);
 
-      Response<dynamic> response = await apiService.get(
-          endPoint: "/student-weekly-schedule", token: true);
-
-      if (response.statusCode != 200 && response.statusCode != 201) {
-        var failure =
-            ServerFaliure.fromResponse(response.statusCode!, response.data);
-        emit(HomeFailure(errormessage: failure.errorMessage));
+        if (response.statusCode != 200 && response.statusCode != 201) {
+          var failure =
+              ServerFaliure.fromResponse(response.statusCode!, response.data);
+          emit(HomeFailure(errormessage: failure.errorMessage));
+          return;
+        }
+        data = response.data;
+        userInfo!
+            .setString(Static.studentweeklyschedule, responseToString(data));
+      } else {
+        data = stringToResponse(
+            userInfo!.getString(Static.studentweeklyschedule) ?? "");
+      }
+      if (data == null || data == "") {
+        emit(const HomeFailure(errormessage: "please try again"));
         return;
       }
-
-      List<dynamic> week = response.data["weekly_appointments"];
+      List<dynamic> week = data["weekly_appointments"];
 
       if (week.isNotEmpty) {
         for (var dayData in week) {
@@ -76,18 +95,31 @@ class HomeCubit extends Cubit<HomeState> {
           }
         }
       }
+      dynamic data1;
 
-      response =
-          await apiService.get(endPoint: "/practical-schedule", token: true);
+      if (internetConnection) {
+        Response<dynamic> response;
+        response =
+            await apiService.get(endPoint: "/practical-schedule", token: true);
 
-      if (response.statusCode != 200 && response.statusCode != 201) {
-        var failure =
-            ServerFaliure.fromResponse(response.statusCode!, response.data);
-        emit(HomeFailure(errormessage: failure.errorMessage));
+        if (response.statusCode != 200 && response.statusCode != 201) {
+          var failure =
+              ServerFaliure.fromResponse(response.statusCode!, response.data);
+          emit(HomeFailure(errormessage: failure.errorMessage));
+          return;
+        }
+        data1 = response.data;
+        userInfo!.setString(Static.studentpraschedule, responseToString(data1));
+      } else {
+        data1 = stringToResponse(
+            userInfo!.getString(Static.studentpraschedule) ?? "");
+      }
+      if (data1 == null || data1 == "") {
+        emit(const HomeFailure(errormessage: "please try again"));
         return;
       }
 
-      Map<String, dynamic> week1 = response.data["schedules"];
+      Map<String, dynamic> week1 = data1["schedules"];
 
       for (var day in pra) {
         if (week1[day.name] != null) {
@@ -131,5 +163,22 @@ class HomeCubit extends Cubit<HomeState> {
     } else {
       emit(HomeSuccess(days: currentday, type: 0, practical: currentpra));
     }
+  }
+
+  Future<bool> checkInternet() async {
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+    if (hasInternet) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  String responseToString(dynamic data) {
+    return jsonEncode(data);
+  }
+
+  dynamic stringToResponse(String data) {
+    return jsonDecode(data);
   }
 }

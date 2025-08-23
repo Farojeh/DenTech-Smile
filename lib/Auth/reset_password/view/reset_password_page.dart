@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ResetPasswordPge extends StatelessWidget {
-  const ResetPasswordPge({super.key});
+  final bool fromedit;
+  const ResetPasswordPge({super.key, this.fromedit = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +23,18 @@ class ResetPasswordPge extends StatelessWidget {
             ..showSnackBar(CustomSnackBar().customSnackBar(
                 'Oops', state.errorMessage, ContentType.failure));
         } else if (state is ResetPasswordSuccess) {
-          bool page ;
-          if(userInfo!.getInt(Static.userRole)==2){
-            page = true ;
-          }else{
-            page = false ;
+          if (!fromedit) {
+            bool page;
+            if (userInfo!.getInt(Static.userRole) == 2) {
+              page = true;
+            } else {
+              page = false;
+            }
+            GoRouter.of(context).go(AppRouter.login, extra: page);
+          } else {
+            GoRouter.of(context).pop();
           }
-          GoRouter.of(context).go(AppRouter.login , extra: page);
+
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(CustomSnackBar().customSnackBar(
@@ -38,10 +44,9 @@ class ResetPasswordPge extends StatelessWidget {
       child: Scaffold(
           body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child:const CustomResetPassword()
-        ),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: const CustomResetPassword()),
       )),
     );
   }

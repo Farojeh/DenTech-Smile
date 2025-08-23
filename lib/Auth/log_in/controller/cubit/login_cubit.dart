@@ -38,13 +38,18 @@ class LoginCubit extends Cubit<LoginState> {
           emit(LoginFailure(errorMessage: failure.errorMessage));
         } else {
           userInfo!.clear();
-          userInfo!.setString(Static.userName , response.data["user"]["name"]);
-          userInfo!.setString(Static.userNumber , response.data["user"]["phone_number"]);
-          userInfo!.setInt(Static.userRole , response.data["user"]["role_id"]);
-          userInfo!.setString(Static.token , response.data["token"]);
-          if(response.data["user"]["role_id"] == 1){
-            userInfo!.setString(Static.studentyear , response.data["user"]["student"]["year"]);
-            userInfo!.setString(Static.studentid , response.data["user"]["student"]["id"].toString());
+          await userInfo!
+              .setString(Static.userName, response.data["user"]["name"]);
+          await userInfo!.setString(
+              Static.userNumber, response.data["user"]["phone_number"]);
+          await userInfo!
+              .setInt(Static.userRole, response.data["user"]["role_id"]);
+          await userInfo!.setString(Static.token, response.data["token"]);
+          if (response.data["user"]["role_id"] == 1) {
+            await userInfo!.setString(
+                Static.studentyear, response.data["user"]["student"]["year"]);
+            await userInfo!.setString(Static.studentid,
+                response.data["user"]["student"]["id"].toString());
           }
           emit(LoginSuccess());
         }

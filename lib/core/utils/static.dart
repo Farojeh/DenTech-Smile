@@ -26,6 +26,7 @@ class Static {
   static String ipconfig = "192.168.1.10";
   static String userName = "userName";
   static String userNumber = "userNumber";
+  static String userNumberedit = "userNumber";
   static String userPassword = "userPassword";
   static String studentyear = "studentyear";
   static String studentid = "studentid";

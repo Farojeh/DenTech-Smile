@@ -41,9 +41,9 @@ class SignUpCubit extends Cubit<SignUpState> {
               ServerFaliure.fromResponse(response.statusCode!, response.data);
           emit(SignUpFailure(errorMessage: failure.errorMessage));
         } else {
-          userInfo!.setString(Static.userName,name);
-          userInfo!.setString(Static.userNumber,number);
-          userInfo!.setString(Static.userPassword,password);
+         await userInfo!.setString(Static.userName,name);
+         await userInfo!.setString(Static.userNumber,number);
+         await userInfo!.setString(Static.userPassword,password);
           emit(SignUpSuccess());
         }
       } catch (error) {

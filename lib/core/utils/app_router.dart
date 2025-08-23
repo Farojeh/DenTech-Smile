@@ -48,6 +48,8 @@ import 'package:dentech_smile/student/learning/views/learning_details_page.dart'
 import 'package:dentech_smile/student/main_tap/controller/cubit/tab_cubit_cubit.dart';
 import 'package:dentech_smile/student/main_tap/view/main_tab_view.dart';
 import 'package:dentech_smile/student/portfolio/controller/cubit/portfolio_cubit.dart';
+import 'package:dentech_smile/student/profile/controller/cubit/verify_edit_cubit.dart';
+import 'package:dentech_smile/student/profile/view/verify_edit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dentech_smile/patient/About_app_page/AboutAppPage.dart';
@@ -65,6 +67,7 @@ abstract class AppRouter {
   static const signUp = "/signUp";
   static const login = "/login";
   static const verifyPage = "/VerifyPage";
+  static const verifyEditPage = "/verifyEditPage";
   static const resetpassword = "/ResetPassword";
   static const datapatient = "/datapatient";
   static const patienthome = "/PatientHome";
@@ -138,12 +141,25 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: resetpassword,
-        builder: (context, state) => BlocProvider<ResetPasswordCubit>(
-          create: (context) => ResetPasswordCubit(),
-          child: const ResetPasswordPge(),
-        ),
+        path: verifyEditPage,
+        builder: (context, state) {
+          return BlocProvider<VerifyEditCubit>(
+            create: (context) => VerifyEditCubit(),
+            child: const VerifyPageEdit(),
+          );
+        },
       ),
+      GoRoute(
+          path: resetpassword,
+          builder: (context, state) {
+            final data = state.extra as bool?;
+            return BlocProvider<ResetPasswordCubit>(
+              create: (context) => ResetPasswordCubit(),
+              child: ResetPasswordPge(
+                fromedit: data ?? false,
+              ),
+            );
+          }),
       GoRoute(
         path: datapatient,
         builder: (context, state) => MultiBlocProvider(

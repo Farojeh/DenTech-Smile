@@ -36,7 +36,7 @@ class ProfessorAppBarTitle extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Image.asset(
-                    'assets/images/happy.png',
+                    "assets/images/tooth.png",
                     width: (size.width / 430) * 16,
                     height: (size.height / 932) * 16,
                     fit: BoxFit.contain,

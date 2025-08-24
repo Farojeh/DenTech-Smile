@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
 class ApiService {
-  static final _baseUrl = "http://${Static.ipconfig}:8000/api";
+  static final _baseUrl = "http://${Static.ipconfig}:8000/";
+
   static final dio = Dio()
     ..httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
@@ -14,8 +16,7 @@ class ApiService {
         return client;
       },
     );
-  static final String token =
-      '10|nvsUQuImqBPrncjOvFJJ4hzfxeyUztPiLiHul9Y4277e4705';
+  static final String token = userInfo!.getString(Static.token)!;
   static final Map<String, String> headers = {
     'Authorization': 'Bearer $token',
     'Content-Type': 'application/json',

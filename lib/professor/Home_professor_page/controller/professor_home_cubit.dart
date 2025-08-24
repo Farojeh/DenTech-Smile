@@ -94,9 +94,7 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
 
   Future<void> getWeeklySchedule() async {
     if (isClosed) return;
-
     emit(ProfessorSchaduleLoading());
-
     try {
       var response = await ApiService.get(
         endPoint: 'api/supervisor-weekly-schedule',

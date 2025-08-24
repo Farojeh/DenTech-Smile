@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
 import 'package:dentech_smile/professor/Home_professor_page/model/schedule_model.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,11 @@ class ProfessorScheduleBlock extends StatelessWidget {
       },
       child: Container(
         width: (size.width / 430) * 362,
-        height: (size.height / 932) * 91,
-        margin: EdgeInsets.only(bottom: size.height * 0.018),
+        height: (size.height / 932) * 100,
+        margin: EdgeInsets.only(
+          bottom: size.height * 0.018,
+          right: size.width * 0.05,
+        ),
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.02,
           vertical: size.height * 0.01,
@@ -40,8 +44,8 @@ class ProfessorScheduleBlock extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: (size.width / 430) * 63,
-              height: (size.height / 932) * 65,
+              width: (size.width / 430) * 80,
+              height: (size.height / 932) * 80,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
@@ -58,33 +62,34 @@ class ProfessorScheduleBlock extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     schedules!.year!,
                     style: TextStyle(
-                      fontFamily: 'ArialRounded',
-                      fontWeight: FontWeight.w400,
+                      fontFamily: Static.arialRoundedMTfont,
                       color: Colors.black,
-                      fontSize: (MediaQuery.of(context).size.width / 430) * 18,
+                      fontSize: (MediaQuery.of(context).size.width / 430) * 19,
                     ),
                   ),
+                  const Spacer(),
                   Text(
                     '${schedules!.from} → ${schedules!.to}',
                     style: TextStyle(
                       fontFamily: 'Afacad',
                       fontWeight: FontWeight.w400,
-                      color: Color.fromRGBO(40, 40, 40, 1),
-                      fontSize: (MediaQuery.of(context).size.width / 430) * 15,
+                      color:const Color.fromRGBO(40, 40, 40, 1),
+                      fontSize: (MediaQuery.of(context).size.width / 430) * 16,
                     ),
                   ),
+                  const Spacer(),
                   Text(
-                    schedules!.stage!,
+                    "${schedules!.stage!} Internship",
                     style: TextStyle(
                       fontFamily: 'Afacad',
                       fontWeight: FontWeight.w400,
-                      color: Color.fromRGBO(40, 40, 40, 1),
-                      fontSize: (MediaQuery.of(context).size.width / 430) * 15,
+                      color: const Color.fromRGBO(40, 40, 40, 1),
+                      fontSize: (MediaQuery.of(context).size.width / 430) * 16,
                     ),
                   ),
                 ],

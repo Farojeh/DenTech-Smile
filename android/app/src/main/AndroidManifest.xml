@@ -7,7 +7,8 @@
         android:maxSdkVersion="29" /> <!-- Android 10 وأقل -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" /> <!-- Android 11+ -->
-    <uses-permission android:name="android.permission.INTERNET" />    
+    <uses-permission android:name="android.permission.INTERNET" />   
+    <uses-permission android:name="android.permission.CAMERA" /> 
 
     <!-- السماح بالوصول للتطبيقات/الأنشطة -->
     <queries>

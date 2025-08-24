@@ -23,7 +23,7 @@ class Static {
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
   static Color? shimmer = Colors.grey[300];
-  static String ipconfig = "192.168.1.10";
+  static String ipconfig = "192.168.77.207";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userNumberedit = "userNumber";
@@ -52,7 +52,7 @@ class Static {
         GoRouter.of(context).pushReplacement(AppRouter.datapatient);
       }
     } else {
-      GoRouter.of(context).pushReplacement(AppRouter.professor);
+      GoRouter.of(context).pushReplacement(AppRouter.homeProf);
     }
   }
 
@@ -148,5 +148,17 @@ class Static {
       height: 300,
       fit: BoxFit.contain,
     ));
+  }
+
+  static void showCustomSnackbar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  static double getheight(BuildContext context, double size) {
+    return (MediaQuery.of(context).size.height / 932) * size;
+  }
+
+  static double getwidth(BuildContext context, double size) {
+    return (MediaQuery.of(context).size.width / 430) * size;
   }
 }

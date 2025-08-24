@@ -20,7 +20,16 @@ import 'package:dentech_smile/patient/Appointments_doctor/AppointmentsDoctorPage
 import 'package:dentech_smile/patient/Appointments_page/view/AppointmentsOralPage.dart';
 import 'package:dentech_smile/patient/Available_doctor_page/model/argument_model.dart';
 import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
-import 'package:dentech_smile/professor/professor.dart';
+import 'package:dentech_smile/professor/Add_pages/view/add_article_body.dart';
+import 'package:dentech_smile/professor/Add_pages/view/add_book_body.dart';
+import 'package:dentech_smile/professor/Add_pages/view/add_video_body.dart';
+import 'package:dentech_smile/professor/Archive_professor_page/view/archive_body.dart';
+import 'package:dentech_smile/professor/Attendance_Registration_professor_page/view/attendance_registration_body.dart';
+import 'package:dentech_smile/professor/Case_doctor_page/view/case_doctor_body.dart';
+import 'package:dentech_smile/professor/Case_professor_page/view/case_professor_body.dart';
+import 'package:dentech_smile/professor/Home_professor_page/model/schedule_model.dart';
+import 'package:dentech_smile/professor/Home_professor_page/view/home_professor_page.dart';
+import 'package:dentech_smile/professor/Home_professor_page/view/scan_qr_code.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/appointment_page_cubit.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/home_cubit.dart';
 import 'package:dentech_smile/student/Home/controller/cubit/state_general_cubit.dart';
@@ -71,7 +80,7 @@ abstract class AppRouter {
   static const resetpassword = "/ResetPassword";
   static const datapatient = "/datapatient";
   static const patienthome = "/PatientHome";
-  static const professor = "/ProfessorHome";
+  // static const professor = "/ProfessorHome";
   static const mainTabView = "/mainTabView";
   static const statePage = "/StatePage";
   static const kHomeView = '/homeView';
@@ -93,14 +102,20 @@ abstract class AppRouter {
   static const myexchange = "/myexchange";
   static const myresourcespage = "/myresourcespage";
   static const stategeneral = "/stategeneral";
+  static const homeProf = '/homeProf';
+  static const attendanceRegistration = '/attendanceRegistration';
+  static const addVideo = '/addVideo';
+  static const addBook = '/addBook';
+  static const addArticle = '/addArticle';
+  static const caseProf = '/caseProf';
+  static const caseDoctor = '/caseDoctor';
+  static const archiveProf = '/archiveProf';
+  static const scanQrCode = '/scanQrCode';
 
   static final router = GoRouter(
     initialLocation: '/',
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const SplashView(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => const SplashView()),
       GoRoute(
         path: welcomView,
         builder: (context, state) => BlocProvider<OnBoardingCubit>(
@@ -120,16 +135,15 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-          path: login,
-          builder: (context, state) {
-            final patient = state.extra as bool? ?? false;
-            return BlocProvider<LoginCubit>(
-              create: (context) => LoginCubit(),
-              child: LogInView(
-                patient: patient,
-              ),
-            );
-          }),
+        path: login,
+        builder: (context, state) {
+          final patient = state.extra as bool? ?? false;
+          return BlocProvider<LoginCubit>(
+            create: (context) => LoginCubit(),
+            child: LogInView(patient: patient),
+          );
+        },
+      ),
       GoRoute(
         path: verifyPage,
         builder: (context, state) {
@@ -150,16 +164,15 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-          path: resetpassword,
-          builder: (context, state) {
-            final data = state.extra as bool?;
-            return BlocProvider<ResetPasswordCubit>(
-              create: (context) => ResetPasswordCubit(),
-              child: ResetPasswordPge(
-                fromedit: data ?? false,
-              ),
-            );
-          }),
+        path: resetpassword,
+        builder: (context, state) {
+          final data = state.extra as bool?;
+          return BlocProvider<ResetPasswordCubit>(
+            create: (context) => ResetPasswordCubit(),
+            child: ResetPasswordPge(fromedit: data ?? false),
+          );
+        },
+      ),
       GoRoute(
         path: datapatient,
         builder: (context, state) => MultiBlocProvider(
@@ -173,9 +186,7 @@ abstract class AppRouter {
             BlocProvider<InformationCubit>(
               create: (context) => InformationCubit(),
             ),
-            BlocProvider<MedicanCubit>(
-              create: (context) => MedicanCubit(),
-            ),
+            BlocProvider<MedicanCubit>(create: (context) => MedicanCubit()),
             BlocProvider<DataPatientConfigCubit>(
               create: (context) => DataPatientConfigCubit(),
             ),
@@ -184,51 +195,42 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: professor,
-        builder: (context, state) => const Professor(),
-      ),
-      GoRoute(
         path: mainTabView,
         builder: (context, state) => MultiBlocProvider(
           providers: [
-            BlocProvider<TabCubitCubit>(
-              create: (context) => TabCubitCubit(),
-            ),
-            BlocProvider<HomeCubit>(
-              create: (context) => HomeCubit(),
-            ),
-            BlocProvider<PortfolioCubit>(
-              create: (context) => PortfolioCubit(),
-            ),
+            BlocProvider<TabCubitCubit>(create: (context) => TabCubitCubit()),
+            BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
+            BlocProvider<PortfolioCubit>(create: (context) => PortfolioCubit()),
             BlocProvider<ArchiveCubit>(
               create: (context) => ArchiveCubit(),
               child: const ArchivePagee(),
-            )
+            ),
           ],
           child: const MainTabView(),
         ),
       ),
       GoRoute(
-          path: statePage,
-          builder: (context, state) {
-            final data = state.extra as Map<String, String>?;
-            final id = data?["id"] ?? "0";
-            final name = data?['name'] ?? 'No name';
-            final start = data?['start'] ?? 'No start';
-            final end = data?['end'] ?? 'No end';
-            final patient = data?['patient'] ?? 'No patient';
+        path: statePage,
+        builder: (context, state) {
+          final data = state.extra as Map<String, String>?;
+          final id = data?["id"] ?? "0";
+          final name = data?['name'] ?? 'No name';
+          final start = data?['start'] ?? 'No start';
+          final end = data?['end'] ?? 'No end';
+          final patient = data?['patient'] ?? 'No patient';
 
-            return BlocProvider<StatePageCubit>(
-              create: (context) => StatePageCubit(id),
-              child: StatePage(
-                name: name,
-                start: start,
-                end: end,
-                id: id,
-                patien: patient,
-              ),
-            );
-          }),
+          return BlocProvider<StatePageCubit>(
+            create: (context) => StatePageCubit(id),
+            child: StatePage(
+              name: name,
+              start: start,
+              end: end,
+              id: id,
+              patien: patient,
+            ),
+          );
+        },
+      ),
       GoRoute(
         path: appointmentpage,
         builder: (context, state) => BlocProvider<AppointmentPageCubit>(
@@ -236,18 +238,16 @@ abstract class AppRouter {
           child: const AppointmentPage(),
         ),
       ),
-      GoRoute(
-        path: learning,
-        builder: (context, state) => const Learnpage(),
-      ),
+      GoRoute(path: learning, builder: (context, state) => const Learnpage()),
       GoRoute(
         path: kHomeView,
         builder: (context, state) => const PatientHomePage(),
       ),
       GoRoute(path: karchive, builder: (context, state) => const ArchivePage()),
       GoRoute(
-          path: available,
-          builder: (context, state) => const AvailableDoctorPage()),
+        path: available,
+        builder: (context, state) => const AvailableDoctorPage(),
+      ),
       GoRoute(path: profile, builder: (context, state) => const ProfilePage()),
       GoRoute(
         path: appointments,
@@ -282,54 +282,53 @@ abstract class AppRouter {
         builder: (context, state) => const AboutAppPage(),
       ),
       GoRoute(
-          path: learningdetails,
-          builder: (context, state) {
-            final Map<String, dynamic> data =
-                state.extra as Map<String, dynamic>;
-            final String title = data["title"];
-            final int type = data["type"];
-            return BlocProvider<LearningCubit>(
-              create: (context) => LearningCubit(title),
-              child: LearningDetailsPage(
-                title: title,
-                type: type,
-              ),
-            );
-          }),
+        path: learningdetails,
+        builder: (context, state) {
+          final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+          final String title = data["title"];
+          final int type = data["type"];
+          final bool add = data["add"]??false ;
+          return BlocProvider<LearningCubit>(
+            create: (context) => LearningCubit(title),
+            child: LearningDetailsPage(title: title, type: type , add: add,),
+          );
+        },
+      ),
       GoRoute(
-          path: artical,
-          builder: (context, state) {
-            final artical = state.extra as Artical;
-            return ArticalePage(
-              artical: artical,
-            );
-          }),
+        path: artical,
+        builder: (context, state) {
+          final artical = state.extra as Artical;
+          return ArticalePage(artical: artical);
+        },
+      ),
       GoRoute(
-          path: exchangepage,
-          builder: (context, state) => const ExchangePage()),
+        path: exchangepage,
+        builder: (context, state) => const ExchangePage(),
+      ),
       GoRoute(
-          path: addresource,
-          builder: (context, state) => BlocProvider<AddResourceCubit>(
-                create: (context) => AddResourceCubit(),
-                child: const AddResource(),
-              )),
+        path: addresource,
+        builder: (context, state) => BlocProvider<AddResourceCubit>(
+          create: (context) => AddResourceCubit(),
+          child: const AddResource(),
+        ),
+      ),
       GoRoute(
-          path: resourcepage,
-          builder: (context, state) {
-            String title = state.extra as String;
-            return BlocProvider<ResourceViewCubit>(
-              create: (context) => ResourceViewCubit(title),
-              child: ResourceViewPage(
-                type: title,
-              ),
-            );
-          }),
+        path: resourcepage,
+        builder: (context, state) {
+          String title = state.extra as String;
+          return BlocProvider<ResourceViewCubit>(
+            create: (context) => ResourceViewCubit(title),
+            child: ResourceViewPage(type: title),
+          );
+        },
+      ),
       GoRoute(
-          path: myexchange,
-          builder: (context, state) => BlocProvider<MyExchangesCubit>(
-                create: (context) => MyExchangesCubit(),
-                child: const MyExchangesPage(),
-              )),
+        path: myexchange,
+        builder: (context, state) => BlocProvider<MyExchangesCubit>(
+          create: (context) => MyExchangesCubit(),
+          child: const MyExchangesPage(),
+        ),
+      ),
       GoRoute(
         path: myresourcespage,
         builder: (context, state) => BlocProvider<MyResourcesCubit>(
@@ -338,22 +337,57 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-          path: stategeneral,
-          builder: (context, state) {
-            final data = state.extra as Map<String, Object>?;
-            final name = data?['name'] ?? 'No name';
-            final patient = data?['patient'] ?? 'No patient';
-            final double rate = data?['rate'] as double;
-            final ArchiveTwo model = data?['model'] as ArchiveTwo;
-            return BlocProvider<StateGeneralCubit>(
-              create: (context) => StateGeneralCubit(model),
-              child: StateGeneral(
-                name: name.toString(),
-                patien: patient.toString(),
-                rate: rate,
-              ),
-            );
-          }),
+        path: stategeneral,
+        builder: (context, state) {
+          final data = state.extra as Map<String, Object>?;
+          final name = data?['name'] ?? 'No name';
+          final patient = data?['patient'] ?? 'No patient';
+          final double rate = data?['rate'] as double;
+          final ArchiveTwo model = data?['model'] as ArchiveTwo;
+          return BlocProvider<StateGeneralCubit>(
+            create: (context) => StateGeneralCubit(model),
+            child: StateGeneral(
+              name: name.toString(),
+              patien: patient.toString(),
+              rate: rate,
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: homeProf,
+        builder: (context, state) => const HomeProfessorPage(),
+      ),
+      GoRoute(
+        path: attendanceRegistration,
+        builder: (context, state) {
+          final schedule = state.extra as Schedules;
+          return AttendanceRegistrationBody(schedule: schedule);
+        },
+      ),
+      GoRoute(
+          path: addVideo, builder: (context, state) => const AddVideoBody()),
+      GoRoute(
+        path: addArticle,
+        builder: (context, state) => const AddArticleBody(),
+      ),
+      GoRoute(path: addBook, builder: (context, state) => const AddBookBody()),
+      GoRoute(
+        path: caseProf,
+        builder: (context, state) => const CaseProfessorBody(),
+      ),
+      GoRoute(
+        path: archiveProf,
+        builder: (context, state) => const ArchiveProfessorPage(),
+      ),
+      GoRoute(
+        path: caseDoctor,
+        builder: (context, state) {
+          final score = state.extra as double;
+          return CaseDoctorBody(score: score);
+        },
+      ),
+       GoRoute(path: scanQrCode, builder: (context, state) => const QRScannerPage()),
     ],
   );
 }

@@ -2,6 +2,8 @@ import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
+import 'package:dentech_smile/professor/Case_professor_page/controller/case_cubit.dart';
+import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +32,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<ThemeCubit>(
           create: (context) => ThemeCubit(),
         ),
+        BlocProvider(
+          create: (context) => ProfessorHomeCubit()
+            ..changeSelectedIndex(0)
+            ..getWeeklySchedule(),
+        ),
+        BlocProvider(create: (context) => CaseCubit()),
       ],
       child: MaterialApp.router(
         theme: ThemeData(

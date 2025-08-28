@@ -1,5 +1,6 @@
 import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/init_app.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/professor/Case_professor_page/controller/case_cubit.dart';
@@ -12,6 +13,8 @@ SharedPreferences? userInfo;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   userInfo = await SharedPreferences.getInstance();
+  await setupLocalNotifications(); // تهيئة إشعارات محلية
+  await initApp();                 // تهيئة Firebase + FCM
   setupServiceLocator();
   runApp(const MyApp());
   // runApp(

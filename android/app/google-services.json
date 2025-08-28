@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096689355619",
+    "project_id": "den-tech-smile",
+    "storage_bucket": "den-tech-smile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096689355619:android:f9b295a7151c97e7b0a156",
+        "android_client_info": {
+          "package_name": "com.example.dentech_smile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXkYkwxoLtj17ajkjMArTw6VrEr8B-kgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

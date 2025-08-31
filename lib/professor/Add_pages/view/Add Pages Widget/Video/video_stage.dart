@@ -81,7 +81,7 @@ class _VideoStageState extends State<VideoStage> {
                     setState(() {
                       selectedId = item.id;
                     });
-                    context.read<PageCubit>().articleStageId = selectedId!;
+                    context.read<PageCubit>().videoStageId = selectedId!;
                   },
                   child: Row(
                     children: [

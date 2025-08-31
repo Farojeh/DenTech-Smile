@@ -4,7 +4,8 @@ import 'package:dentech_smile/professor/Case_professor_page/view/dialog_evaluate
 import 'package:flutter/material.dart';
 
 class DoctorCaseButton extends StatelessWidget {
-  const DoctorCaseButton({super.key});
+  final int sessionId;
+  const DoctorCaseButton({super.key, required this.sessionId});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class DoctorCaseButton extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return DialogEvaluateProfessor();
+                  return DialogEvaluateProfessor(sessionId: sessionId,);
                 },
               );
             },

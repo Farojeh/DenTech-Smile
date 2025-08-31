@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ArticleLoadBody extends StatelessWidget {
-  final TextEditingController controller;
-  const ArticleLoadBody({super.key, required this.controller});
+  const ArticleLoadBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class ArticleLoadBody extends StatelessWidget {
         //////// هون لما عم اكتب مقالة كبيرة عم يعطي غلط
         return SingleChildScrollView(
           child: Container(
-            height: Static.getheight(context, 320),
+            height: Static.getheight(context, 340),
             padding: EdgeInsets.symmetric(
               horizontal: horizontal,
               vertical: vertical,
@@ -66,17 +65,11 @@ class ArticleLoadBody extends StatelessWidget {
                     ),
                     child: IntrinsicHeight(
                       child: TextFormField(
-                        controller: controller,
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return "Article is required";
-                          }
-                          return null;
+                        controller: context.read<PageCubit>().linkController,
+                        onChanged: (value) {
+                          context.read<PageCubit>().articleContent = value;
                         },
-                        // onChanged: (value) {
-                        //   context.read<PageCubit>().articleContent = value;
-                        // },
-                        maxLines: 20,
+                        maxLines: 8,
                         minLines: 4,
                         keyboardType: TextInputType.multiline,
                         textAlignVertical: TextAlignVertical.top,

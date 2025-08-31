@@ -11,7 +11,7 @@ class ProfessorCaseImage extends StatelessWidget {
       height: Static.getheight(context, 90),
       child: CircleAvatar(
         radius: 15,
-        backgroundImage: const AssetImage('assets/images/doctor_male.png'),
+        backgroundImage: const AssetImage('assets/images/doctor.png'),
       ),
     );
   }

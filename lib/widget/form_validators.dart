@@ -2,7 +2,7 @@ class FormValidators {
   // حروف عربية وإنجليزية وأرقام عربية وإنجليزية ومسافات
   final _nameRegex = RegExp(r"^[a-zA-Z\u0600-\u06FF0-9\u0660-\u0669\s]+$");
   final _emailRegex = RegExp(r"^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$");
-  final _phoneRegex = RegExp(r"^[0-9\u0660-\u0669]{10}$");
+  // final _phoneRegex = RegExp(r"^[0-9\u0660-\u0669]{10}$");
 
   // ------------------ اسم المستخدم ------------------
   String? userNameValidator(String? value) {

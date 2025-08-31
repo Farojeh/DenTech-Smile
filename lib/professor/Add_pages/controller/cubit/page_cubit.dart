@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/utils/api.dart';
-import 'package:dentech_smile/core/utils/static.dart';
-import 'package:dentech_smile/main.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +11,8 @@ class PageCubit extends Cubit<PageState> {
   PageCubit() : super(PageInitial());
 
   FilePickerResult? pdfResult;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController linkController = TextEditingController();
   String pdfName = '';
   double pdfRate = 0;
   int pdfStageId = 0;
@@ -53,19 +53,19 @@ class PageCubit extends Cubit<PageState> {
     }
   }
 
-  Future<void> storePdf() async {
+  Future<bool> storePdf() async {
     // ✅ التحقق من الحقول المطلوبة
     if (pdfName.isEmpty) {
       emit(PageFailure(errorMessage: "Please enter the file name"));
-      return;
+      return false ;
     }
     if (pdfStageId == 0) {
       emit(PageFailure(errorMessage: "Please select a stage"));
-      return;
+      return false;
     }
     if (pdfResult!.xFiles.isEmpty) {
       emit(PageFailure(errorMessage: "Please upload a file"));
-      return;
+      return false;
     }
 
     emit(PageLoading());
@@ -87,40 +87,39 @@ class PageCubit extends Cubit<PageState> {
     if (response['success']) {
       emit(PageSuccess());
       message = 'Done';
+      return true;
     } else {
       message = 'Not Done';
       emit(PageFailure(errorMessage: response['error']));
+      return false;
     }
   }
 
-  Future<void> storeVideo() async {
+  Future<bool> storeVideo() async {
     emit(PageLoading());
-
-    print(videoName );
-    print(videoPath);
-    print(userInfo!.getString(Static.token));
 
     var response = await ApiService.post(
       endPoint: 'api/store-educational-content',
       data: FormData.fromMap({
         'title': videoName,
         'type': 'link',
-        'stage_id': videoStageId,
-        'appropriate_rating': videoRate.toInt(),
+        'stage_id': videoStageId.toString(),
+        'appropriate_rating': videoRate.toInt().toString(),
         'content_url': videoPath.toString(),
       }),
     );
-     print(response);
     if (response['success']) {
       message = 'Done';
       emit(PageSuccess());
+      return true ;
     } else {
       message = 'Not Done';
       emit(PageFailure(errorMessage: response['error']));
+       return false ;
     }
   }
 
-  Future<void> storeArticle() async {
+  Future<bool> storeArticle() async {
     emit(PageLoading());
     List<MultipartFile> imageFiles = await Future.wait(
       images!.map((image) async {
@@ -137,8 +136,8 @@ class PageCubit extends Cubit<PageState> {
         'type': 'article',
         'stage_id': articleStageId,
         'appropriate_rating': articleRate.toInt(),
-        'text_content': "articleContent",
-        'images': await Future.wait(
+        'text_content': articleContent,
+        'images[]': await Future.wait(
           images!.map((image) async {
             return await MultipartFile.fromFile(
               image.path,
@@ -152,9 +151,11 @@ class PageCubit extends Cubit<PageState> {
     if (response['success']) {
       emit(PageSuccess());
       message = 'Done';
+      return true;
     } else {
       emit(PageFailure(errorMessage: response['error']));
       message = 'Not Done';
+      return false;
     }
   }
 }

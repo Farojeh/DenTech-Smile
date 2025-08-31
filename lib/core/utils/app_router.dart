@@ -287,10 +287,14 @@ abstract class AppRouter {
           final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
           final String title = data["title"];
           final int type = data["type"];
-          final bool add = data["add"]??false ;
+          final bool add = data["add"] ?? false;
           return BlocProvider<LearningCubit>(
             create: (context) => LearningCubit(title),
-            child: LearningDetailsPage(title: title, type: type , add: add,),
+            child: LearningDetailsPage(
+              title: title,
+              type: type,
+              add: add,
+            ),
           );
         },
       ),
@@ -373,21 +377,37 @@ abstract class AppRouter {
       ),
       GoRoute(path: addBook, builder: (context, state) => const AddBookBody()),
       GoRoute(
-        path: caseProf,
-        builder: (context, state) => const CaseProfessorBody(),
-      ),
+          path: caseProf,
+          builder: (context, state) {
+            final ids = state.extra as Map<String, String>;
+            return CaseProfessorBody(
+              sessionId: ids["sessionId"].toString(),
+              studentId: ids["studentId"].toString(),
+            );
+          }),
       GoRoute(
-        path: archiveProf,
-        builder: (context, state) => const ArchiveProfessorPage(),
-      ),
+          path: archiveProf,
+          builder: (context, state) {
+            final ids = state.extra as Map<String, String>;
+            return ArchiveProfessorPage(
+              sessionId: ids["sessionId"].toString(),
+              studentId: ids["studentId"].toString(),
+            );
+          }),
       GoRoute(
         path: caseDoctor,
         builder: (context, state) {
-          final score = state.extra as double;
-          return CaseDoctorBody(score: score);
+          final map = state.extra as Map<String, String>;
+          final score = map["score"] ?? "0.0";
+          final sessionId = map["sessionId"] ?? "0";
+          return CaseDoctorBody(
+            score: score,
+            sessionId: sessionId,
+          );
         },
       ),
-       GoRoute(path: scanQrCode, builder: (context, state) => const QRScannerPage()),
+      GoRoute(
+          path: scanQrCode, builder: (context, state) => const QRScannerPage()),
     ],
   );
 }

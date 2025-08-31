@@ -17,8 +17,7 @@ class AddVideoBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //  final formKey = GlobalKey<FormState>();
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController linkController = TextEditingController();
+    
     //double rating = 0;
     //int? stageId;
 
@@ -43,7 +42,7 @@ class AddVideoBody extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    VideoContainer(controller: nameController),
+                    VideoContainer(),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: horizontal),
                       child: const Divider(
@@ -64,11 +63,10 @@ class AddVideoBody extends StatelessWidget {
                         color: Color.fromRGBO(133, 177, 188, 1),
                       ),
                     ),
-                    VideoLinkBody(controller: linkController),
+                    VideoLinkBody(),
                     AddVideoButton(
                       oldContext: context,
-                      nameController: nameController,
-                      linkController: linkController,
+                     
                     ),
                   ],
                 ),

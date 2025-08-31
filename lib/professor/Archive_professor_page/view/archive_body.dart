@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ArchiveProfessorPage extends StatelessWidget {
-  const ArchiveProfessorPage({super.key});
+   final String studentId;
+  final String sessionId;
+  const ArchiveProfessorPage({super.key, required this.studentId, required this.sessionId});
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<CaseCubit>().getDoctorArchive(1, 1),
+      (_) => context.read<CaseCubit>().getDoctorArchive(int.parse(studentId), int.parse(sessionId)),
     );
     return BlocConsumer<CaseCubit, CaseState>(
       listener: (context, state) {

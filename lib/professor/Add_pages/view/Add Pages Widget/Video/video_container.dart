@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VideoContainer extends StatelessWidget {
-  final TextEditingController controller;
-  const VideoContainer({super.key, required this.controller});
+  const VideoContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class VideoContainer extends StatelessWidget {
                   onChanged: (value) {
                     context.read<PageCubit>().videoName = value;
                   },
-                  controller: controller,
+                  controller: context.read<PageCubit>().nameController,
 
                   // validator: (value) {
                   //   if (value == null || value.trim().isEmpty) {

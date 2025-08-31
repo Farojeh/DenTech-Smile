@@ -22,7 +22,7 @@ class ProfessorAppBarArrowCase extends StatelessWidget {
           ),
           alignment: Alignment.center,
           child: Image.asset(
-            'assets/images/Vector77.png',
+            'assets/images/arrow_back_white.png',
             width: Static.getwidth(context, 13),
             height: Static.getheight(context, 18),
             fit: BoxFit.contain,

@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DialogEvaluateProfessor extends StatelessWidget {
-  const DialogEvaluateProfessor({super.key});
+  final int sessionId;
+  const DialogEvaluateProfessor({super.key, required this.sessionId});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-    final TextEditingController controller2 = TextEditingController();
     double horizontal = Static.getwieght(context, 40);
     double vertical = Static.gethieght(context, 25);
     double horizontal2 = Static.getwieght(context, 24.0);
@@ -80,10 +79,9 @@ class DialogEvaluateProfessor extends StatelessWidget {
                           height: Static.gethieght(context, 35),
                           child: TextFormField(
                             onChanged: (value) {
-                              context.read<CaseCubit>().score =
-                                  int.tryParse(value) ?? 0;
+                              context.read<CaseCubit>().score =int.parse(value);
                             },
-                            controller: controller,
+                            controller: context.read<CaseCubit>().controller,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                 horizontal: 8,
@@ -144,7 +142,7 @@ class DialogEvaluateProfessor extends StatelessWidget {
                         onChanged: (value) {
                           context.read<CaseCubit>().comment = value;
                         },
-                        controller: controller2,
+                        controller: context.read<CaseCubit>().controller2,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: horizontal,
@@ -220,7 +218,7 @@ class DialogEvaluateProfessor extends StatelessWidget {
                     SizedBox(height: Static.gethieght(context, 12)),
                     ElevatedButton(
                       onPressed: () async {
-                        await context.read<CaseCubit>().postEvaluate(2);
+                        await context.read<CaseCubit>().postEvaluate(sessionId);
                         Static.showCustomSnackbar(
                           context,
                           context.read<CaseCubit>().message,

@@ -1,6 +1,6 @@
-import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfessorBodyContainer extends StatelessWidget {
   const ProfessorBodyContainer({super.key});
@@ -85,8 +85,7 @@ class ProfessorBodyContainer extends StatelessWidget {
                     backgroundColor: Colors.black,
                   ),
                   onPressed: () async {
-                  BlocProvider.of<ProfessorHomeCubit>(context).printscan();
-                  //  GoRouter.of(context).push(AppRouter.scanQrCode);
+                    GoRouter.of(context).push(AppRouter.scanQrCode);
                   },
 
                   child: Text(

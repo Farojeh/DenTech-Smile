@@ -1,9 +1,10 @@
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/professor/Add_pages/controller/cubit/page_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VideoLinkBody extends StatelessWidget {
-  final TextEditingController controller;
-  const VideoLinkBody({super.key, required this.controller});
+  const VideoLinkBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +40,16 @@ class VideoLinkBody extends StatelessWidget {
             ],
           ),
           TextFormField(
-            controller: controller,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return "Link is required";
-              }
-              return null;
+            controller: context.read<PageCubit>().linkController,
+            onChanged: (value) {
+              context.read<PageCubit>().videoPath = value;
             },
+            // validator: (value) {
+            //   if (value == null || value.trim().isEmpty) {
+            //     return "Link is required";
+            //   }
+            //   return null;
+            // },
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: const BorderSide(

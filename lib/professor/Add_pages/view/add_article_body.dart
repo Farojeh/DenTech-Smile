@@ -15,13 +15,6 @@ class AddArticleBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  final formKey = GlobalKey<FormState>();
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController articleController = TextEditingController();
-
-    // double rating = 0;
-    // int? stageId;
-
     double horizontal = Static.getwidth(context, 34);
 
     return BlocProvider(
@@ -44,7 +37,7 @@ class AddArticleBody extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    ArticleContainer(controller: nameController),
+                    ArticleContainer(),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: horizontal),
                       child: const Divider(
@@ -65,13 +58,10 @@ class AddArticleBody extends StatelessWidget {
                         color: Color.fromRGBO(133, 177, 188, 1),
                       ),
                     ),
-                    ArticleLoadBody(controller: articleController),
+                    ArticleLoadBody(),
                     AddArticleButton(
                 oldContext: context,
-                // formKey: formKey,
-                nameController: nameController,
-                //stageIdGetter: () => stageId,
-                //ratingGetter: () => rating,
+               
               ),
                   ],
                 ),

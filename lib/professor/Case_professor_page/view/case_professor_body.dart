@@ -17,12 +17,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CaseProfessorBody extends StatelessWidget {
-  const CaseProfessorBody({super.key});
+ final String studentId;
+  final String sessionId;
+  const CaseProfessorBody({super.key, required this.studentId, required this.sessionId,});
 
   @override
   Widget build(BuildContext context) {
+    print("*************************************************** $studentId");
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<CaseCubit>().getProfCase(1, 1),
+      (_) => context.read<CaseCubit>().getProfCase(int.parse(studentId), int.parse(sessionId)),
     );
     return BlocConsumer<CaseCubit, CaseState>(
       listener: (context, state) {
@@ -107,7 +110,7 @@ class CaseProfessorBody extends StatelessWidget {
                 Positioned(
                   bottom: Static.getheight(context, 40.0),
                   right: Static.getwidth(context, 40.0),
-                  child: ProfessorCaseButton(),
+                  child: ProfessorCaseButton(sessionId: int.parse(studentId)),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
 import 'package:dentech_smile/professor/Home_professor_page/view/HomeProfessorWidget/professor_schedule_list.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,7 @@ class ProfessorSchedule extends StatelessWidget {
                   ),
                 ),
 
-                ProfessorScheduleList(),
+               userInfo!.getInt(Static.userRole)!=null && userInfo!.getInt(Static.userRole)==4?Container(): ProfessorScheduleList(),
               ],
             ),
           ),

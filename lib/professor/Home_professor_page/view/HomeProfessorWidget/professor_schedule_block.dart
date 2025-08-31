@@ -3,6 +3,7 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
 import 'package:dentech_smile/professor/Home_professor_page/model/schedule_model.dart';
 import 'package:flutter/material.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,12 +20,15 @@ class ProfessorScheduleBlock extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        GoRouter.of(
-          context,
-        ).push(AppRouter.attendanceRegistration, extra: schedules);
-        context.read<ProfessorHomeCubit>().getPracticalScheduleStudents(
-              schedules!.practical_id!,
-            );
+        if (userInfo!.getInt(Static.userRole) != null &&
+            userInfo!.getInt(Static.userRole) == 3) {
+          GoRouter.of(
+            context,
+          ).push(AppRouter.attendanceRegistration, extra: schedules);
+          context.read<ProfessorHomeCubit>().getPracticalScheduleStudents(
+                schedules!.practical_id!,
+              );
+        }
       },
       child: Container(
         width: (size.width / 430) * 362,
@@ -78,7 +82,7 @@ class ProfessorScheduleBlock extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Afacad',
                       fontWeight: FontWeight.w400,
-                      color:const Color.fromRGBO(40, 40, 40, 1),
+                      color: const Color.fromRGBO(40, 40, 40, 1),
                       fontSize: (MediaQuery.of(context).size.width / 430) * 16,
                     ),
                   ),

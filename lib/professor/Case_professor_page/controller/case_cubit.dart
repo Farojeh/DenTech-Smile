@@ -15,6 +15,9 @@ class CaseCubit extends Cubit<CaseState> {
   bool isArchived = false;
   int archive = 0;
   String message = '';
+  int sessionId=0;
+   final TextEditingController controller = TextEditingController();
+    final TextEditingController controller2 = TextEditingController();
 
   void changeCheckedArchive(bool value) {
     isArchived = value;
@@ -49,6 +52,7 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> postEvaluate(int sessionId) async {
     emit(CaseLoading());
     try {
+      print(sessionId);
       var response = await ApiService.post(
         endPoint: 'api/evaluate-session',
         data: FormData.fromMap({
@@ -58,10 +62,14 @@ class CaseCubit extends Cubit<CaseState> {
           'is_archived': archive,
         }),
       );
+      print(response);
+      print("gggggggggggggggggggggggggggggg");
       if (response['success']) {
+        print("pppppppppppppppppppppppppppppppppp");
         emit(CaseSuccess());
         message = 'Done';
       }
+      print("lllllllllllllllllllllllllllllllll");
     } catch (e) {
       emit(CaseFailure(errorMessage: e.toString()));
     }
@@ -71,6 +79,7 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> getDoctorArchive(int studentId, int sessionId) async {
     emit(CaseLoading());
     try {
+      print("hhhhhhhhhhhhhhhhhhhhh");
       var response = await ApiService.post(
         endPoint: 'api/supervisor-scan-Qrcode',
         data: FormData.fromMap({
@@ -78,7 +87,9 @@ class CaseCubit extends Cubit<CaseState> {
           'session_id': sessionId,
         }),
       );
+      print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
       if (response['success']) {
+        print(response);
         List<dynamic> ll = [];
         ll = response['data']
             .map(

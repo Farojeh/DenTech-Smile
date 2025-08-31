@@ -29,7 +29,7 @@ class DoctorArchiveModel {
     stageName = json['stage_name'];
     studentName = json['student_name'];
     studentImage = json['student_image'];
-    evaluationScore = json['evaluation_score'] ?? 0.0;
+    evaluationScore = (json['evaluation_score'] ?? 0.0) ==0?0.0:json['evaluation_score'];
     supervisorComments = json['supervisor_comments'] ?? '';
     patientName = json['patient_name'];
     appointmentDate = json['appointment_date'];

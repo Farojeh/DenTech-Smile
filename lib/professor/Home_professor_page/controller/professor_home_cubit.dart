@@ -101,7 +101,7 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
       );
 
       if (isClosed) return;
-
+      
       if (response['success']) {
         scheduleModel = ScheduleModel.fromJson(response['data']);
         getDaysSchedules();
@@ -119,7 +119,8 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
 
   PracticalModel? practicalModel;
   Future<void> getPracticalScheduleStudents(int practicalScheduleId) async {
-    if (isClosed) return;
+   
+    print("fffffffffffffffffffffffffffffffffffffffffff $practicalScheduleId");
 
     emit(ProfessorPracticalLoading());
 
@@ -129,20 +130,22 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
         data: FormData.fromMap({"practicalSchedule_Id": practicalScheduleId}),
       );
 
-      if (isClosed) return;
+      print(response);
+
+     
 
       if (response['success']) {
         practicalModel = PracticalModel.fromJson(response['data']);
         length = practicalModel!.students!.length;
         checkedList = List.generate(length, (index) => false);
-        if (!isClosed) {
+       
           emit(ProfessorHomeSuccess());
-        }
+        
       }
     } catch (e) {
-      if (!isClosed) {
+    
         emit(ProfessorHomeFailure(errorMessage: e.toString()));
-      }
+      
     }
   }
 
@@ -186,11 +189,14 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
       final String? rawValue = barcode.rawValue;
       if (rawValue == null) continue;
       try {
+        print("jjjjjjjjjjjjjjjjjjjjj");
         final object = jsonDecode(rawValue);
         studentid = object["student_id"].toString();
         sessionid = object["session_id"].toString();
+        printscan();
         return true;
       } catch (e) {
+        print(e.toString());
         return false;
       }
     }

@@ -3,17 +3,16 @@ import 'package:dentech_smile/core/utils/style.dart';
 import 'package:dentech_smile/professor/Add_pages/controller/cubit/page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class AddVideoButton extends StatelessWidget {
   final BuildContext oldContext;
-  final TextEditingController nameController;
-  final TextEditingController linkController;
+
 
   const AddVideoButton({
     super.key,
     required this.oldContext,
-    required this.nameController,
-    required this.linkController,
+  
   });
 
   @override
@@ -36,11 +35,15 @@ class AddVideoButton extends StatelessWidget {
             backgroundColor: Styles.basicColor,
           ),
           onPressed: () async {
-            await context.read<PageCubit>().storeVideo();
+          bool result =  await context.read<PageCubit>().storeVideo();
+          if(!oldContext.mounted) return ;
             Static.showCustomSnackbar(
               oldContext,
               oldContext.read<PageCubit>().message,
             );
+            if(result){
+              GoRouter.of(oldContext).pop();
+            }
           },
           child: Text(
             'Add Video',

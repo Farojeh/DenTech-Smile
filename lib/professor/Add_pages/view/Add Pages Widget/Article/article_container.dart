@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ArticleContainer extends StatelessWidget {
-  final TextEditingController controller;
-  const ArticleContainer({super.key, required this.controller});
+  const ArticleContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class ArticleContainer extends StatelessWidget {
                 ),
                 SizedBox(height: Static.getheight(context, 16)),
                 TextFormField(
-                  controller: controller,
+                  controller: context.read<PageCubit>().nameController,
                   onChanged: (value) {
                     context.read<PageCubit>().articleName = value;
                   },

@@ -78,8 +78,11 @@ class ProfessorArchiveBlock extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.caseDoctor,
-                    extra: doctorArchiveModel!.evaluationScore);
+                Map<String, String> map = {
+                  "score": doctorArchiveModel!.evaluationScore.toString(),
+                  "sessionId": doctorArchiveModel!.sessionId.toString()
+                };
+                GoRouter.of(context).push(AppRouter.caseDoctor, extra: map);
                 context.read<CaseCubit>().getDoctorCase(
                       doctorArchiveModel!.sessionId!,
                     );

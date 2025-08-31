@@ -19,7 +19,15 @@ class AddBookBody extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => PageCubit(),
-      child: Scaffold(
+      child: BlocConsumer<PageCubit, PageState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is PageLoading) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          } else {
+            return  Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.white.withOpacity(0),
             shadowColor: Colors.white.withOpacity(0),
@@ -44,10 +52,13 @@ class AddBookBody extends StatelessWidget {
                 child: Divider(color: Color.fromRGBO(133, 177, 188, 1)),
               ),
               BookLoadBody(),
-              AddBookButton(),
+              AddBookButton(oldContext: context),
             ],
           ),
         ),
+      );
+          }
+        },
       ),
     );
   }

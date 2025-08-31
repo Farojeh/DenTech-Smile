@@ -18,8 +18,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
 class CaseDoctorBody extends StatelessWidget {
-  double? score;
-  CaseDoctorBody({super.key, required this.score});
+  String sessionId;
+  String score;
+  CaseDoctorBody({super.key, required this.score, required this.sessionId});
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +102,11 @@ class CaseDoctorBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (score == 0.0)
+                if (double.parse(score) == 0.0)
                   Positioned(
                     bottom: Static.getheight(context, 40.0),
                     right: Static.getwidth(context, 40.0),
-                    child: ProfessorCaseButton(),
+                    child: ProfessorCaseButton(sessionId: int.parse(sessionId)),
                   ),
               ],
             ),

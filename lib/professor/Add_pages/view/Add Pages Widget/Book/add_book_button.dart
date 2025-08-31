@@ -3,9 +3,12 @@ import 'package:dentech_smile/core/utils/style.dart';
 import 'package:dentech_smile/professor/Add_pages/controller/cubit/page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class AddBookButton extends StatelessWidget {
-  const AddBookButton({super.key});
+  final BuildContext oldContext;
+
+  const AddBookButton({super.key, required this.oldContext,});
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +44,16 @@ class AddBookButton extends StatelessWidget {
               ),
               backgroundColor: Styles.basicColor,
             ),
-            onPressed: () {
-              context.read<PageCubit>().storePdf();
+            onPressed: ()async {
+              bool result = await context.read<PageCubit>().storePdf();
+               if(!oldContext.mounted) return ;
+            Static.showCustomSnackbar(
+              oldContext,
+              oldContext.read<PageCubit>().message,
+            );
+            if(result){
+              GoRouter.of(oldContext).pop();
+            }
             },
             child: Text(
               'Add Book',

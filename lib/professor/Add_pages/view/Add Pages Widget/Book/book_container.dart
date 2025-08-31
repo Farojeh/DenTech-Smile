@@ -8,7 +8,6 @@ class BookContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
     double horizontal = Static.getwidth(context, 40);
     double horizontal2 = Static.getwidth(context, 12);
     double vertical = Static.getheight(context, 10);
@@ -45,7 +44,7 @@ class BookContainer extends StatelessWidget {
                 ),
                 SizedBox(height: Static.getheight(context, 16)),
                 TextFormField(
-                  controller: controller,
+                  controller: context.read<PageCubit>().nameController,
                   onChanged: (value) {
                     context.read<PageCubit>().pdfName = value;
                   },

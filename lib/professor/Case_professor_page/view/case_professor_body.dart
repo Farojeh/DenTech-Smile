@@ -53,7 +53,7 @@ class CaseProfessorBody extends StatelessWidget {
                           width: double.infinity,
                           child: ClipPath(
                             clipper: WaveClipper(),
-                            child: ProfessorAppointmentsContainerClip(),
+                            child: const ProfessorAppointmentsContainerClip(),
                           ),
                         ),
                         Padding(
@@ -71,7 +71,8 @@ class CaseProfessorBody extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    ProfessorAppBarArrowCase(),
+                                   const ProfessorAppBarArrowCase(),
+                                  const SizedBox(width: 10,),
                                     ProfessorAppBarCaseTitle(
                                       caseProfModel: caseDetails,
                                     ),
@@ -81,7 +82,7 @@ class CaseProfessorBody extends StatelessWidget {
                               SizedBox(height: Static.getheight(context, 40)),
                               Row(
                                 children: [
-                                  ProfessorCaseImage(),
+                                 const ProfessorCaseImage(),
                                   SizedBox(
                                     width: Static.getwidth(context, 100),
                                   ),

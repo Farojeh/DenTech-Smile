@@ -9,8 +9,7 @@ class AppBarProfTitle extends StatelessWidget {
     return Text(
       'Attendance Registration',
       style: TextStyle(
-        fontFamily: 'ArialRounded',
-        fontWeight: FontWeight.bold,
+        fontFamily: Static.arialRoundedMTfont,
         color: Colors.black,
         fontSize: Static.getwidth(context, 22),
       ),

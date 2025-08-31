@@ -14,7 +14,11 @@ class AttendanceRegistrationBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: const AppBarBackArrow(), title: const AppBarProfTitle()),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white.withOpacity(0),
+        leading: const AppBarBackArrow(), title: const AppBarProfTitle()),
       body: const SingleChildScrollView(
         child: Column(
           children: [RegisterationBodyTitle(), RegistrationListBody()],

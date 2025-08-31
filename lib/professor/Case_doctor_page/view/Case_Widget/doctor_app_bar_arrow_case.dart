@@ -6,7 +6,7 @@ class DoctorAppBarArrowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double horizontal = Static.getwidth(context, 15);
+    double horizontal = Static.getwidth(context, 5);
     double vertical = Static.getheight(context, 15);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
@@ -22,7 +22,7 @@ class DoctorAppBarArrowCase extends StatelessWidget {
           ),
           alignment: Alignment.center,
           child: Image.asset(
-            'assets/images/Vector77.png',
+            'assets/images/arrow_back_white.png',
             width: Static.getwidth(context, 13),
             height: Static.getheight(context, 18),
             fit: BoxFit.contain,

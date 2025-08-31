@@ -10,8 +10,7 @@ class ProfessorArchiveAppBarTitle extends StatelessWidget {
       'Cases archive',
       style: TextStyle(
         color: Colors.black,
-        fontFamily: 'ArialRounded',
-        fontWeight: FontWeight.w600,
+        fontFamily: Static.arialRoundedMTfont,
         fontSize: Static.getwidth(context, 25),
       ),
     );

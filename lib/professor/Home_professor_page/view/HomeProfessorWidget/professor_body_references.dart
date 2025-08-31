@@ -1,5 +1,7 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/style.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,7 +27,7 @@ class ProfessorBodyReferences extends StatelessWidget {
               context,
               () {
                 GoRouter.of(context).push(AppRouter.learningdetails,
-                    extra: {"title": "YouTube videos", "type": 2 , "add":true});
+                    extra: {"title": "YouTube videos", "type": 2, "add": isSupervisor()});
               },
               boxWidth,
               boxHeight,
@@ -37,8 +39,11 @@ class ProfessorBodyReferences extends StatelessWidget {
             _buildBox(
               context,
               () {
-                GoRouter.of(context).push(AppRouter.learningdetails,
-                    extra: {"title": "Scientific articles", "type": 3 , "add":true});
+                GoRouter.of(context).push(AppRouter.learningdetails, extra: {
+                  "title": "Scientific articles",
+                  "type": 3,
+                  "add": isSupervisor()
+                });
               },
               boxWidth,
               boxHeight,
@@ -50,8 +55,11 @@ class ProfessorBodyReferences extends StatelessWidget {
             _buildBox(
               context,
               () {
-                GoRouter.of(context).push(AppRouter.learningdetails,
-                    extra: {"title": "Books and references", "type": 1 ,"add":true});
+                GoRouter.of(context).push(AppRouter.learningdetails, extra: {
+                  "title": "Books and references",
+                  "type": 1,
+                  "add": isSupervisor()
+                });
               },
               boxWidth,
               boxHeight,
@@ -116,5 +124,13 @@ class ProfessorBodyReferences extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool isSupervisor() {
+    if (userInfo!.getInt(Static.userRole) == 4) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

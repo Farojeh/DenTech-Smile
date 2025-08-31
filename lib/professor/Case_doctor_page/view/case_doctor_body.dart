@@ -49,7 +49,7 @@ class CaseDoctorBody extends StatelessWidget {
                           width: double.infinity,
                           child: ClipPath(
                             clipper: WaveClipper(),
-                            child: DoctorAppointmentsContainerClip(),
+                            child: const DoctorAppointmentsContainerClip(),
                           ),
                         ),
                         Padding(
@@ -68,7 +68,8 @@ class CaseDoctorBody extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    DoctorAppBarArrowCase(),
+                                    const DoctorAppBarArrowCase(),
+                                     const SizedBox(width: 10,),
                                     DoctorAppBarCaseTitle(
                                       caseDoctorModel: caseDetails,
                                     ),
@@ -78,7 +79,7 @@ class CaseDoctorBody extends StatelessWidget {
                               SizedBox(height: Static.getheight(context, 40)),
                               Row(
                                 children: [
-                                  DoctorCaseImage(),
+                                  const DoctorCaseImage(),
                                   SizedBox(
                                     width: Static.getwidth(context, 100),
                                   ),
@@ -90,11 +91,11 @@ class CaseDoctorBody extends StatelessWidget {
                               DoctorCaseDescription(
                                 caseDoctorModel: caseDetails,
                               ),
-                              DoctorCaseXrayImage(
+                              const DoctorCaseXrayImage(
                                 image: "assets/images/XRay.png",
                               ),
-                              DoctorCaseToothPhotoBefor(),
-                              DoctorCaseToothPhotoAfter(),
+                              const DoctorCaseToothPhotoBefor(),
+                              const DoctorCaseToothPhotoAfter(),
                             ],
                           ),
                         ),
@@ -112,7 +113,7 @@ class CaseDoctorBody extends StatelessWidget {
             ),
           );
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(color: Styles.basicColor),
             ),

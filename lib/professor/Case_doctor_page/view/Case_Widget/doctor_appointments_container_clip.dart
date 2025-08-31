@@ -11,7 +11,7 @@ class DoctorAppointmentsContainerClip extends StatelessWidget {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/front_background.png'),
+          image: AssetImage('assets/images/state.jpg'),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
             Color.fromARGB(80, 0, 0, 0),

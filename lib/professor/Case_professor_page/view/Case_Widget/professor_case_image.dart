@@ -9,9 +9,9 @@ class ProfessorCaseImage extends StatelessWidget {
     return SizedBox(
       width: Static.getwidth(context, 90),
       height: Static.getheight(context, 90),
-      child: CircleAvatar(
+      child:const CircleAvatar(
         radius: 15,
-        backgroundImage: const AssetImage('assets/images/doctor.png'),
+        backgroundImage:  AssetImage('assets/images/doctor.png'),
       ),
     );
   }

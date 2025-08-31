@@ -120,8 +120,10 @@ class _ProfileBodyState extends State<ProfileBody> {
                 create: (context) => NumberEditDialogCubit(),
                 child: const NumberEditDialg(editnumber: false),
               ));
-    }else if(id =="4"){
+    } else if (id == "4") {
+      String fcmtoken = userInfo!.getString('fcm_token')!;
       userInfo!.clear();
+      userInfo!.setString('fcm_token', fcmtoken);
       GoRouter.of(context).pushReplacement('/');
     }
   }

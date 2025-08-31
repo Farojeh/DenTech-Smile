@@ -28,7 +28,7 @@ class ProfessorScheduleList extends StatelessWidget {
           return SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.3,
-            child: Center(
+            child:const Center(
               child: CircularProgressIndicator(color: Styles.basicColor),
             ),
           );
@@ -40,7 +40,7 @@ class ProfessorScheduleList extends StatelessWidget {
               ? SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
-                  child: Center(
+                  child:const Center(
                     child: Text(
                       'There is no session yet',
                       style: TextStyle(

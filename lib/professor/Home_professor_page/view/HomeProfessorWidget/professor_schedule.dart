@@ -103,7 +103,24 @@ class ProfessorSchedule extends StatelessWidget {
                   ),
                 ),
 
-               userInfo!.getInt(Static.userRole)!=null && userInfo!.getInt(Static.userRole)==4?Container(): ProfessorScheduleList(),
+               userInfo!.getInt(Static.userRole)!=null && userInfo!.getInt(Static.userRole)==4?Center(
+                 child: Column(
+                   children: [
+                     Container(
+                      margin:const EdgeInsets.only(top: 20),
+                      height: 180,
+                      width: 200,
+                      child: Image.asset("assets/images/File searching-rafiki.png",
+                      fit: BoxFit.contain,
+                      ),
+                     ),
+                     Text("No Weekly Schedule" , style: TextStyle(
+                      fontFamily: Static.afacadfont,
+                      fontWeight: FontWeight.w400
+                     ),)
+                   ],
+                 ),
+               ):const ProfessorScheduleList(),
               ],
             ),
           ),

@@ -100,7 +100,8 @@ class ProfessorArchiveBlock extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Image.asset(
-                  'assets/images/Vector8.png',
+                  'assets/images/arrow_patient.png',
+                  color: Static.basiccolor,
                   width: Static.getwidth(context, 11),
                   height: Static.getheight(context, 16),
                 ),

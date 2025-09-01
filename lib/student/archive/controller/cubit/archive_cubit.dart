@@ -32,12 +32,7 @@ class ArchiveCubit extends Cubit<ArchiveState> {
       List<InternshipTwo> internships = stagesJson
           .map((stageJson) => InternshipTwo.setdatafromarchive(stageJson))
           .toList();
-      List<ArchiveTwo> selectArchive = internships
-          .firstWhere(
-            (i) => i.archives.isNotEmpty,
-            orElse: () => InternshipTwo(id: '0', name: '', archives: []),
-          )
-          .archives;
+      List<ArchiveTwo> selectArchive = internships[0].archives;
       emit(ArchiveSuccess(
           allinternships: internships, allarchives: selectArchive, select: 0));
     } catch (error) {

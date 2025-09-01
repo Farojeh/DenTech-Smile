@@ -1,11 +1,16 @@
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/professor/Case_doctor_page/model/case_doctor_model.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/patient_info_cubit.dart';
+import 'package:dentech_smile/student/Home/view/widget/info_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
 class DoctorPatientName extends StatelessWidget {
+  final int patientid;
   CaseDoctorModel? caseDoctorModel;
-  DoctorPatientName({super.key, required this.caseDoctorModel});
+  DoctorPatientName(
+      {super.key, required this.caseDoctorModel, required this.patientid});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,15 @@ class DoctorPatientName extends StatelessWidget {
           ],
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => BlocProvider<PatientInfoCubit>(
+                create: (context) => PatientInfoCubit(patientid),
+                child: const InfoDialog(),
+              ),
+            );
+          },
           child: Padding(
             padding: EdgeInsets.only(right: Static.getwidth(context, 28)),
             child: Text(

@@ -42,7 +42,7 @@ class CustomPortfolio extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   Text(
-                                    "${e.degree} / ${e.total}",
+                                    "${e.degree} ",
                                     style: TextStyle(
                                         fontFamily: Static.afacadfont,
                                         fontWeight: FontWeight.w500,

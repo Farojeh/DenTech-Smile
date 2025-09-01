@@ -17,15 +17,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CaseProfessorBody extends StatelessWidget {
- final String studentId;
+  final String studentId;
   final String sessionId;
-  const CaseProfessorBody({super.key, required this.studentId, required this.sessionId,});
+  const CaseProfessorBody({
+    super.key,
+    required this.studentId,
+    required this.sessionId,
+  });
 
   @override
   Widget build(BuildContext context) {
     print("*************************************************** $studentId");
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<CaseCubit>().getProfCase(int.parse(studentId), int.parse(sessionId)),
+      (_) => context
+          .read<CaseCubit>()
+          .getProfCase(int.parse(studentId), int.parse(sessionId)),
     );
     return BlocConsumer<CaseCubit, CaseState>(
       listener: (context, state) {
@@ -71,8 +77,10 @@ class CaseProfessorBody extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                   const ProfessorAppBarArrowCase(),
-                                  const SizedBox(width: 10,),
+                                    const ProfessorAppBarArrowCase(),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     ProfessorAppBarCaseTitle(
                                       caseProfModel: caseDetails,
                                     ),
@@ -82,7 +90,7 @@ class CaseProfessorBody extends StatelessWidget {
                               SizedBox(height: Static.getheight(context, 40)),
                               Row(
                                 children: [
-                                 const ProfessorCaseImage(),
+                                  const ProfessorCaseImage(),
                                   SizedBox(
                                     width: Static.getwidth(context, 100),
                                   ),
@@ -92,15 +100,17 @@ class CaseProfessorBody extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: Static.getheight(context, 25)),
-                              ProfessorPatientName(),
+                              ProfessorPatientName(
+                                patientid: caseDetails!.patientid!,
+                              ),
                               ProfessorCaseDescription(
                                 caseProfModel: caseDetails,
                               ),
-                              ProfessorCaseXrayImage(
+                              const ProfessorCaseXrayImage(
                                 image: "assets/images/XRay.png",
                               ),
-                              ProfessorCaseToothPhotoBefor(),
-                              ProfessorCaseToothPhotoAfter(),
+                              const ProfessorCaseToothPhotoBefor(),
+                              const ProfessorCaseToothPhotoAfter(),
                             ],
                           ),
                         ),

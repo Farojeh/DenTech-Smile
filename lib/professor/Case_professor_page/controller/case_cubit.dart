@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/utils/api.dart';
+import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/professor/Archive_professor_page/model/doctor_archive_model.dart';
 import 'package:dentech_smile/professor/Case_doctor_page/model/case_doctor_model.dart';
 import 'package:dentech_smile/professor/Case_professor_page/model/case_prof_model.dart';
@@ -88,6 +90,8 @@ class CaseCubit extends Cubit<CaseState> {
         }),
       );
       print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+       print(userInfo!.getInt(Static.userRole));
+        print(userInfo!.getString(Static.token));
       if (response['success']) {
         print(response);
         List<dynamic> ll = [];
@@ -97,12 +101,14 @@ class CaseCubit extends Cubit<CaseState> {
                   DoctorArchiveModel.fromJson(doctorArchiveModel),
             )
             .toList();
-
+         
         doctorArchiveModelList = ll.cast<DoctorArchiveModel>();
 
         emit(CaseSuccess());
       }
     } catch (e) {
+       print("**********************************");
+      print(e.toString());
       emit(CaseFailure(errorMessage: e.toString()));
     }
   }

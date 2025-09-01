@@ -87,7 +87,7 @@ class CaseDoctorBody extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: Static.getheight(context, 25)),
-                              DoctorPatientName(caseDoctorModel: caseDetails),
+                              DoctorPatientName(caseDoctorModel: caseDetails , patientid: caseDetails!.patientid!,),
                               DoctorCaseDescription(
                                 caseDoctorModel: caseDetails,
                               ),

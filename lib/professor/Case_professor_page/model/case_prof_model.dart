@@ -3,6 +3,7 @@ class CaseProfModel {
   String? studentImage;
   String? stage;
   String? patientName;
+  int? patientid;
   String? description;
   String? radiologyImage;
   List<String>? beforeImages;
@@ -13,6 +14,7 @@ class CaseProfModel {
       this.studentImage,
       this.stage,
       this.patientName,
+      this.patientid ,
       this.description,
       this.radiologyImage,
       this.beforeImages,
@@ -23,6 +25,7 @@ class CaseProfModel {
     studentImage = json['student_image'] ?? '';
     stage = json['stage'];
     patientName = json['patient_name'];
+    patientid = json['patient_id']??0;
     description = json['description'];
     radiologyImage = json['radiology_image'] ?? '';
     beforeImages = json['before_images'].cast<String>() ?? [];

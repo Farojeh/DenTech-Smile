@@ -1,8 +1,12 @@
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/student/Home/controller/cubit/patient_info_cubit.dart';
+import 'package:dentech_smile/student/Home/view/widget/info_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfessorPatientName extends StatelessWidget {
-  const ProfessorPatientName({super.key});
+  final int patientid ;
+  const ProfessorPatientName({super.key, required this.patientid});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,15 @@ class ProfessorPatientName extends StatelessWidget {
           ],
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+             showDialog(
+        context: context,
+        builder: (context) => BlocProvider<PatientInfoCubit>(
+          create: (context) => PatientInfoCubit(patientid),
+          child: const InfoDialog(),
+        ),
+      );
+          },
           child: Padding(
             padding: EdgeInsets.only(right: Static.getwidth(context, 28)),
             child: Text(

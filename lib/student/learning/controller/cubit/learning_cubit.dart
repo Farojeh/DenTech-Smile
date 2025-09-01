@@ -50,12 +50,7 @@ class LearningCubit extends Cubit<LearningState> {
           .map((stageJson) => Internship.setdata(tid, stageJson))
           .toList();
 
-      List<Archive> selectArchive = internships
-          .firstWhere(
-            (i) => i.archives.isNotEmpty,
-            orElse: () => Internship(id: '0', name: '', archives: []),
-          )
-          .archives;
+       List<Archive> selectArchive = internships[0].archives;
       emit(LearningSuccess(
           allinternships: internships, allarchives: selectArchive, select: 0));
     } catch (error) {

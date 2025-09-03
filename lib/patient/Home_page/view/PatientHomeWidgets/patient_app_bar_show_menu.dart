@@ -2,6 +2,8 @@ import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
+import 'package:dentech_smile/main.dart';
+import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +27,11 @@ class PatientAppBarShowMenu extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: Colors.white,
       offset: const Offset(50, 50),
-      icon: Image.asset('assets/images/drawer.png', width: Static.gethieght(context, 40), height: Static.gethieght(context, 40)),
+      icon: Image.asset(
+        'assets/images/drawer.png',
+        width: Static.gethieght(context, 40),
+        height: Static.gethieght(context, 40),
+      ),
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,
@@ -65,6 +71,7 @@ class PatientAppBarShowMenu extends StatelessWidget {
             Future.delayed(Duration.zero, () {
               context.read<ThemeCubit>().changeLang();
             });
+            context.read<PatientCubit>().newEmit();
           },
           child: Text(
             changeLangText,
@@ -76,6 +83,22 @@ class PatientAppBarShowMenu extends StatelessWidget {
         ),
         const PopupMenuDivider(),
         PopupMenuItem(
+          onTap: () async {
+            String? fcmtoken = userInfo!.getString(Static.fcmToken);
+            await userInfo!.remove(Static.token);
+            await userInfo!.remove(Static.userRole);
+
+            if (fcmtoken != null) {
+              await userInfo!
+                  .setString(Static.fcmToken, fcmtoken); // 👈 نفس المفتاح
+            }
+
+            print("*********************************");
+            print(userInfo!
+                .getString(Static.fcmToken)); // 👈 لازم يطبع نفس القيمة
+            first = true;
+            GoRouter.of(context).pushReplacement('/');
+          },
           value: 4,
           child: Text(
             logoutText,

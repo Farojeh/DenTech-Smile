@@ -48,7 +48,7 @@ class PatientDoctorOralBlock extends StatelessWidget {
                   children: [
                     Text(
                       student.name!,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Afacad',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -56,14 +56,14 @@ class PatientDoctorOralBlock extends StatelessWidget {
                     ),
                     Text(
                       student.year!,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Afacad',
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                       ),
                     ),
                     RatingBarIndicator(
-                      rating: student.avgEvaluation!.toDouble(),
+                      rating: student.avgEvaluation.toDouble(),
                       itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: Color.fromARGB(255, 212, 175, 55),

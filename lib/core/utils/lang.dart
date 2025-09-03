@@ -2,12 +2,12 @@ class Lang {
   static Map<String, String> arabLang = {
     "availabeDoctor": "الاطباء المتاحين",
     "Profile": "الملف الشخصي",
-    "About_app": "حول التطبيق",
+    "About_app": "حول التطبيق ",
     "Log_out": "تسجيل الخروج",
     "change_lang": "تغيير اللغة",
     "Hello": "مرحبا بك ",
     "Archive_status": "أرشيف الحالات",
-    "follow": "تتبع وضعك الصحي وحالتك بدقة من خلال هذا القسم'",
+    "follow": "تتبع وضعك الصحي بدقة من خلال هذا القسم الذي يوضح ارشيف الحالات",
     "Archive": "الأرشيف",
     "oral": "طب الفم",
     "message1": "لا يوجد أطباء أسنان في هذا المكان حالياً",
@@ -17,17 +17,16 @@ class Lang {
     "NO": "لا",
     "available_appointment": "المواعيد المتاحة",
     "message3": "لا يوجد مواعيد متاحة",
-    "message4": "؟هل تريد تأكيد الموعد",
+    "message4": "هل تريد تأكيد الموعد ",
     "hour": "الساعة :",
-    "message5": "لا يوجد حالات لرؤيتها حالياً",
+    "message5": "لا يوجد حالات لرؤيتها حالياً'",
     "description": "وصف الحالة",
     "appointments": "مواعيد الجلسات العلاجية",
     "xray": "صورة الاشعة للاسنان ",
     "photo_befor": "صور للاسنان قبل العلاج",
     "photo_after": "صور للاسنان بعد العلاج",
-    "message6":
-        "الرجاء اولا الذهاب الى الجامعة و اخذ صورة اشعة ثم سيتم معالجتها وتوجيهك الى مجموعة الاطباء المناسبين",
-    "message7": "طلبك قيد المعالجة الرجاء الانتظار قليلا"
+    "message6": "يجب عليك الذهاب للكلية والقيام بتصوير صورة اشعة ",
+    "message7": "طلبك قيد المعالجة الرجاء الانتظار ",
   };
   static Map<String, String> enLang = {
     "availabeDoctor": "Availabe Doctor",
@@ -56,8 +55,7 @@ class Lang {
     "xray": "Dental X-ray",
     "photo_befor": "Pictures of teeth before treatment",
     "photo_after": "Pictures of teeth after treatment",
-    "message6":
-        "Please first go to the university and take an x-ray, then it will be processed and you will be directed to the appropriate group of doctors.",
-    "message7":"Your request is being processed. Please wait a moment."
+    "message6": "You should go to the college and get an x-ray.",
+    "message7": "Your request is being processed",
   };
 }

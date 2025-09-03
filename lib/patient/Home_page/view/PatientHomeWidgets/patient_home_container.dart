@@ -40,7 +40,7 @@ class PatientHomeContainer extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: size.height * 0.04 > 30 ? 30 : size.height * 0.04,
+                top:context.watch<ThemeCubit>().isArabic? 22:size.height * 0.04 > 25 ? 25 : size.height * 0.04,
                 left: Static.getwieght(context, 30),
                 child: Text(
                   context.watch<ThemeCubit>().isArabic
@@ -55,7 +55,7 @@ class PatientHomeContainer extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: Static.gethieght(context, 82),
+                top:context.watch<ThemeCubit>().isArabic? Static.gethieght(context, 70):Static.gethieght(context, 75),
                 left: size.width * 0.012 > 5 ? 5 : size.width * 0.012,
                 right: size.width * 0.46 > 155 ? 155 : size.width * 0.46,
                 child: Padding(
@@ -75,20 +75,21 @@ class PatientHomeContainer extends StatelessWidget {
                     textDirection: context.watch<ThemeCubit>().isArabic
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                    maxLines: 2,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
               Positioned(
-                bottom: Static.gethieght(context, 37),
+                bottom:Static.gethieght(context, 25),
                 left: Static.getwieght(context, 30),
                 width: size.width * 0.3 > 117 ? 117 : size.width * 0.3,
                 height: size.height * 0.05 > 38 ? 38 : size.height * 0.05,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black.withOpacity(0),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15), 
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     backgroundColor: Colors.black,
                   ),

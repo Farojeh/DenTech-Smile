@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/student/profile/controller/cubit/number_edit_dialog_cubit.dart';
@@ -103,7 +104,7 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
-  void event(String id) {
+  void event(String id) async {
     if (id == "1") {
       showDialog(
           context: context,
@@ -120,10 +121,21 @@ class _ProfileBodyState extends State<ProfileBody> {
                 create: (context) => NumberEditDialogCubit(),
                 child: const NumberEditDialg(editnumber: false),
               ));
-    } else if (id == "4") {
-      String fcmtoken = userInfo!.getString('fcm_token')!;
-      userInfo!.clear();
-      userInfo!.setString('fcm_token', fcmtoken);
+    }else if(id == "3"){
+      GoRouter.of(context).push(AppRouter.notifications , extra: false);
+    }
+     else if (id == "4") {
+      String? fcmtoken = userInfo!.getString(Static.fcmToken);
+      await userInfo!.remove(Static.token);
+      await userInfo!.remove(Static.userRole);
+
+      if (fcmtoken != null) {
+        await userInfo!.setString(Static.fcmToken, fcmtoken); // 👈 نفس المفتاح
+      }
+
+      print("*********************************");
+      print(userInfo!.getString(Static.fcmToken)); // 👈 لازم يطبع نفس القيمة
+      first = true;
       GoRouter.of(context).pushReplacement('/');
     }
   }

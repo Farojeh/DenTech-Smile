@@ -2,11 +2,15 @@ import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dentech_smile/Auth/data_patient/view/widget/image_dialog.dart';
+import 'package:dentech_smile/core/utils/api_service.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/init_app.dart';
+import 'package:dentech_smile/core/utils/service_locator.dart';
 import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/view/PatientHomeWidgets/patient_dialog.dart';
 import 'package:dentech_smile/student/Home/view/widget/show_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -23,7 +27,7 @@ class Static {
   static Color lightcolor = const Color(0xff353535);
   static Color lightcolor2 = const Color(0xff7C7979);
   static Color? shimmer = Colors.grey[300];
-  static String ipconfig = "192.168.1.9";
+  static String ipconfig = "192.168.137.160";
   static String userName = "userName";
   static String userNumber = "userNumber";
   static String userNumberedit = "userNumber";
@@ -31,8 +35,10 @@ class Static {
   static String studentyear = "studentyear";
   static String studentid = "studentid";
   static String patientdata = "patientdata";
+  static String fcmToken = 'fcm_token';
   static String studentweeklyschedule = "studentweeklyschedule";
   static String studentpraschedule = "studentpraschedule";
+  static String proffesorschedule = "proffesorschedule";
   static String urlimage = "http://$ipconfig:8000/storage/";
   static String urlimagewithoutsplash = "http://$ipconfig:8000/storage";
   static String urlimagewithoutstorage = "http://$ipconfig:8000";
@@ -41,7 +47,21 @@ class Static {
   static String token = "Token";
   static String studentimage = "studentimage";
 
-  static void home(BuildContext context) {
+  static void home(BuildContext context) async {
+    await initApp();
+    updateFcm().then((result) {
+      if (result) {
+        rootScaffoldMessengerKey.currentState!
+          ..hideCurrentSnackBar()
+          ..showSnackBar(CustomSnackBar()
+              .customSnackBar('Hello', "Welcome Again", ContentType.success));
+      } else {
+        rootScaffoldMessengerKey.currentState!
+          ..hideCurrentSnackBar()
+          ..showSnackBar(CustomSnackBar().customSnackBar('Opps',
+              "Something error about notification", ContentType.failure));
+      }
+    });
     if (userInfo!.getInt(userRole) == 1) {
       GoRouter.of(context).pushReplacement(AppRouter.mainTabView);
     } else if (userInfo!.getInt(userRole) == 2) {
@@ -53,6 +73,32 @@ class Static {
       }
     } else {
       GoRouter.of(context).pushReplacement(AppRouter.homeProf);
+    }
+  }
+
+  static Future<bool> updateFcm() async {
+    final apiService = getIt<ApiService>();
+    Response response;
+
+    String? fcm = userInfo!.getString(Static.fcmToken); // 👈 نفس المفتاح
+
+    print("Static.fcmToken: ${Static.fcmToken}");
+    print("FCM in updateFcm: $fcm");
+
+    if (fcm == null) return false;
+
+    Map<String, String> data = {"fcm_token": fcm};
+
+    try {
+      response = await apiService.post(
+        endPoint: "/update-token",
+        data: data,
+        token: true,
+      );
+      print(data);
+      return response.statusCode == 200 || response.statusCode == 201;
+    } catch (e) {
+      return false;
     }
   }
 

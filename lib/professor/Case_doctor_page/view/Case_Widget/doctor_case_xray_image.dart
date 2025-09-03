@@ -1,5 +1,5 @@
 import 'package:dentech_smile/core/utils/static.dart';
-import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/ImageScreen.dart';
+import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_screen.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCaseXrayImage extends StatelessWidget {

@@ -11,7 +11,7 @@ class ArchiveModel {
     if (json['students'] != null) {
       students = <StudentsArchive>[];
       json['students'].forEach((v) {
-        students!.add(new StudentsArchive.fromJson(v));
+        students!.add( StudentsArchive.fromJson(v));
       });
     }
   }

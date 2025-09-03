@@ -25,7 +25,7 @@ class PatientCaseDescription extends StatelessWidget {
                 context.watch<ThemeCubit>().isArabic
                     ? Lang.arabLang["description"]!
                     : Lang.enLang["description"]!,
-                style: TextStyle(
+                style:const TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,
                   fontSize: 18,

@@ -15,11 +15,11 @@ final class PatientFailure extends PatientState {
 
 final class PatientSuccess extends PatientState {}
 
-final class PatientOralSuccess extends PatientState {
-  final OralDoctorModel? oralDoctorModel;
+// final class PatientOralSuccess extends PatientState {
+//   final OralDoctorModel? oralDoctorModel;
 
-  PatientOralSuccess([this.oralDoctorModel]);
-}
+//   PatientOralSuccess([this.oralDoctorModel]);
+// }
 
 final class PatientDoctorStageSuccess extends PatientState {
   final RequestStatusModel? requestStatusModel;

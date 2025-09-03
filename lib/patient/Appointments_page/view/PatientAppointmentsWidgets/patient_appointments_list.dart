@@ -22,29 +22,28 @@ class PatientAppointmentsList extends StatelessWidget {
         if (state is PatientLoading) {
           return SizedBox(
             height: screenHeight,
-            // width: MediaQuery.of(context).size.width,
             child: const Center(child: CircularProgressIndicator()),
           );
         } else if (state is PatientAppointmentSuccess) {
           final appointmentModel = state.appointmentModel;
           return ListView.builder(
             padding: EdgeInsets.symmetric(
-                horizontal: Static.getwieght(context, 30), vertical: 0),
+              horizontal: Static.getwieght(context, 30),
+              vertical: 0,
+            ),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => Padding(
-              padding:
-                  EdgeInsets.symmetric(vertical: Static.gethieght(context, 7)),
+              padding: EdgeInsets.symmetric(
+                vertical: Static.gethieght(context, 7),
+              ),
               child: Column(
                 children: [
                   PatientAppointmentsBlock(
-                      appointments:
-                          appointmentModel.availableAppointments![index]),
-                   Divider(
-                    thickness: 0.5,
-                    indent: 10,
-                    color: Static.basiccolor,
-                  )
+                    appointments:
+                        appointmentModel.availableAppointments![index],
+                  ),
+                  Divider(thickness: 0.5, indent: 10, color: Static.basiccolor),
                 ],
               ),
             ),

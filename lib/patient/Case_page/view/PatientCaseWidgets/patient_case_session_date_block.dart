@@ -1,4 +1,4 @@
-import 'package:dentech_smile/patient/Case_page/model/CaseInfoModel.dart';
+import 'package:dentech_smile/patient/Case_page/model/case_info_model.dart';
 import 'package:flutter/material.dart';
 
 class PatientCaseSessionDateBlock extends StatelessWidget {

@@ -36,10 +36,20 @@ class ProfessorAppBarShowMenu extends StatelessWidget {
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem(
-                  onTap: () {
-                    String fcmtoken = userInfo!.getString('fcm_token')!;
-                    userInfo!.clear();
-                    userInfo!.setString('fcm_token', fcmtoken);
+                  onTap: () async {
+                    String? fcmtoken = userInfo!.getString(Static.fcmToken);
+                    await userInfo!.remove(Static.token);
+                    await userInfo!.remove(Static.userRole);
+
+                    if (fcmtoken != null) {
+                      await userInfo!.setString(
+                          Static.fcmToken, fcmtoken); // 👈 نفس المفتاح
+                    }
+
+                    print("*********************************");
+                    print(userInfo!
+                        .getString(Static.fcmToken)); // 👈 لازم يطبع نفس القيمة
+                    first = true;
                     GoRouter.of(context).pushReplacement('/');
                   },
                   value: 2,
@@ -53,13 +63,13 @@ class ProfessorAppBarShowMenu extends StatelessWidget {
           : (context) => [
                 PopupMenuItem(
                   onTap: () {
-                    String fcmtoken = userInfo!.getString('fcm_token')!;
+                    String fcmtoken = userInfo!.getString(Static.fcmToken)!;
                     userInfo!.clear();
-                    userInfo!.setString('fcm_token', fcmtoken);
+                    userInfo!.setString(Static.fcmToken, fcmtoken);
                     GoRouter.of(context).pushReplacement('/');
                   },
                   value: 2,
-                  child:const Text(
+                  child: const Text(
                     'Log out',
                     style: TextStyle(
                         fontFamily: 'Afacad', fontWeight: FontWeight.w500),

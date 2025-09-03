@@ -44,7 +44,7 @@ class PatientArchiveList extends StatelessWidget {
                         ),
                         child: Container(
                           width: screenWidth * 0.85,
-                          height: 1,
+                          height: 0.5,
                           color: const Color.fromARGB(255, 34, 158, 189),
                         ),
                       ),
@@ -58,7 +58,9 @@ class PatientArchiveList extends StatelessWidget {
                 )
               : Center(
                   child: Padding(
-                    padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
+                    padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.2,
+                    ),
                     child: Image.asset(
                       "assets/images/File searching-rafiki.png",
                       height: 250,

@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:dentech_smile/firebase_options.dart';
@@ -43,11 +44,11 @@ Future<void> initApp() async {
   /// جلب وحفظ الـ FCM token
   final fcm = await FirebaseMessaging.instance.getToken();
   debugPrint("📲 FCM Token: $fcm");
-  await userInfo?.setString('fcm_token', fcm ?? '');
+  await userInfo?.setString(Static.fcmToken, fcm ?? '');
 
   /// استماع لتحديث التوكن
   FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
-    userInfo?.setString('fcm_token', fcmToken);
+    userInfo?.setString(Static.fcmToken, fcmToken);
     debugPrint("🔄 Token refreshed: $fcmToken");
   });
 

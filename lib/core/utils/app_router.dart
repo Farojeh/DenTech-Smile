@@ -16,10 +16,14 @@ import 'package:dentech_smile/Auth/reset_password/view/verify_page.dart';
 import 'package:dentech_smile/Auth/sign_up/controller/cubit/sign_up_cubit.dart';
 import 'package:dentech_smile/Auth/sign_up/view/sign_up.dart';
 import 'package:dentech_smile/Auth/splash_view/splash_view.dart';
-import 'package:dentech_smile/patient/Appointments_doctor/AppointmentsDoctorPage.dart';
-import 'package:dentech_smile/patient/Appointments_page/view/AppointmentsOralPage.dart';
+import 'package:dentech_smile/patient/About_app_page/about_app_page.dart';
+import 'package:dentech_smile/patient/Appointments_doctor/appointments_doctor_page.dart';
+import 'package:dentech_smile/patient/Appointments_page/view/appointments_oral_page.dart';
 import 'package:dentech_smile/patient/Available_doctor_page/model/argument_model.dart';
+import 'package:dentech_smile/patient/Case_page/view/case_page.dart';
 import 'package:dentech_smile/patient/Home_page/model/oral_doctor_model.dart';
+import 'package:dentech_smile/patient/Notifications_page/cubit/notification_cubit.dart';
+import 'package:dentech_smile/patient/Notifications_page/view/notifications_page.dart';
 import 'package:dentech_smile/professor/Add_pages/view/add_article_body.dart';
 import 'package:dentech_smile/professor/Add_pages/view/add_book_body.dart';
 import 'package:dentech_smile/professor/Add_pages/view/add_video_body.dart';
@@ -61,14 +65,11 @@ import 'package:dentech_smile/student/profile/controller/cubit/verify_edit_cubit
 import 'package:dentech_smile/student/profile/view/verify_edit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dentech_smile/patient/About_app_page/AboutAppPage.dart';
 import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
 import 'package:dentech_smile/patient/Archive_page/view/archive_body.dart';
 import 'package:dentech_smile/patient/Available_doctor_page/view/available_doctor_body.dart';
 import 'package:dentech_smile/patient/Home_page/view/patient_home_page.dart';
-import 'package:dentech_smile/patient/Notifications_page/view/NotificationsPage.dart';
 import 'package:dentech_smile/patient/Profile_page/view/profile_page.dart';
-import 'package:dentech_smile/patient/Case_page/view/CasePage.dart';
 
 abstract class AppRouter {
   static const welcomView = "/onBoarding";
@@ -241,7 +242,7 @@ abstract class AppRouter {
       GoRoute(path: learning, builder: (context, state) => const Learnpage()),
       GoRoute(
         path: kHomeView,
-        builder: (context, state) => const PatientHomePage(),
+        builder: (context, state) =>  const PatientHomePage(),
       ),
       GoRoute(path: karchive, builder: (context, state) => const ArchivePage()),
       GoRoute(
@@ -275,7 +276,13 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: notifications,
-        builder: (context, state) => const NotificationPage(),
+        builder: (context, state) {
+          final bool isar = state.extra as bool;
+          return BlocProvider<NotificationCubit>(
+            create: (context) => NotificationCubit(),
+            child: NotificationPage(isar: isar),
+          );
+        },
       ),
       GoRoute(
         path: aboutApp,

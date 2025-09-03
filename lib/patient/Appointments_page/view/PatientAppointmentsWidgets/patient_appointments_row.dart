@@ -14,13 +14,11 @@ class PatientAppointmentsRow extends StatelessWidget {
       child: Row(
         children: [
           Image(
-            image: const AssetImage(
-              'assets/images/information 1.png',
-            ),
-            width:Static.gethieght(context, 32),
-            height: Static.gethieght(context, 32)
+            image: const AssetImage('assets/images/information 1.png'),
+            width: Static.gethieght(context, 32),
+            height: Static.gethieght(context, 32),
           ),
-         const SizedBox(width: 15),
+          const SizedBox(width: 15),
           Text(
             context.watch<ThemeCubit>().isArabic
                 ? Lang.arabLang["available_appointment"]!
@@ -28,7 +26,7 @@ class PatientAppointmentsRow extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w700,
-              fontSize: Static.getwieght(context, 25)
+              fontSize: Static.getwieght(context, 25),
             ),
           ),
         ],

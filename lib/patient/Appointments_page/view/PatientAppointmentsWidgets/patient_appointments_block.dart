@@ -1,9 +1,9 @@
 import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/core/utils/style.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Appointments_page/model/appointment_model.dart';
 import 'package:flutter/material.dart';
-import 'package:dentech_smile/core/utils/style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'time_block.dart';
 
@@ -30,8 +30,8 @@ class PatientAppointmentsBlock extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width:  6,
-                    height:  6,
+                    width: 6,
+                    height: 6,
                     decoration: const BoxDecoration(
                       color: Styles.basicColor,
                       shape: BoxShape.circle,
@@ -48,7 +48,7 @@ class PatientAppointmentsBlock extends StatelessWidget {
                   ),
                 ],
               ),
-             const SizedBox(height: 6),
+              const SizedBox(height: 6),
               Text(
                 appointments.date ?? '',
                 style: TextStyle(
@@ -65,9 +65,7 @@ class PatientAppointmentsBlock extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      "[ ${context.watch<ThemeCubit>().isArabic
-                          ? Lang.arabLang["message3"]!
-                          : Lang.enLang["message3"]!} ]",
+                      "[ ${context.watch<ThemeCubit>().isArabic ? Lang.arabLang["message3"]! : Lang.enLang["message3"]!} ]",
                       style: TextStyle(
                         fontFamily: 'Afacad',
                         fontSize: Static.getwieght(context, 18),

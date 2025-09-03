@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 
 class AboutAppPage extends StatelessWidget {
@@ -57,7 +58,7 @@ class AboutAppPage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: width * 0.15,
-                    backgroundColor: basicColor.withOpacity(0.1),
+                    backgroundColor:Static.basiccolor,
                     child: Icon(
                       Icons.medical_services,
                       size: width * 0.15,

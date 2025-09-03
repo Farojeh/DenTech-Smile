@@ -6,7 +6,6 @@ import 'package:dio/io.dart';
 
 class ApiService {
   static final _baseUrl = "http://${Static.ipconfig}:8000/";
-
   static final dio = Dio()
     ..httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
@@ -16,18 +15,35 @@ class ApiService {
         return client;
       },
     );
+
   static final String token = userInfo!.getString(Static.token)!;
-  static final Map<String, String> headers = {
+
+  static Map<String, String> baseHeaders = {
     'Authorization': 'Bearer $token',
     'Content-Type': 'application/json',
   };
 
-  ApiService(dio);
-  static Future<Map<String, dynamic>> get({required String endPoint}) async {
+  static Map<String, String> _headers({
+    bool withLang = false,
+    String langCode = "en",
+  }) {
+    if (withLang) {
+      return {...baseHeaders, 'Accept-Language': langCode};
+    }
+    return baseHeaders;
+  }
+
+  static Future<Map<String, dynamic>> get({
+    required String endPoint,
+    bool withLang = false,
+    String langCode = "en",
+  }) async {
     try {
       var response = await dio.get(
         '$_baseUrl$endPoint',
-        options: Options(headers: headers),
+        options: Options(
+          headers: _headers(withLang: withLang, langCode: langCode),
+        ),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -54,12 +70,16 @@ class ApiService {
   static Future<Map<String, dynamic>> post({
     required String endPoint,
     dynamic data,
+    bool withLang = false,
+    String langCode = "en",
   }) async {
     try {
       var response = await dio.post(
         '$_baseUrl$endPoint',
-        options: Options(headers: headers),
         data: data,
+        options: Options(
+          headers: _headers(withLang: withLang, langCode: langCode),
+        ),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

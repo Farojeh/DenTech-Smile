@@ -1,3 +1,4 @@
+
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_arrow.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_container_clip.dart';
@@ -7,8 +8,8 @@ import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_description.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_image.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_text.dart';
-import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_tooth_photo_befor.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_tooth_photo_after.dart';
+import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_tooth_photo_befor.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_xray_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +23,9 @@ class CasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => PatientCaseCubit()
-        ..getCaseInfoByIdStudentStage(student.studentId!, student.stageId!),
+      create: (context) =>
+          PatientCaseCubit()
+            ..getCaseInfoByIdStudentStage(student.studentId!, student.stageId!,context),
       child: BlocConsumer<PatientCaseCubit, PatientCaseState>(
         listener: (context, state) {
           if (state is PatientCaseFailure) {
@@ -37,8 +39,8 @@ class CasePage extends StatelessWidget {
             final caseInfoModel = state.caseInfoModel;
             return Directionality(
               textDirection: context.watch<ThemeCubit>().isArabic
-            ? TextDirection.rtl
-            : TextDirection.ltr,
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
               child: Scaffold(
                 backgroundColor: Colors.white,
                 body: SizedBox.expand(
@@ -63,11 +65,11 @@ class CasePage extends StatelessWidget {
                                 children: [
                                   PatientCaseDescription(
                                     description:
-                                        caseInfoModel.sessionDescription!,
+                                        caseInfoModel.sessionDescription ?? 'لا يوجد وصف',
                                   ),
                                   PatientCaseAppointments(
                                     appintments:
-                                        caseInfoModel.appointmentDates!,
+                                        caseInfoModel.appointmentDates ?? [],
                                   ),
                                   const PatientCaseXrayImage(
                                     image: "assets/images/XRay.png",

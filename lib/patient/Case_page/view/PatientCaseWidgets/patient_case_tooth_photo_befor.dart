@@ -1,6 +1,6 @@
 import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
-import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/ImageScreen.dart';
+import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,7 +31,7 @@ class PatientCaseToothPhotoBefor extends StatelessWidget {
                 context.watch<ThemeCubit>().isArabic
                     ? Lang.arabLang["photo_befor"]!
                     : Lang.enLang["photo_befor"]!,
-                style: TextStyle(
+                style:const TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,
                   fontSize: 18,

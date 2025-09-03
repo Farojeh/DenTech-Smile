@@ -22,7 +22,7 @@ class PatientElevetedButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final cubit = context.watch<PatientCubit>();
+        final cubit = context.read<PatientCubit>();
         return ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Styles.basicColor,
@@ -34,29 +34,31 @@ class PatientElevetedButton extends StatelessWidget {
           onPressed: () {
             if (cubit.appointmentStateNumb == 1) {
               Static.showMyDialog(
-                  context,
-                  context.read<ThemeCubit>().isArabic
-                      ? Lang.arabLang["message6"]!
-                      : Lang.enLang["message6"]!,
-                  0);
+                context,
+                context.read<ThemeCubit>().isArabic
+                    ? Lang.arabLang["message6"]!
+                    : Lang.enLang["message6"]!,
+                0,
+              );
             }
             if (cubit.appointmentStateNumb == 2) {
               Static.showMyDialog(
-                  context,
-                  context.watch<ThemeCubit>().isArabic
-                      ? Lang.arabLang["message7"]!
-                      : Lang.enLang["message7"]!,
-                  0);
+                context,
+                context.read<ThemeCubit>().isArabic
+                    ? Lang.arabLang["message7"]!
+                    : Lang.enLang["message7"]!,
+                0,
+              );
             }
             if (cubit.appointmentStateNumb == 3) {
               GoRouter.of(context).push(AppRouter.available);
             }
           },
           child: Text(
-            context.watch<ThemeCubit>().isArabic
+            context.read<ThemeCubit>().isArabic
                 ? Lang.arabLang["book_appointmment"]!
                 : Lang.enLang["book_appointmment"]!,
-                textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w500,

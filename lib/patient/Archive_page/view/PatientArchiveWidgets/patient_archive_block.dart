@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
 import 'package:dentech_smile/patient/Case_page/controller/patient_case_cubit.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,8 @@ class PatientArchiveBlock extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
-                      "assets/images/doctor_male.png",
-                      width: screenWidth * 0.2,
+                      "assets/images/doctor.png",
+                      width: screenWidth * 0.25,
                       height: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -88,14 +89,13 @@ class PatientArchiveBlock extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () {
-                    GoRouter.of(context).push(
-                      AppRouter.status,
-                      extra: patientCase,
-                    );
+                    GoRouter.of(
+                      context,
+                    ).push(AppRouter.status, extra: patientCase);
                   },
                   child: Container(
-                    width: screenWidth * 0.1,
-                    height: screenWidth * 0.1,
+                    width: screenWidth * 0.09,
+                    height: screenWidth * 0.09,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -106,9 +106,10 @@ class PatientArchiveBlock extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/images/Vector2.png',
-                      width: screenWidth * 0.06,
-                      height: screenWidth * 0.06,
+                      context.watch<ThemeCubit>().isArabic?'assets/images/arrow_back_white.png':"assets/images/arrow_patient.png",
+                      color: const Color.fromARGB(255, 133, 177, 188),
+                      width: screenWidth * 0.045,
+                      height: screenWidth * 0.045,
                     ),
                   ),
                 );

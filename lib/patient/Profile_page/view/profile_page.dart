@@ -1,3 +1,4 @@
+
 import 'package:dentech_smile/core/utils/style.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Profile_page/model/profile_model.dart';
@@ -63,8 +64,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Directionality(
       textDirection: context.watch<ThemeCubit>().isArabic
-            ? TextDirection.rtl
-            : TextDirection.ltr,
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Styles.basicColor,
         body: Stack(
@@ -130,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 child: Padding(
-                  padding:const EdgeInsets.only(top: 30 , left: 30 , right: 30),
+                  padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
                   child: ListView.separated(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
@@ -169,58 +170,57 @@ class _ProfilePageState extends State<ProfilePage> {
     double screenWidth,
     double screenHeight,
     BuildContext context,
-  ) =>
-      Row(
-        children: [
-          Image.asset(
+  ) => Row(
+    children: [
+      Image.asset(
+        profileModel.icon!,
+        height: screenHeight * 0.037,
+        width: screenWidth * 0.08,
+        fit: BoxFit.contain,
+      ),
+      SizedBox(width: screenWidth * 0.04),
+      Expanded(
+        child: Text(
+          profileModel.text!,
+          textAlign: TextAlign.right,
+          style: TextStyle(
+            fontFamily: 'Afacad',
+            fontWeight: FontWeight.w500,
+            fontSize: screenWidth * 0.038,
+            color: const Color.fromRGBO(105, 105, 105, 1),
+          ),
+        ),
+      ),
+      InkWell(
+        onTap: () {
+          showWeightDialog(
+            context,
             profileModel.icon!,
-            height: screenHeight * 0.037,
-            width: screenWidth * 0.08,
+            profileModel.text!,
+            screenWidth,
+            screenHeight,
+          );
+        },
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          height: screenHeight * 0.037,
+          width: screenWidth * 0.08,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: const Color.fromRGBO(0, 128, 128, 1),
+              width: 1.5,
+            ),
+          ),
+          alignment: Alignment.center,
+          child: Image.asset(
+            'assets/images/left_vector.png',
             fit: BoxFit.contain,
           ),
-          SizedBox(width: screenWidth * 0.04),
-          Expanded(
-            child: Text(
-              profileModel.text!,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                fontFamily: 'Afacad',
-                fontWeight: FontWeight.w500,
-                fontSize: screenWidth * 0.038,
-                color: const Color.fromRGBO(105, 105, 105, 1),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              showWeightDialog(
-                context,
-                profileModel.icon!,
-                profileModel.text!,
-                screenWidth,
-                screenHeight,
-              );
-            },
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              height: screenHeight * 0.037,
-              width: screenWidth * 0.08,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: const Color.fromRGBO(0, 128, 128, 1),
-                  width: 1.5,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/left_vector.png',
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 void showWeightDialog(

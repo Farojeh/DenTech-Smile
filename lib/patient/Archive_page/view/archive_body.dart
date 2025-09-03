@@ -12,7 +12,7 @@ class ArchivePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PatientCaseCubit()..getCases(),
+      create: (context) => PatientCaseCubit()..getCases(context),
       child: Directionality(
         textDirection: context.watch<ThemeCubit>().isArabic
             ? TextDirection.rtl

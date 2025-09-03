@@ -56,7 +56,11 @@ class ApiService {
       bool tokenbool = false}) async {
     Response response;
     if (tokenbool == false) {
-      response = await _dio.post('$_baseUrl$endPoint', data: data);
+      response = await _dio.post('$_baseUrl$endPoint',
+          data: data,
+          options: Options(
+            headers: {'Accept': 'application/json', 'Accept-Language': 'en'},
+          ));
     } else {
       String token = userInfo!.getString(Static.token)!;
       response = await _dio.post('$_baseUrl$endPoint',

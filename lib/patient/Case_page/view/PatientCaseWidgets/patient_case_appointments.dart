@@ -1,6 +1,6 @@
 import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
-import 'package:dentech_smile/patient/Case_page/model/CaseInfoModel.dart';
+import 'package:dentech_smile/patient/Case_page/model/case_info_model.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/patient_case_session_date_block.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +33,7 @@ class PatientCaseAppointments extends StatelessWidget {
                 context.watch<ThemeCubit>().isArabic
                     ? Lang.arabLang["appointments"]!
                     : Lang.enLang["appointments"]!,
-                style: TextStyle(
+                style:const TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,
                   fontSize: 18,
@@ -62,7 +62,7 @@ class PatientCaseAppointments extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return PatientCaseSessionDateBlock(
-                appointment: appintments[index],
+                appointment: appintments[index] ,
               );
             },
           ),

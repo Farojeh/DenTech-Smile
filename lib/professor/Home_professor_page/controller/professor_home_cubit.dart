@@ -4,10 +4,13 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/utils/api.dart';
+import 'package:dentech_smile/core/utils/static.dart';
+import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/professor/Attendance_Registration_professor_page/model/practical-schedule-students_model.dart';
 import 'package:dentech_smile/professor/Home_professor_page/model/schedule_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 // import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
@@ -96,12 +99,21 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
     if (isClosed) return;
     emit(ProfessorSchaduleLoading());
     try {
-      var response = await ApiService.get(
-        endPoint: 'api/supervisor-weekly-schedule',
-      );
+      bool internetConnection = await checkInternet();
+      var response;
+      if (internetConnection) {
+        response = await ApiService.get(
+          endPoint: 'api/supervisor-weekly-schedule',
+        );
+        userInfo!
+            .setString(Static.proffesorschedule,responseToString(response));
+      } else {
+        response = stringToResponse(
+            userInfo!.getString(Static.proffesorschedule) ?? "");
+      }
 
       if (isClosed) return;
-      
+
       if (response['success']) {
         scheduleModel = ScheduleModel.fromJson(response['data']);
         getDaysSchedules();
@@ -117,9 +129,25 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
     }
   }
 
+  Future<bool> checkInternet() async {
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+    if (hasInternet) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  String responseToString(dynamic data) {
+    return jsonEncode(data);
+  }
+
+  dynamic stringToResponse(String data) {
+    return jsonDecode(data);
+  }
+
   PracticalModel? practicalModel;
   Future<void> getPracticalScheduleStudents(int practicalScheduleId) async {
-   
     print("fffffffffffffffffffffffffffffffffffffffffff $practicalScheduleId");
 
     emit(ProfessorPracticalLoading());
@@ -132,20 +160,15 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
 
       print(response);
 
-     
-
       if (response['success']) {
         practicalModel = PracticalModel.fromJson(response['data']);
         length = practicalModel!.students!.length;
         checkedList = List.generate(length, (index) => false);
-       
-          emit(ProfessorHomeSuccess());
-        
+
+        emit(ProfessorHomeSuccess());
       }
     } catch (e) {
-    
-        emit(ProfessorHomeFailure(errorMessage: e.toString()));
-      
+      emit(ProfessorHomeFailure(errorMessage: e.toString()));
     }
   }
 
@@ -203,9 +226,11 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
     return false;
   }
 
-  void printscan(){
-    print("*****************************************session_id $sessionid **********************************");
-    print("*****************************************student_id $studentid **********************************");
+  void printscan() {
+    print(
+        "*****************************************session_id $sessionid **********************************");
+    print(
+        "*****************************************student_id $studentid **********************************");
   }
 
   @override

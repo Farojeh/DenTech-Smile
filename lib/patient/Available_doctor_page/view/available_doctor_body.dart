@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AvailableDoctorPage extends StatelessWidget {
-  const AvailableDoctorPage({
-    super.key,
-  });
+  const AvailableDoctorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +22,14 @@ class AvailableDoctorPage extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            shadowColor: Colors.white.withOpacity(0),
+            shadowColor: Colors.white,
             leading: const PatientAvailableAppBarArrow(),
             title: const PatientAvailabeAppBarTitle(),
-            actions:const [ PatientAvailableAppBarAction()],
+            actions: const [PatientAvailableAppBarAction()],
           ),
           body: const SingleChildScrollView(
-              child: PatientBodyList(
-            isFullHeight: true,
-          )),
+            child: PatientBodyList(isFullHeight: true),
+          ),
         ),
       ),
     );

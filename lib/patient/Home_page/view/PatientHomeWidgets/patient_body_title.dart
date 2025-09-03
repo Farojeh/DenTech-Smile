@@ -1,3 +1,4 @@
+
 import 'package:dentech_smile/core/utils/lang.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class PatientBodyTitle extends StatelessWidget {
             context.watch<ThemeCubit>().isArabic
                 ? Lang.arabLang["availabeDoctor"]!
                 : Lang.enLang["availabeDoctor"]!,
-            style:const TextStyle(
+            style: const TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w700,
               color: Colors.black,
@@ -28,7 +29,7 @@ class PatientBodyTitle extends StatelessWidget {
             context.watch<ThemeCubit>().isArabic
                 ? Lang.arabLang["oral"]!
                 : Lang.enLang["oral"]!,
-            style:const TextStyle(
+            style: const TextStyle(
               fontFamily: 'Afacad',
               fontWeight: FontWeight.w400,
               color: Color.fromARGB(255, 54, 54, 54),

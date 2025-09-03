@@ -1,3 +1,4 @@
+
 class OralDoctorModel {
   String? status;
   List<Students>? students;
@@ -29,17 +30,17 @@ class Students {
   String? name;
   String? year;
   String? profileImage;
-  double? avgEvaluation;
+  double avgEvaluation = 0.0 ;
 
   Students(
-      {this.id, this.name, this.year, this.profileImage, this.avgEvaluation});
+      {this.id, this.name, this.year, this.profileImage, required this.avgEvaluation});
 
   Students.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     year = json['year'];
-    profileImage = json['profile_image'];
-    avgEvaluation = json['avg_evaluation'];
+    profileImage = json['profile_image'] ?? '';
+    avgEvaluation = (json['avg_evaluation']) == null ? 0.0 : (json['avg_evaluation']).toDouble() ;
   }
 
   Map<String, dynamic> toJson() {

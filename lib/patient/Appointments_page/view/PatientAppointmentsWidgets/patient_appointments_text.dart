@@ -14,7 +14,7 @@ class PatientAppointmentsText extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return Positioned(
       top: Static.gethieght(context, 170),
-      right: Static.getwieght(context, 110),
+      right: Static.getwieght(context, 85),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,21 +23,21 @@ class PatientAppointmentsText extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
-                  width: 3,
-                  height: 3,
+                  width: 2.5,
+                  height: 2.5,
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
                   ),
                 ),
               ),
-             const SizedBox(width: 7,),
+              const SizedBox(width: 5),
               Text(
                 student.name!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w500,
-                  fontSize: screenWidth * 0.04,
+                  fontSize: screenWidth * 0.035,
                 ),
               ),
             ],
@@ -48,21 +48,21 @@ class PatientAppointmentsText extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
-                  width: 3,
-                  height: 3,
+                  width: 2.5,
+                  height: 2.5,
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
                   ),
                 ),
               ),
-              const SizedBox(width: 7,),
+              const SizedBox(width: 5),
               Text(
                 student.year!,
                 style: TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w500,
-                  fontSize: screenWidth * 0.04,
+                  fontSize: screenWidth * 0.035,
                 ),
               ),
             ],
@@ -73,17 +73,17 @@ class PatientAppointmentsText extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
-                  width: 3,
-                  height: 3,
+                  width: 2.5,
+                  height: 2.5,
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
                   ),
                 ),
               ),
-              const SizedBox(width: 7,),
+              const SizedBox(width: 5),
               RatingBarIndicator(
-                rating: student.avgEvaluation!.toDouble(),
+                rating: student.avgEvaluation.toDouble(),
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Color.fromARGB(255, 212, 175, 55),

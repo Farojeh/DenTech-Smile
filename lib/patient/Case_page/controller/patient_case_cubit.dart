@@ -1,8 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:dentech_smile/core/utils/api.dart';
+import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
-import 'package:dentech_smile/patient/Case_page/model/CaseInfoModel.dart';
+import 'package:dentech_smile/patient/Case_page/model/case_info_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'patient_case_state.dart';
 
@@ -15,7 +16,7 @@ class PatientCaseCubit extends Cubit<PatientCaseState> {
       "doctor_name": "احمد",
       "year": "سنة رابعة",
       "stage_name": "قلع ناب",
-      "image": "assets/images/doctor_male.png",
+      "image": "assets/images/doctor.png",
       "rate": 3.2,
       "date": "12/3/2025",
     },
@@ -24,7 +25,7 @@ class PatientCaseCubit extends Cubit<PatientCaseState> {
       "doctor_name": "محمد",
       "year": "سنة خامسة",
       "stage_name": "كاملة",
-      "image": "assets/images/doctor_male.png",
+      "image": "assets/images/doctor.png",
       "rate": 5.0,
       "date": "12/5/2025",
     },
@@ -58,9 +59,15 @@ class PatientCaseCubit extends Cubit<PatientCaseState> {
   Map<String, Map<String, dynamic>> caseInfo = {};
 
   ArchiveModel? archiveModel;
-  Future<void> getCases() async {
+  Future<void> getCases(BuildContext context) async {
     emit(PatientCaseLoading());
-    var response = await ApiService.get(endPoint: 'api/viewArchive');
+      final isArabic = context.read<ThemeCubit>().isArabic;
+    final langCode = isArabic ? "ar" : "en";
+    var response = await ApiService.get(
+      endPoint: 'api/viewArchive',
+       langCode: langCode,
+       withLang: true,
+      );
     if (response['success']) {
       archiveModel = ArchiveModel.fromJson(response['data']);
       emit(PatientArchiveSuccess(archiveModel!));
@@ -68,14 +75,19 @@ class PatientCaseCubit extends Cubit<PatientCaseState> {
   }
 
   CaseInfoModel? caseInfoModel;
-  Future<void> getCaseInfoByIdStudentStage(int idStu, int idSta) async {
+  Future<void> getCaseInfoByIdStudentStage(int idStu, int idSta,BuildContext context) async {
     emit(PatientCaseSuccess());
+      final isArabic = context.read<ThemeCubit>().isArabic;
+    final langCode = isArabic ? "ar" : "en";
     var response = await ApiService.post(
       endPoint: 'api/viewTreatment',
       data: {"student_id": idStu, "stage_id": idSta},
+       langCode: langCode,
+       withLang: true,
     );
     if (response['success']) {
       caseInfoModel = CaseInfoModel.fromJson(response['data']);
+      print(response);
       emit(PatientCaseInfoSuccess(caseInfoModel!));
     }
   }

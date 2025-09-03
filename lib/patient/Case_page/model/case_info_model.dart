@@ -16,7 +16,7 @@ class CaseInfoModel {
 
   CaseInfoModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    sessionDescription = json['session_description'];
+    sessionDescription = json['session_description'] ?? '';
     if (json['appointment_dates'] != null) {
       appointmentDates = <AppointmentDates>[];
       json['appointment_dates'].forEach((v) {

@@ -25,7 +25,7 @@ class ProfessorAppBarImage extends StatelessWidget {
         alignment: Alignment.center,
         child: InkWell(
           onTap: () {
-            GoRouter.of(context).push(AppRouter.notifications);
+            GoRouter.of(context).push(AppRouter.notifications , extra: false);
           },
           child: Image.asset(
             'assets/images/ringing.png',

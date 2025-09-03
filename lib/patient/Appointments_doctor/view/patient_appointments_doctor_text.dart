@@ -7,8 +7,11 @@ class PatientAppointmentsDoctorText extends StatelessWidget {
   final RequestStatusModel student;
   final int index;
 
-  const PatientAppointmentsDoctorText(
-      {super.key, required this.student, required this.index});
+  const PatientAppointmentsDoctorText({
+    super.key,
+    required this.student,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {

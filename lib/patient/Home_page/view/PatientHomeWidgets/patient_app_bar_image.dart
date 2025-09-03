@@ -12,25 +12,25 @@ class PatientAppBarImage extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        left: size.width * 0.03,  
-        top: size.height * 0.01, 
+        left: size.width * 0.03,
+        top: size.height * 0.01,
       ),
       child: Container(
-        width: Static.getwieght(context, 50), 
-        height: Static.gethieght(context, 40), 
+        width: Static.getwieght(context, 50),
+        height: Static.gethieght(context, 40),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),  
-          border: Border.all(color: Colors.black, width: size.width * 0.002), 
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.black, width: size.width * 0.002),
         ),
         alignment: Alignment.center,
         child: InkWell(
           onTap: () {
-            GoRouter.of(context).push(AppRouter.notifications);
+            GoRouter.of(context).push(AppRouter.notifications , extra: true);
           },
           child: Image.asset(
             'assets/images/ringing.png',
-            width: Static.gethieght(context, 27) ,
+            width: Static.gethieght(context, 27),
             height: Static.gethieght(context, 27),
             fit: BoxFit.contain,
           ),

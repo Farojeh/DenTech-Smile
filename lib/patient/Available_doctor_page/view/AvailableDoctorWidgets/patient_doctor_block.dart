@@ -19,7 +19,7 @@ class PatientDoctorBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top :8.0, bottom: 11 ,left: 20,right: 20),
+      padding: const EdgeInsets.only(top: 8.0, bottom: 11, left: 20, right: 20),
       child: Container(
         width: double.infinity,
         height: (MediaQuery.of(context).size.height / 932) * 100,
@@ -50,14 +50,14 @@ class PatientDoctorBlock extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Padding(
-                 padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       student.students![index].name!,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Afacad',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -65,14 +65,15 @@ class PatientDoctorBlock extends StatelessWidget {
                     ),
                     Text(
                       student.students![index].year!,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Afacad',
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                       ),
                     ),
                     RatingBarIndicator(
-                      rating: student.students![index].avgEvaluation!.toDouble(),
+                      rating: student.students![index].avgEvaluation!
+                          .toDouble(),
                       itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: Color.fromARGB(255, 212, 175, 55),

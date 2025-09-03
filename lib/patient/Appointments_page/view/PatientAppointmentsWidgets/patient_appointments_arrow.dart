@@ -15,8 +15,8 @@ class PatientAppointmentsArrow extends StatelessWidget {
       child: GestureDetector(
         onTap: () => Navigator.of(context).maybePop(),
         child: Container(
-          padding:const EdgeInsets.only(left: 2),
-          margin:const EdgeInsets.only(right: 10),
+          padding: const EdgeInsets.only(left: 2),
+          margin: const EdgeInsets.only(right: 10),
           width: Static.gethieght(context, 45),
           height: Static.gethieght(context, 45),
           decoration: BoxDecoration(

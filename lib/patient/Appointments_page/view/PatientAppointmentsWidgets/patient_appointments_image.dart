@@ -15,9 +15,10 @@ class PatientAppointmentsImage extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(width: 0.5, color: Colors.black),
-          image:const DecorationImage(
+          image: const DecorationImage(
             image: AssetImage(
-                "assets/images/smiling-young-male-dentist-holding-toothbrush 1.png"),
+              "assets/images/smiling-young-male-dentist-holding-toothbrush 1.png",
+            ),
             fit: BoxFit.cover,
           ),
         ),

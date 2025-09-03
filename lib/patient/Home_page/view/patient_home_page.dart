@@ -16,23 +16,22 @@ class PatientHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
-    return BlocProvider(
-      create: (context) => PatientCubit()
-        ..getAppointmentstatus()
-        ..getOralDoctor(),
-      child: Directionality(
-        textDirection: context.watch<ThemeCubit>().isArabic
+    bool isArabic = context.watch<ThemeCubit>().isArabic;
+    context.read<PatientCubit>()
+      ..getAppointmentstatus()
+      ..getOralDoctor(isArabic);
+    return Directionality(
+        textDirection: context.read<ThemeCubit>().isArabic
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: Scaffold(
+           backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 7),
               child: AppBar(
-                backgroundColor: Colors.white.withOpacity(0),
+                backgroundColor: Colors.white,
                 shadowColor: Colors.white.withOpacity(0),
                 leading: const PatientAppBarShowMenu(),
                 title: const PatientAppBarTitle(),
@@ -49,15 +48,15 @@ class PatientHomePage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(height: 10,), 
+                    const SizedBox(height: 10),
                     const PatientHomeContainer(),
-                    const SizedBox(height: 7,),
+                    const SizedBox(height: 7),
                     Padding(
                       padding: EdgeInsets.only(top: size.height * 0.04),
                       child: const Column(
                         children: [
                           PatientBodyTitle(),
-                           SizedBox(height: 7,),
+                          SizedBox(height: 7),
                           PatientBodyOralList(isFullHeight: false),
                         ],
                       ),
@@ -73,7 +72,6 @@ class PatientHomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

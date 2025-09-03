@@ -12,8 +12,8 @@ class PatientCaseText extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Positioned(
-      top: screenHeight * 0.215,
-      right: screenWidth * 0.18,
+      top: screenHeight * 0.18,
+      right: screenWidth * 0.23,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

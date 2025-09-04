@@ -11,7 +11,7 @@ class AppBarProfTitle extends StatelessWidget {
       style: TextStyle(
         fontFamily: Static.arialRoundedMTfont,
         color: Colors.black,
-        fontSize: Static.getwidth(context, 22),
+        fontSize: Static.getwidth(context, 21),
       ),
     );
   }

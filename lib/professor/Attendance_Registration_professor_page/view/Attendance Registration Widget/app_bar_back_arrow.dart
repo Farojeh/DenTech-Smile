@@ -9,16 +9,16 @@ class AppBarBackArrow extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: Static.getheight(context, 8),
-        bottom: Static.getheight(context, 8),
-        left: Static.getwidth(context, 15),
+        bottom: Static.getheight(context, 11),
+        left: Static.getwidth(context, 20),
       ),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).maybePop();
         },
         child: Container(
-          width: Static.getwidth(context, 42),
-          height: Static.getheight(context, 42),
+          width: Static.getwidth(context, 38),
+          height: Static.getheight(context, 38),
           decoration: BoxDecoration(
             color: const Color.fromRGBO(81, 81, 81, 0.24),
             borderRadius: BorderRadius.circular(20),

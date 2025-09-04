@@ -1,5 +1,4 @@
 import 'package:dentech_smile/professor/Home_professor_page/controller/cubit/student_marks_cubit.dart';
-import 'package:dentech_smile/student/Home/controller/cubit/portfolio_pdf_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +11,7 @@ class StudentMarkDialod extends StatelessWidget {
       create: (context) => StudentMarksCubit(),
       child: BlocListener<StudentMarksCubit, StudentMarksState>(
         listener: (context, state) async {
-          if (state is PortfolioPdfSuccess) {
+          if (state is StudentMarksSuccess) {
             // Navigator.of(context).pop();
           }
         },

@@ -37,7 +37,6 @@ class LoginCubit extends Cubit<LoginState> {
               ServerFaliure.fromResponse(response.statusCode!, response.data);
           emit(LoginFailure(errorMessage: failure.errorMessage));
         } else {
-          userInfo!.clear();
           await userInfo!
               .setString(Static.userName, response.data["user"]["name"]);
           await userInfo!.setString(

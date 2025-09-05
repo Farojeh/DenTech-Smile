@@ -96,21 +96,27 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
   // }
 
   Future<void> getWeeklySchedule() async {
+    print("gggggggggggggggggggggggggg");
     if (isClosed) return;
     emit(ProfessorSchaduleLoading());
     try {
+      print("gggggggggggggggggggggggggg");
       bool internetConnection = await checkInternet();
+      print("gggggggggggggggggggggggggg");
       var response;
       if (internetConnection) {
         response = await ApiService.get(
           endPoint: 'api/supervisor-weekly-schedule',
         );
+        print(response);
         userInfo!
             .setString(Static.proffesorschedule,responseToString(response));
       } else {
         response = stringToResponse(
             userInfo!.getString(Static.proffesorschedule) ?? "");
       }
+       print(userInfo!.getString(Static.token));
+      print(response);
 
       if (isClosed) return;
 
@@ -123,6 +129,8 @@ class ProfessorHomeCubit extends Cubit<ProfessorHomeState> {
         }
       }
     } catch (e) {
+      print(userInfo!.getString(Static.token));
+      print(e);
       if (!isClosed) {
         emit(ProfessorHomeFailure(errorMessage: e.toString()));
       }

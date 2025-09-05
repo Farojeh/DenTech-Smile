@@ -4,6 +4,7 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/main.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
+import 'package:dentech_smile/restart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -98,6 +99,7 @@ class PatientAppBarShowMenu extends StatelessWidget {
                 .getString(Static.fcmToken)); // 👈 لازم يطبع نفس القيمة
             first = true;
             GoRouter.of(context).pushReplacement('/');
+            RestartWidget.restartApp(context);
           },
           value: 4,
           child: Text(

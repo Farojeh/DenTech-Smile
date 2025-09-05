@@ -6,6 +6,7 @@ import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:dentech_smile/professor/Case_professor_page/controller/case_cubit.dart';
 import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
+import 'package:dentech_smile/restart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,15 +14,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 SharedPreferences? userInfo;
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
-bool first = true ;    
+
+bool first = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   userInfo = await SharedPreferences.getInstance();
   await setupLocalNotifications(); // تهيئة إشعارات محلية
   await initApp(); // تهيئة Firebase + FCM
-  first = false ;
+  first = false;
   setupServiceLocator();
-  runApp(const MyApp());
+  runApp(
+    const RestartWidget(
+      child: MyApp(),
+    ),
+  );
   // runApp(
   //   DevicePreview(
   //     enabled: !kReleaseMode,
@@ -34,6 +40,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    print("hello from main ");
     return MultiBlocProvider(
       providers: [
         BlocProvider<TranslationCubit>(create: (context) => TranslationCubit()),
@@ -41,11 +48,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<ThemeCubit>(
           create: (context) => ThemeCubit(),
         ),
-        BlocProvider(
-          create: (context) => ProfessorHomeCubit()
-            ..changeSelectedIndex(0)
-            ..getWeeklySchedule(),
-        ),
+        BlocProvider(create: (context) => ProfessorHomeCubit()),
         BlocProvider(create: (context) => CaseCubit()),
       ],
       child: MaterialApp.router(

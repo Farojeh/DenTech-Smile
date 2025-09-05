@@ -1,7 +1,10 @@
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/main.dart';
+import 'package:dentech_smile/professor/Home_professor_page/controller/professor_home_cubit.dart';
 import 'package:dentech_smile/professor/Home_professor_page/view/HomeProfessorWidget/student_marks_dialog.dart';
+import 'package:dentech_smile/restart_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfessorAppBarShowMenu extends StatelessWidget {
@@ -50,7 +53,9 @@ class ProfessorAppBarShowMenu extends StatelessWidget {
                     print(userInfo!
                         .getString(Static.fcmToken)); // 👈 لازم يطبع نفس القيمة
                     first = true;
+                    context.read<ProfessorHomeCubit>().close();
                     GoRouter.of(context).pushReplacement('/');
+                    RestartWidget.restartApp(context);
                   },
                   value: 2,
                   child: const Text(

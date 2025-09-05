@@ -1,3 +1,4 @@
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 
 class ProfessorAppBarTitle extends StatelessWidget {
@@ -16,8 +17,7 @@ class ProfessorAppBarTitle extends StatelessWidget {
             Text(
               'Dr.Lina Saeed',
               style: TextStyle(
-                fontFamily: 'ArialRounded',
-                fontWeight: FontWeight.bold,
+                fontFamily: Static.arialRoundedMTfont,
                 color: Colors.black,
                 fontSize: (size.width / 430) * 20,
               ),

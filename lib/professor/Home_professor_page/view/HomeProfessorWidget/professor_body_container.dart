@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,14 +44,13 @@ class ProfessorBodyContainer extends StatelessWidget {
               ),
               Positioned(
                 top: size.height * 0.04 > 30 ? 30 : size.height * 0.04,
-                left: size.width * 0.5 > 20 ? 35 : size.width * 0.5,
+                left: 25,
                 child: Text(
                   'Scan Qr Code',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: (MediaQuery.of(context).size.width / 430) * 23,
-                    fontFamily: 'Afacad',
-                    fontWeight: FontWeight.bold,
+                    fontSize: (MediaQuery.of(context).size.width / 430) * 21,
+                    fontFamily: Static.arialRoundedMTfont,
                   ),
                 ),
               ),
@@ -83,6 +83,8 @@ class ProfessorBodyContainer extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shadowColor: Colors.white.withOpacity(0)
                   ),
                   onPressed: () async {
                     GoRouter.of(context).push(AppRouter.scanQrCode);

@@ -12,14 +12,14 @@ part 'case_state.dart';
 
 class CaseCubit extends Cubit<CaseState> {
   CaseCubit() : super(CaseInitial());
-  int score = 0;
+  String score = "0";
   String comment = '';
   bool isArchived = false;
   int archive = 0;
   String message = '';
-  int sessionId=0;
-   final TextEditingController controller = TextEditingController();
-    final TextEditingController controller2 = TextEditingController();
+  int sessionId = 0;
+  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller2 = TextEditingController();
 
   void changeCheckedArchive(bool value) {
     isArchived = value;
@@ -90,8 +90,8 @@ class CaseCubit extends Cubit<CaseState> {
         }),
       );
       print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-       print(userInfo!.getInt(Static.userRole));
-        print(userInfo!.getString(Static.token));
+      print(userInfo!.getInt(Static.userRole));
+      print(userInfo!.getString(Static.token));
       if (response['success']) {
         print(response);
         List<dynamic> ll = [];
@@ -101,13 +101,13 @@ class CaseCubit extends Cubit<CaseState> {
                   DoctorArchiveModel.fromJson(doctorArchiveModel),
             )
             .toList();
-         
+
         doctorArchiveModelList = ll.cast<DoctorArchiveModel>();
 
         emit(CaseSuccess());
       }
     } catch (e) {
-       print("**********************************");
+      print("**********************************");
       print(e.toString());
       emit(CaseFailure(errorMessage: e.toString()));
     }

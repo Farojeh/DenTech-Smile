@@ -79,7 +79,8 @@ class DialogEvaluateProfessor extends StatelessWidget {
                           height: Static.gethieght(context, 35),
                           child: TextFormField(
                             onChanged: (value) {
-                              context.read<CaseCubit>().score =int.parse(value);
+                              context.read<CaseCubit>().score =
+                                  value.toString();
                             },
                             controller: context.read<CaseCubit>().controller,
                             decoration: InputDecoration(

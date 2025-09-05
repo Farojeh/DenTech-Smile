@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/professor/Add_pages/controller/cubit/page_cubit.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +28,10 @@ class ArticleContainer extends StatelessWidget {
             child: SizedBox(
               height: Static.getheight(context, 120),
               width: Static.getwidth(context, 120),
-              child: Image.asset(
+              child:context.read<PageCubit>().images!.isEmpty? Image.asset(
                 'assets/images/Component 3.png',
                 fit: BoxFit.contain,
-              ),
+              ):Image.file(File(context.read<PageCubit>().images![0].path), fit: BoxFit.cover),
             ),
           ),
           SizedBox(width: Static.getwidth(context, 22)),

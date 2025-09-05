@@ -10,12 +10,12 @@ class ProfessorBodyReferences extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final margin = 32.0;
+    final margin = 33.0;
 
     final boxWidth = (MediaQuery.of(context).size.width / 430) * 80;
     final boxHeight = (MediaQuery.of(context).size.height / 932) * 70;
     final textHeight = (MediaQuery.of(context).size.height / 932) * 50;
-    final spacing = (MediaQuery.of(context).size.width / 430) * 45;
+    final spacing = (MediaQuery.of(context).size.width / 430) * 48;
 
     return SafeArea(
       child: Padding(
@@ -116,7 +116,7 @@ class ProfessorBodyReferences extends StatelessWidget {
                   fontFamily: 'ArialRounded',
                   fontWeight: FontWeight.w400,
                   color: Colors.black,
-                  fontSize: (MediaQuery.of(context).size.width / 430) * 15,
+                  fontSize: (MediaQuery.of(context).size.width / 430) * 14,
                 ),
               ),
             ),

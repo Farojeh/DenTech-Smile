@@ -3,7 +3,8 @@ import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_sc
 import 'package:flutter/material.dart';
 
 class ProfessorCaseToothPhotoAfter extends StatelessWidget {
-  const ProfessorCaseToothPhotoAfter({super.key});
+  final List<String> photos ;
+  const ProfessorCaseToothPhotoAfter({super.key, required this.photos});
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +37,12 @@ class ProfessorCaseToothPhotoAfter extends StatelessWidget {
               right: Static.getwidth(context, 22),
               left: Static.getwidth(context, 22),
             ),
-            child: GridView.builder(
+            child:photos.isNotEmpty? GridView.builder(
               padding: EdgeInsets.zero,
-              itemCount: 4,
+              itemCount: photos.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 12,
@@ -71,6 +72,8 @@ class ProfessorCaseToothPhotoAfter extends StatelessWidget {
                   ),
                 );
               },
+            ):const Center(
+              child: Text("No Photo yet"),
             ),
           ),
         ],

@@ -16,7 +16,7 @@ import 'package:dentech_smile/widget/wave_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CaseProfessorBody extends StatelessWidget {
+class CaseProfessorBody extends StatefulWidget {
   final String studentId;
   final String sessionId;
   const CaseProfessorBody({
@@ -26,13 +26,24 @@ class CaseProfessorBody extends StatelessWidget {
   });
 
   @override
+  State<CaseProfessorBody> createState() => _CaseProfessorBodyState();
+}
+
+class _CaseProfessorBodyState extends State<CaseProfessorBody> {
+  @override
+  void initState() {
+    super.initState();
+    // استدعاء الداتا مرة وحدة
+    print(
+        "*************************************************** ${widget.studentId}");
+    context.read<CaseCubit>().getProfCase(
+          int.parse(widget.studentId),
+          int.parse(widget.sessionId),
+        );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print("*************************************************** $studentId");
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context
-          .read<CaseCubit>()
-          .getProfCase(int.parse(studentId), int.parse(sessionId)),
-    );
     return BlocConsumer<CaseCubit, CaseState>(
       listener: (context, state) {
         if (state is CaseFailure) {
@@ -109,8 +120,12 @@ class CaseProfessorBody extends StatelessWidget {
                               const ProfessorCaseXrayImage(
                                 image: "assets/images/XRay.png",
                               ),
-                              const ProfessorCaseToothPhotoBefor(),
-                              const ProfessorCaseToothPhotoAfter(),
+                              ProfessorCaseToothPhotoBefor(
+                                photos: caseDetails.beforeImages ?? [],
+                              ),
+                              ProfessorCaseToothPhotoAfter(
+                                photos: caseDetails.afterImages ?? [],
+                              ),
                             ],
                           ),
                         ),
@@ -121,13 +136,14 @@ class CaseProfessorBody extends StatelessWidget {
                 Positioned(
                   bottom: Static.getheight(context, 40.0),
                   right: Static.getwidth(context, 40.0),
-                  child: ProfessorCaseButton(sessionId: int.parse(studentId)),
+                  child: ProfessorCaseButton(
+                      sessionId: int.parse(widget.sessionId)),
                 ),
               ],
             ),
           );
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(color: Styles.basicColor),
             ),

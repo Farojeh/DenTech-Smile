@@ -16,21 +16,22 @@ class ApiService {
       },
     );
 
-  static final String token = userInfo!.getString(Static.token)!;
-
-  static Map<String, String> baseHeaders = {
-    'Authorization': 'Bearer $token',
-    'Content-Type': 'application/json',
-  };
 
   static Map<String, String> _headers({
     bool withLang = false,
     String langCode = "en",
   }) {
     if (withLang) {
-      return {...baseHeaders, 'Accept-Language': langCode};
+      return {
+        'Authorization': 'Bearer ${userInfo!.getString(Static.token)!}',
+        'Content-Type': 'application/json',
+        'Accept-Language': langCode
+      };
     }
-    return baseHeaders;
+    return {
+      'Authorization': 'Bearer ${userInfo!.getString(Static.token)!}',
+      'Content-Type': 'application/json',
+    };
   }
 
   static Future<Map<String, dynamic>> get({
@@ -45,7 +46,8 @@ class ApiService {
           headers: _headers(withLang: withLang, langCode: langCode),
         ),
       );
-
+      print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+      print(_headers(withLang: withLang, langCode: langCode));
       if (response.statusCode == 200 || response.statusCode == 201) {
         return {'success': true, 'data': response.data};
       } else {

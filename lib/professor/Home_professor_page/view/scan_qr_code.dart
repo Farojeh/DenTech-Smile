@@ -30,13 +30,12 @@ class _QRScannerPageState extends State<QRScannerPage> {
             setState(() {
               _isScanned = true; // قفل القراءة بعد أول نجاح
             });
-
             Map<String, String> ids = {
               "sessionId": context.read<ProfessorHomeCubit>().sessionid,
               "studentId": context.read<ProfessorHomeCubit>().studentid
             };
-
             if (userInfo!.getInt(Static.userRole) == 3) {
+              print("ffffffffffffffffffffffffffffffffffffffffffffff");
               GoRouter.of(context).pushReplacement(
                 AppRouter.caseProf,
                 extra: ids,

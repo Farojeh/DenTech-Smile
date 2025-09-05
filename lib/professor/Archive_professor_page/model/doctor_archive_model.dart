@@ -29,7 +29,9 @@ class DoctorArchiveModel {
     stageName = json['stage_name'];
     studentName = json['student_name'];
     studentImage = json['student_image'];
-    evaluationScore = (json['evaluation_score'] ?? 0.0) ==0?0.0:json['evaluation_score'];
+    evaluationScore = json['evaluation_score'] == null
+        ? evaluate(null)
+        : evaluate(json['evaluation_score'].toString());
     supervisorComments = json['supervisor_comments'] ?? '';
     patientName = json['patient_name'];
     appointmentDate = json['appointment_date'];
@@ -48,5 +50,13 @@ class DoctorArchiveModel {
     data['patient_name'] = patientName;
     data['appointment_date'] = appointmentDate;
     return data;
+  }
+
+  double evaluate(String? number) {
+    if (number == null) {
+      return 0.0;
+    }
+    double result =  num.parse(number).toDouble();
+    return result;
   }
 }

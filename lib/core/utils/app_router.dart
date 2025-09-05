@@ -242,7 +242,7 @@ abstract class AppRouter {
       GoRoute(path: learning, builder: (context, state) => const Learnpage()),
       GoRoute(
         path: kHomeView,
-        builder: (context, state) =>  const PatientHomePage(),
+        builder: (context, state) => const PatientHomePage(),
       ),
       GoRoute(path: karchive, builder: (context, state) => const ArchivePage()),
       GoRoute(
@@ -414,7 +414,8 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-          path: scanQrCode, builder: (context, state) => const QRScannerPage()),
+          path: scanQrCode,
+          builder: (context, state) => const QRScannerPage()),
     ],
   );
 }

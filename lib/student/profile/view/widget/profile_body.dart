@@ -1,6 +1,7 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/main.dart';
+import 'package:dentech_smile/restart_widget.dart';
 import 'package:dentech_smile/student/profile/controller/cubit/number_edit_dialog_cubit.dart';
 import 'package:dentech_smile/student/profile/view/widget/number_edit_dialog.dart';
 import 'package:flutter/material.dart';
@@ -121,10 +122,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                 create: (context) => NumberEditDialogCubit(),
                 child: const NumberEditDialg(editnumber: false),
               ));
-    }else if(id == "3"){
-      GoRouter.of(context).push(AppRouter.notifications , extra: false);
-    }
-     else if (id == "4") {
+    } else if (id == "3") {
+      GoRouter.of(context).push(AppRouter.notifications, extra: false);
+    } else if (id == "4") {
       String? fcmtoken = userInfo!.getString(Static.fcmToken);
       await userInfo!.remove(Static.token);
       await userInfo!.remove(Static.userRole);
@@ -137,6 +137,7 @@ class _ProfileBodyState extends State<ProfileBody> {
       print(userInfo!.getString(Static.fcmToken)); // 👈 لازم يطبع نفس القيمة
       first = true;
       GoRouter.of(context).pushReplacement('/');
+      RestartWidget.restartApp(context);
     }
   }
 }

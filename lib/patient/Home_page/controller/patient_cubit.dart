@@ -36,6 +36,8 @@ class PatientCubit extends Cubit<PatientState> {
 
   OralDoctorModel? oralDoctorModel;
   Future<void> getOralDoctor(bool isArabic) async {
+    print("kkkkk");
+    print(userInfo!.getString(Static.token));
     // final isArabic = context.read<ThemeCubit>().isArabic;
     final langCode = isArabic ? "ar" : "en";
     emit(PatientLoading());
@@ -44,6 +46,7 @@ class PatientCubit extends Cubit<PatientState> {
       langCode: langCode,
       withLang: true,
     );
+    print(response['data']);
     if (response['success']) {
       oralDoctorModel = OralDoctorModel.fromJson(response['data']);
       emit(PatientSuccess());

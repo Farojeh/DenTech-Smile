@@ -85,6 +85,8 @@ class PatientCaseCubit extends Cubit<PatientCaseState> {
        langCode: langCode,
        withLang: true,
     );
+    print("kjhg");
+    print({"student_id": idStu, "stage_id": idSta});
     if (response['success']) {
       caseInfoModel = CaseInfoModel.fromJson(response['data']);
       print(response);

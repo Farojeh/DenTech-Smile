@@ -79,7 +79,7 @@ class CaseDoctorBody extends StatelessWidget {
                               SizedBox(height: Static.getheight(context, 40)),
                               Row(
                                 children: [
-                                  const DoctorCaseImage(),
+                                   DoctorCaseImage(url: caseDetails!.studentImage,),
                                   SizedBox(
                                     width: Static.getwidth(context, 100),
                                   ),
@@ -87,15 +87,15 @@ class CaseDoctorBody extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: Static.getheight(context, 25)),
-                              DoctorPatientName(caseDoctorModel: caseDetails , patientid: caseDetails!.patientid!,),
+                              DoctorPatientName(caseDoctorModel: caseDetails , patientid: caseDetails.patientid!,),
                               DoctorCaseDescription(
                                 caseDoctorModel: caseDetails,
                               ),
-                              const DoctorCaseXrayImage(
-                                image: "assets/images/XRay.png",
+                               DoctorCaseXrayImage(
+                                image: caseDetails.radiologyImage!,
                               ),
-                              const DoctorCaseToothPhotoBefor(),
-                              const DoctorCaseToothPhotoAfter(),
+                               DoctorCaseToothPhotoBefor(photos: caseDetails.beforeImages??[],),
+                               DoctorCaseToothPhotoAfter(photos: caseDetails.beforeImages??[],),
                             ],
                           ),
                         ),

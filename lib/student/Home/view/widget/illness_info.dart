@@ -9,7 +9,7 @@ class IllnessInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          left: Static.getwieght(context, 35),
+          left: Static.getwieght(context, 25),
           top: Static.gethieght(context, 10)),
       child: GridView.count(
         crossAxisCount: 2,
@@ -33,14 +33,14 @@ class IllnessInfo extends StatelessWidget {
                       shape: BoxShape.circle, color: Color(0xff46A1A7)),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 7,
                 ),
                 Text(
                   illness[index],
                   style: TextStyle(
                       fontFamily: Static.afacadfont,
                       fontWeight: FontWeight.w400,
-                      fontSize: Static.getwieght(context, 17)),
+                      fontSize: Static.getwieght(context, 15)),
                 ),
               ],
             ),

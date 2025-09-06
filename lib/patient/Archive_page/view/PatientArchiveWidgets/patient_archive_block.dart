@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/app_router.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Archive_page/model/ArchiveModel.dart';
 import 'package:dentech_smile/patient/Case_page/controller/patient_case_cubit.dart';
@@ -31,9 +32,13 @@ class PatientArchiveBlock extends StatelessWidget {
                   padding: EdgeInsets.all(screenWidth * 0.015),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      "assets/images/doctor.png",
+                    child:patientCase.image==''? Image.asset(
+                      'assets/images/female-doctor.png',
                       width: screenWidth * 0.25,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ):Image.network('${Static.urlimagewithoutstorage}${patientCase.image}',
+                    width: screenWidth * 0.25,
                       height: double.infinity,
                       fit: BoxFit.cover,
                     ),

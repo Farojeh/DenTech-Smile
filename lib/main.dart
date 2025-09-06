@@ -2,6 +2,7 @@ import 'package:dentech_smile/Auth/translation/cubit/translation_cubit.dart';
 import 'package:dentech_smile/core/utils/app_router.dart';
 import 'package:dentech_smile/core/utils/init_app.dart';
 import 'package:dentech_smile/core/utils/service_locator.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Home_page/controller/patient_cubit.dart';
 import 'package:dentech_smile/professor/Case_professor_page/controller/case_cubit.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("hello from main ");
+    print(userInfo!.getString(Static.token));
     return MultiBlocProvider(
       providers: [
         BlocProvider<TranslationCubit>(create: (context) => TranslationCubit()),

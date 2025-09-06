@@ -20,7 +20,7 @@ class Showimage extends StatelessWidget {
                 panEnabled: true,
                 minScale: 0.5,
                 maxScale: 4,
-                child: Image.network("${Static.urlimage}$imagePath"),
+                child: Image.network("${Static.urlimagewithoutstorage}$imagePath"),
               )
             : Image.file(File(imagePath), fit: BoxFit.cover),
       ),

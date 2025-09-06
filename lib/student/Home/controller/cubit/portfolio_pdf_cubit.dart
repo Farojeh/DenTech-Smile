@@ -32,10 +32,14 @@ class PortfolioPdfCubit extends Cubit<PortfolioPdfState> {
         emit(PortfolioPdffailure(errormessage: failure.errorMessage));
         return;
       }
+      
       String path = response.data["url"];
       await downloadFile("${Static.urlimagewithoutstorage}$path", path);
+      
       emit(PortfolioPdfSuccess(path: path));
     } catch (error) {
+      print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+      print(error.toString());
       if (error is DioException) {
         var failure = ServerFaliure.fromDioException(error);
         emit(PortfolioPdffailure(errormessage: failure.errorMessage));

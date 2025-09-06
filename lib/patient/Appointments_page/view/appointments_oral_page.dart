@@ -59,7 +59,9 @@ class AppointmentsOralPage extends StatelessWidget {
                 ),
                 const PatientAppointmentsArrow(),
                 PatientAppointmentsText(student: student),
-                const PatientAppointmentsImage(),
+                 PatientAppointmentsImage(
+                  img:student.profileImage==''?'': '${Static.urlimagewithoutstorage}${student.profileImage}',
+                 ),
               ],
             ),
           ),

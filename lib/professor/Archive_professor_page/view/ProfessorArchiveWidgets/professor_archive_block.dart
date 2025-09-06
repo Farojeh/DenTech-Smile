@@ -31,9 +31,13 @@ class ProfessorArchiveBlock extends StatelessWidget {
                   padding: EdgeInsets.all(screenWidth * 0.015),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
+                    child: doctorArchiveModel!.studentImage==null? Image.asset(
                       "assets/images/female-doctor.png",
                       width: Static.getwidth(context, 115),
+                      height: Static.getheight(context, 90),
+                      fit: BoxFit.cover,
+                    ):Image.network("${Static.urlimagewithoutstorage}${doctorArchiveModel!.studentImage}",
+                     width: Static.getwidth(context, 115),
                       height: Static.getheight(context, 90),
                       fit: BoxFit.cover,
                     ),

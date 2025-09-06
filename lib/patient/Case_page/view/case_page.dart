@@ -1,4 +1,5 @@
 
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_arrow.dart';
 import 'package:dentech_smile/patient/Appointments_page/view/PatientAppointmentsWidgets/patient_appointments_container_clip.dart';
@@ -71,11 +72,11 @@ class CasePage extends StatelessWidget {
                                     appintments:
                                         caseInfoModel.appointmentDates ?? [],
                                   ),
-                                  const PatientCaseXrayImage(
-                                    image: "assets/images/XRay.png",
+                                   PatientCaseXrayImage(
+                                    image: caseInfoModel.radiologyImages![0].url!,
                                   ),
-                                  const PatientCaseToothPhotoBefor(),
-                                  const PatientCaseToothPhotoAfter(),
+                                   PatientCaseToothPhotoBefor(photos: caseInfoModel.beforeImages??[],),
+                                   PatientCaseToothPhotoAfter(photos: caseInfoModel.afterImages??[],),
                                 ],
                               ),
                             ),
@@ -84,7 +85,7 @@ class CasePage extends StatelessWidget {
                       ),
                       const PatientAppointmentsArrow(),
                       PatientCaseText(student: student),
-                      const PatientCaseImage(),
+                       PatientCaseImage(img: student.image==''?'':'${Static.urlimagewithoutstorage}${student.image}')
                     ],
                   ),
                 ),

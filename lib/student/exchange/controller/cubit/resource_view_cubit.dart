@@ -32,6 +32,7 @@ class ResourceViewCubit extends Cubit<ResourceViewState> {
       Response response;
       response = await apiService.post(
           endPoint: "/showResourcesByCategory", data: data, token: true);
+          print(response);
       if (response.statusCode != 200 && response.statusCode != 201) {
         var failure =
             ServerFaliure.fromResponse(response.statusCode!, response.data);

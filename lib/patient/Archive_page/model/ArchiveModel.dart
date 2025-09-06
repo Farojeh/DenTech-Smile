@@ -32,6 +32,7 @@ class StudentsArchive {
   String? year;
   String? stageName;
   int? stageId;
+  String? image ;
   double? averageEvaluation;
 
   StudentsArchive(
@@ -40,6 +41,7 @@ class StudentsArchive {
       this.year,
       this.stageName,
       this.stageId,
+      this.image,
       this.averageEvaluation});
 
   StudentsArchive.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class StudentsArchive {
     name = json['name'];
     year = json['year'];
     stageName = json['stage_name'];
+    image = json['profile_image']??'';
     stageId = json['stage_id'];
     averageEvaluation = json['average_evaluation'] ?? 0;
   }

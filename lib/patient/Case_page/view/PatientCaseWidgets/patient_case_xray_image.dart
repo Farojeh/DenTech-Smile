@@ -1,4 +1,5 @@
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class PatientCaseXrayImage extends StatelessWidget {
                 context.watch<ThemeCubit>().isArabic
                     ? Lang.arabLang["xray"]!
                     : Lang.enLang["xray"]!,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,
                   fontSize: 18,
@@ -46,8 +47,9 @@ class PatientCaseXrayImage extends StatelessWidget {
             int index = 1;
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) =>
-                    ImageScreen(imagePath: image, heroTag: 'img$index'),
+                builder: (_) => ImageScreen(
+                    imagePath: "${Static.urlimagewithoutstorage}$image",
+                    heroTag: 'img$index'),
               ),
             );
           },
@@ -59,7 +61,10 @@ class PatientCaseXrayImage extends StatelessWidget {
             child: SizedBox(
               width: size.width * 0.8,
               height: size.height * 0.25,
-              child: Image.asset('assets/images/XRay.png', fit: BoxFit.cover),
+              child: Image.network(
+                "${Static.urlimagewithoutstorage}$image",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

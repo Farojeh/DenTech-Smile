@@ -64,7 +64,7 @@ class AppointmentsDoctorPage extends StatelessWidget {
                 ),
                 const PatientAppointmentsArrow(),
                 PatientAppointmentsDoctorText(student: student, index: index),
-                const PatientAppointmentsImage(),
+                PatientAppointmentsImage(img: '${Static.urlimagewithoutstorage}${student.stageName}',),
               ],
             ),
           ),

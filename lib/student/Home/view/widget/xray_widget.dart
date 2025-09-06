@@ -19,7 +19,7 @@ class XRayWidget extends StatelessWidget {
         ),
         InkWell(
           overlayColor: MaterialStatePropertyAll(Colors.white.withOpacity(0)),
-          onTap: () => Static.showimage(context, "radiology/$image", false),
+          onTap: () => Static.showimage(context,image, false),
           child: Container(
             margin: EdgeInsets.symmetric(
                 horizontal: Static.getwieght(context, 40),
@@ -30,7 +30,7 @@ class XRayWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                "${Static.urlimage}radiology/$image",
+                "${Static.urlimagewithoutstorage}$image",
                 fit: BoxFit.cover,
               ),
             ),

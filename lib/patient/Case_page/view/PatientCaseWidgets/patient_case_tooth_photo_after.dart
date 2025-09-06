@@ -1,11 +1,14 @@
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
+import 'package:dentech_smile/patient/Case_page/model/case_info_model.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientCaseToothPhotoAfter extends StatelessWidget {
-  const PatientCaseToothPhotoAfter({super.key});
+  final List<AfterImages> photos;
+  const PatientCaseToothPhotoAfter({super.key, required this.photos});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class PatientCaseToothPhotoAfter extends StatelessWidget {
                 context.watch<ThemeCubit>().isArabic
                     ? Lang.arabLang["photo_after"]!
                     : Lang.enLang["photo_after"]!,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w600,
                   fontSize: 18,
@@ -47,7 +50,7 @@ class PatientCaseToothPhotoAfter extends StatelessWidget {
           ),
           child: GridView.builder(
             padding: EdgeInsets.zero,
-            itemCount: 4,
+            itemCount: photos.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,7 +64,8 @@ class PatientCaseToothPhotoAfter extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => ImageScreen(
-                        imagePath: 'assets/images/Rectangle.png',
+                        imagePath:
+                            "${Static.urlimagewithoutstorage}${photos[index].url}",
                         heroTag: 'img$index',
                       ),
                     ),
@@ -72,8 +76,8 @@ class PatientCaseToothPhotoAfter extends StatelessWidget {
                   height: size.width * 0.08,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      'assets/images/Rectangle.png',
+                    child: Image.network(
+                      "${Static.urlimagewithoutstorage}${photos[index].url}",
                       fit: BoxFit.cover,
                     ),
                   ),

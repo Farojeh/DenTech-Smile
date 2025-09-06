@@ -17,7 +17,7 @@ class DoctorCaseXrayImage extends StatelessWidget {
               Image(
                 width: Static.getwidth(context, 25),
                 height: Static.getheight(context, 25),
-                image: AssetImage('assets/images/x-rays.png'),
+                image:const AssetImage('assets/images/x-rays.png'),
               ),
               Padding(
                 padding: EdgeInsets.only(left: Static.getwidth(context, 23)),
@@ -37,7 +37,7 @@ class DoctorCaseXrayImage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) =>
-                      ImageScreen(imagePath: image, heroTag: 'img$index'),
+                      ImageScreen(imagePath:"${Static.urlimagewithoutstorage}$image", heroTag: 'img$index'),
                 ),
               );
             },
@@ -49,7 +49,8 @@ class DoctorCaseXrayImage extends StatelessWidget {
               child: SizedBox(
                 width: Static.getwidth(context, 323),
                 height: Static.getheight(context, 215),
-                child: Image.asset(image, fit: BoxFit.cover),
+                child:  Image.network("${Static.urlimagewithoutstorage}$image",
+                          fit: BoxFit.cover,),
               ),
             ),
           ),

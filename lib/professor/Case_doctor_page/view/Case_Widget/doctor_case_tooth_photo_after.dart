@@ -3,7 +3,8 @@ import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_sc
 import 'package:flutter/material.dart';
 
 class DoctorCaseToothPhotoAfter extends StatelessWidget {
-  const DoctorCaseToothPhotoAfter({super.key});
+  final List<String> photos ;
+  const DoctorCaseToothPhotoAfter({super.key, required this.photos});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class DoctorCaseToothPhotoAfter extends StatelessWidget {
               Image(
                 width: Static.getwidth(context, 25),
                 height: Static.getheight(context, 25),
-                image: AssetImage('assets/images/after.png'),
+                image:const AssetImage('assets/images/after.png'),
               ),
               Padding(
                 padding: EdgeInsets.only(left: Static.getwidth(context, 23)),
@@ -38,10 +39,10 @@ class DoctorCaseToothPhotoAfter extends StatelessWidget {
             ),
             child: GridView.builder(
               padding: EdgeInsets.zero,
-              itemCount: 4,
+              itemCount: photos.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 12,
@@ -52,7 +53,7 @@ class DoctorCaseToothPhotoAfter extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => ImageScreen(
-                          imagePath: 'assets/images/Rectangle.png',
+                          imagePath: "${Static.urlimagewithoutstorage}${photos[index]}",
                           heroTag: 'img$index',
                         ),
                       ),
@@ -63,9 +64,8 @@ class DoctorCaseToothPhotoAfter extends StatelessWidget {
                     height: Static.getheight(context, 100),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'assets/images/Rectangle.png',
-                        fit: BoxFit.cover,
+                      child: Image.network("${Static.urlimagewithoutstorage}${photos[index]}",
+                          fit: BoxFit.cover,
                       ),
                     ),
                   ),

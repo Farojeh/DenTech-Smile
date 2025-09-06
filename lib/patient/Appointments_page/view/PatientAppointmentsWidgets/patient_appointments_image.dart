@@ -2,7 +2,8 @@ import 'package:dentech_smile/core/utils/static.dart';
 import 'package:flutter/material.dart';
 
 class PatientAppointmentsImage extends StatelessWidget {
-  const PatientAppointmentsImage({super.key});
+  final String img;
+  const PatientAppointmentsImage({super.key, required this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +16,18 @@ class PatientAppointmentsImage extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(width: 0.5, color: Colors.black),
-          image: const DecorationImage(
-            image: AssetImage(
-              "assets/images/smiling-young-male-dentist-holding-toothbrush 1.png",
-            ),
-            fit: BoxFit.cover,
-          ),
         ),
-        // child: ClipOval(
-        //   child: Image.asset(
-        //     "assets/images/smiling-young-male-dentist-holding-toothbrush 1.png",
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
+        child: ClipOval(
+          child: img == ''
+              ? Image.asset(
+                  "assets/images/female-doctor.png",
+                  fit: BoxFit.cover,
+                )
+              : Image.network(
+                  img,
+                  fit: BoxFit.cover,
+                ),
+        ),
       ),
     );
   }

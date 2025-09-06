@@ -35,7 +35,7 @@ class _MedicinesInfoState extends State<MedicinesInfo> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
-                      "${Static.urlimage}${widget.images[index]}",
+                      "${Static.urlimagewithoutstorage}${widget.images[index]}",
                       fit: BoxFit.cover,
                     ),
                   ),

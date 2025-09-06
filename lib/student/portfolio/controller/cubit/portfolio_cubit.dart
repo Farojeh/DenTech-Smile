@@ -29,7 +29,7 @@ class PortfolioCubit extends Cubit<PortfolioState> {
       }
 
       List<dynamic> stagesJson = response.data["stages"];
-      double totaldegree = response.data["overall_grade"]??0.0;
+      double totaldegree = response.data["overall_grade"]==null?0.0:degree(response.data["overall_grade"].toString());
 
       List<PortfolioIntership> internships = stagesJson
           .map((stageJson) => PortfolioIntership.setdata(stageJson))
@@ -42,4 +42,14 @@ class PortfolioCubit extends Cubit<PortfolioState> {
       }
     }
   }
+ 
+  double degree(String? number){
+    if(number == null){
+      return 0.0 ;
+    }else{
+      return num.parse(number).toDouble();
+    }
+  }
+
+
 }

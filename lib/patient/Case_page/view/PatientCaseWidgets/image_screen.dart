@@ -25,7 +25,7 @@ class ImageScreen extends StatelessWidget {
                   panEnabled: true,
                   minScale: 0.8,
                   maxScale: 4,
-                  child: Image.asset(
+                  child: Image.network(
                     imagePath,
                     fit: BoxFit.contain,
                   ),

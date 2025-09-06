@@ -32,6 +32,7 @@ class PatientElevetedButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
+            print(cubit.appointmentStateNumb);
             if (cubit.appointmentStateNumb == 1) {
               Static.showMyDialog(
                 context,

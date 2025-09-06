@@ -85,7 +85,7 @@ class _AfterWidgetState extends State<AfterWidget> {
                                     borderRadius: BorderRadius.circular(15),
                                     child: !ind.contains(index)
                                         ? Image.network(
-                                            "${Static.urlimage}${widget.images[index]}",
+                                            "${Static.urlimagewithoutstorage}${widget.images[index]}",
                                             fit: BoxFit.cover,
                                           )
                                         : Image.file(File(widget.images[index]),

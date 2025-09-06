@@ -13,12 +13,20 @@ class PortfolioIntership{
     return PortfolioIntership(
       id: map['stage_id'],
       name: map['stage_name'],
-      degree: map["stage_average_evaluation"],
+      degree:map["stage_average_evaluation"]==null?0.0: degreefun(map["stage_average_evaluation"].toString()),
       total: 5,
       cases: (map['patients'] as List)
           .map((p) => Case.setdata(p))
           .toList(),
     );
+  }
+
+  static double degreefun(String? number){
+    if(number == null){
+      return 0.0 ;
+    }else{
+      return num.parse(number).toDouble();
+    }
   }
 
 }

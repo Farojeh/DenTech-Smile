@@ -48,7 +48,7 @@ class BeforGeneral extends StatelessWidget {
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: Image.network(
-                                  "${Static.urlimage}${images[index]}",
+                                  "${Static.urlimagewithoutstorage}${images[index]}",
                                   fit: BoxFit.cover,
                                 )),
                           ),

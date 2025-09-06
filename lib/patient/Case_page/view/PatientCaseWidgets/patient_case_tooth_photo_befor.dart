@@ -1,11 +1,14 @@
 import 'package:dentech_smile/core/utils/lang.dart';
+import 'package:dentech_smile/core/utils/static.dart';
 import 'package:dentech_smile/core/utils/theme_cubit.dart';
+import 'package:dentech_smile/patient/Case_page/model/case_info_model.dart';
 import 'package:dentech_smile/patient/Case_page/view/PatientCaseWidgets/image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientCaseToothPhotoBefor extends StatelessWidget {
-  const PatientCaseToothPhotoBefor({super.key});
+  final List<BeforeImages> photos ;
+  const PatientCaseToothPhotoBefor({super.key, required this.photos});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class PatientCaseToothPhotoBefor extends StatelessWidget {
           ),
           child: GridView.builder(
             padding: EdgeInsets.zero,
-            itemCount: 4,
+            itemCount: photos.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,7 +64,7 @@ class PatientCaseToothPhotoBefor extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => ImageScreen(
-                        imagePath: 'assets/images/Rectangle.png',
+                        imagePath: "${Static.urlimagewithoutstorage}${photos[index].url}",
                         heroTag: 'img$index',
                       ),
                     ),
@@ -72,9 +75,8 @@ class PatientCaseToothPhotoBefor extends StatelessWidget {
                   height: size.width * 0.08,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      'assets/images/Rectangle.png',
-                      fit: BoxFit.cover,
+                    child: Image.network("${Static.urlimagewithoutstorage}${photos[index].url}",
+                          fit: BoxFit.cover,
                     ),
                   ),
                 ),

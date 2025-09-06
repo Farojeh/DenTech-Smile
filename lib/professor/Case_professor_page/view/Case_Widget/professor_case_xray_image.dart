@@ -37,7 +37,7 @@ class ProfessorCaseXrayImage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) =>
-                      ImageScreen(imagePath: image, heroTag: 'img$index'),
+                      ImageScreen(imagePath: "${Static.urlimagewithoutstorage}$image", heroTag: 'img$index'),
                 ),
               );
             },
@@ -49,7 +49,8 @@ class ProfessorCaseXrayImage extends StatelessWidget {
               child: SizedBox(
                 width: Static.getwidth(context, 323),
                 height: Static.getheight(context, 215),
-                child: Image.asset(image, fit: BoxFit.cover),
+                child:  Image.network("${Static.urlimagewithoutstorage}$image",
+                          fit: BoxFit.cover,),
               ),
             ),
           ),

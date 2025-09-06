@@ -101,7 +101,7 @@ class _CaseProfessorBodyState extends State<CaseProfessorBody> {
                               SizedBox(height: Static.getheight(context, 40)),
                               Row(
                                 children: [
-                                  const ProfessorCaseImage(),
+                                   ProfessorCaseImage(url: caseDetails!.studentImage,),
                                   SizedBox(
                                     width: Static.getwidth(context, 100),
                                   ),
@@ -112,13 +112,13 @@ class _CaseProfessorBodyState extends State<CaseProfessorBody> {
                               ),
                               SizedBox(height: Static.getheight(context, 25)),
                               ProfessorPatientName(
-                                patientid: caseDetails!.patientid!,
+                                patientid: caseDetails.patientid!,
                               ),
                               ProfessorCaseDescription(
                                 caseProfModel: caseDetails,
                               ),
-                              const ProfessorCaseXrayImage(
-                                image: "assets/images/XRay.png",
+                               ProfessorCaseXrayImage(
+                                image: caseDetails.radiologyImage!,
                               ),
                               ProfessorCaseToothPhotoBefor(
                                 photos: caseDetails.beforeImages ?? [],

@@ -35,15 +35,15 @@ class PatientCaseDescription extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(top: size.height * 0.005),
+          padding: EdgeInsets.only(top: size.height * 0.01 , bottom: size.height * 0.01),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding:const EdgeInsets.symmetric(horizontal: 25),
             child: Center(
               child: Text(
                 softWrap: true,
                 textAlign: TextAlign.center,
                 description,
-                style: TextStyle(
+                style:const TextStyle(
                   fontFamily: 'Afacad',
                   fontWeight: FontWeight.w400,
                   fontSize: 14,

@@ -53,7 +53,7 @@ class ProfessorCaseToothPhotoAfter extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => ImageScreen(
-                          imagePath: 'assets/images/Rectangle.png',
+                          imagePath: "${Static.urlimagewithoutstorage}${photos[index]}",
                           heroTag: 'img$index',
                         ),
                       ),
@@ -64,9 +64,8 @@ class ProfessorCaseToothPhotoAfter extends StatelessWidget {
                     height: Static.getheight(context, 100),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'assets/images/Rectangle.png',
-                        fit: BoxFit.cover,
+                      child: Image.network("${Static.urlimagewithoutstorage}${photos[index]}",
+                          fit: BoxFit.cover,
                       ),
                     ),
                   ),

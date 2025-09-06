@@ -31,8 +31,13 @@ class PatientDoctorOralBlock extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
+                  child:student.profileImage == ''? Image.asset(
                     'assets/images/female-doctor.png',
+                    width: Static.getwieght(context, 100),
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ):Image.network(
+                    '${Static.urlimagewithoutstorage}${student.profileImage}',
                     width: Static.getwieght(context, 100),
                     height: double.infinity,
                     fit: BoxFit.cover,
